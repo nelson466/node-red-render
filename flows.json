@@ -159,7 +159,7 @@
         "id": "057f0d931ddff8f7",
         "type": "GSheet",
         "z": "30bfffe14836de0f",
-        "creds": "0e380751f20769bb",
+        "creds": "3d0e07754521693a",
         "method": "get",
         "action": "",
         "sheet": "1CGfI2dkxgYdfw37UlectzlLVmVtBW0EQ8MUh9ni5R6Q",
@@ -207,7 +207,7 @@
         "id": "e7534f9ecc49c258",
         "type": "GSheet",
         "z": "30bfffe14836de0f",
-        "creds": "0e380751f20769bb",
+        "creds": "3d0e07754521693a",
         "method": "append",
         "action": "",
         "sheet": "1CGfI2dkxgYdfw37UlectzlLVmVtBW0EQ8MUh9ni5R6Q",
@@ -227,7 +227,9 @@
         "name": "dato1",
         "props": [
             {
-                "p": "payload"
+                "p": "topic",
+                "v": "$round($random()*100, 2)",
+                "vt": "jsonata"
             }
         ],
         "repeat": "3",
@@ -235,8 +237,6 @@
         "once": true,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "$round($random()*100, 2)",
-        "payloadType": "jsonata",
         "x": 90,
         "y": 300,
         "wires": [
@@ -325,7 +325,7 @@
         "type": "function",
         "z": "30bfffe14836de0f",
         "name": "function 1",
-        "func": "// guardar el valor en contexto de flujo\nflow.set('temp', msg.payload);\nreturn msg;",
+        "func": "// guardar el valor en contexto de flujo\nflow.set('temp', msg.topic);\nmsg.payload = msg.topic;\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -536,7 +536,7 @@
         "id": "c3f645121877dab0",
         "type": "GSheet",
         "z": "30bfffe14836de0f",
-        "creds": "0e380751f20769bb",
+        "creds": "3d0e07754521693a",
         "method": "append",
         "action": "",
         "sheet": "1CGfI2dkxgYdfw37UlectzlLVmVtBW0EQ8MUh9ni5R6Q",
@@ -600,7 +600,7 @@
         "className": ""
     },
     {
-        "id": "0e380751f20769bb",
+        "id": "3d0e07754521693a",
         "type": "gauth",
         "name": "node-red-sheets@ninth-optics-458601-r5.iam.gserviceaccount.com"
     },
