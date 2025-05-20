@@ -214,7 +214,7 @@
         "cells": "hoja1!A5",
         "flatten": false,
         "name": "",
-        "x": 270,
+        "x": 290,
         "y": 240,
         "wires": [
             []
@@ -336,7 +336,7 @@
         "y": 300,
         "wires": [
             [
-                "0001f6a88ebc04b5"
+                "63db2af75a40515c"
             ]
         ]
     },
@@ -356,7 +356,7 @@
         "y": 360,
         "wires": [
             [
-                "fbc4ae5b1d875610"
+                "9dfe85bee29d5596"
             ]
         ]
     },
@@ -399,62 +399,6 @@
                 "e7a45bd7690a2d8b"
             ]
         ]
-    },
-    {
-        "id": "0001f6a88ebc04b5",
-        "type": "ui_gauge",
-        "z": "30bfffe14836de0f",
-        "name": "dato1",
-        "group": "2860c9df3bc14fd2",
-        "order": 1,
-        "width": 4,
-        "height": 4,
-        "gtype": "gage",
-        "title": "TEMPERATURA",
-        "label": "units",
-        "format": "{{value}}",
-        "min": "-55",
-        "max": "100",
-        "colors": [
-            "#00b500",
-            "#e6e600",
-            "#ca3838"
-        ],
-        "seg1": "",
-        "seg2": "",
-        "diff": false,
-        "className": "",
-        "x": 390,
-        "y": 300,
-        "wires": []
-    },
-    {
-        "id": "fbc4ae5b1d875610",
-        "type": "ui_gauge",
-        "z": "30bfffe14836de0f",
-        "name": "dato2",
-        "group": "2860c9df3bc14fd2",
-        "order": 2,
-        "width": 4,
-        "height": 4,
-        "gtype": "gage",
-        "title": "LUZ",
-        "label": "units",
-        "format": "{{value}}",
-        "min": "0",
-        "max": "100",
-        "colors": [
-            "#00b500",
-            "#e6e600",
-            "#ca3838"
-        ],
-        "seg1": "",
-        "seg2": "",
-        "diff": false,
-        "className": "",
-        "x": 390,
-        "y": 360,
-        "wires": []
     },
     {
         "id": "e5e524232045f503",
@@ -579,7 +523,100 @@
         ]
     },
     {
-        "id": "c4a2bc67ed2ed6e5",
+        "id": "9dfe85bee29d5596",
+        "type": "ui_artlessgauge2",
+        "z": "30bfffe14836de0f",
+        "group": "2860c9df3bc14fd2",
+        "order": 2,
+        "width": 4,
+        "height": 4,
+        "name": "date2",
+        "icon": "thermometer",
+        "label": "LUZ",
+        "unit": "LUX",
+        "layout": "radial",
+        "decimals": "2",
+        "differential": false,
+        "minmax": false,
+        "colorTrack": "#555555",
+        "style": "2,2",
+        "colorFromTheme": true,
+        "property": "payload",
+        "secondary": "secondary",
+        "inline": true,
+        "animate": true,
+        "log2": false,
+        "sectors": [
+            {
+                "val": 0,
+                "col": "#00ccff",
+                "t": "min",
+                "dot": 0
+            },
+            {
+                "val": 100,
+                "col": "#ff6666",
+                "t": "max",
+                "dot": 0
+            },
+            {
+                "val": 5,
+                "col": "#ff6666",
+                "t": "sec",
+                "dot": 0
+            }
+        ],
+        "lineWidth": "7",
+        "bgcolorFromTheme": true,
+        "diffCenter": "",
+        "x": 390,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "032f92b901f52676",
+        "type": "ui_template",
+        "z": "30bfffe14836de0f",
+        "group": "",
+        "name": "cargar FontAwesome",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "format": "<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css\">",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "global",
+        "className": "",
+        "x": 120,
+        "y": 600,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "63db2af75a40515c",
+        "type": "ui_template",
+        "z": "30bfffe14836de0f",
+        "group": "2860c9df3bc14fd2",
+        "name": "dato1",
+        "order": 1,
+        "width": 4,
+        "height": 4,
+        "format": "<div class=\"custom-gauge\">\n  <!-- Fila superior: etiqueta + icono -->\n  <div class=\"label-icon\">\n    <span class=\"label\">TEMPERATURA</span>\n    <i class=\"fa fa-thermometer-half icon\"></i>\n  </div>\n  <!-- Valores centrados -->\n  <div class=\"value-unit\">\n    <span class=\"value\">{{msg.payload | number:2}}</span>\n    <span class=\"unit\">°C</span>\n  </div>\n</div>\n\n<style>\n/* Contenedor principal */\n.custom-gauge {\n  width: 192px;\n  height: 192px;\n  background: #ffffff;\n  border-radius: 12px;\n  box-shadow: 0 2px 6px rgba(0,0,0,0.2);\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n  padding: 12px;\n  box-sizing: border-box;\n  font-family: \"Roboto\", sans-serif;\n}\n\n/* Fila de etiqueta + icono */\n.label-icon {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  margin-bottom: 30px; /* más separación verticalmente */\n}\n.label {\n  font-size: 18px;       /* un poco más grande */\n  font-weight: 600;\n  color: #333333;\n}\n.icon {\n  font-size: 45px;       /* más grande verticalmente */\n  color: #e53935;\n  line-height: 1;\n}\n\n/* Fila del valor y unidad */\n.value-unit {\n  display: flex;\n  justify-content: center;\n  align-items: baseline;\n  flex-grow: 1;\n}\n.value {\n  font-size: 48px;\n  font-weight: 600;\n  color: #212121;\n  line-height: 1;\n}\n.unit {\n  font-size: 48px;       /* igual al valor numérico */\n  font-weight: 600;\n  color: #757575;\n  margin-left: 4px;\n}\n</style>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 390,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d29e82e65c35133b",
         "type": "ui_spacer",
         "z": "30bfffe14836de0f",
         "name": "spacer",
