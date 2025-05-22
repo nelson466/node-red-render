@@ -1,7 +1,8 @@
 module.exports = {
-  // Configura aquí la clave de encriptación.
-  // Es recomendable establecer NODE_RED_CREDENTIAL_SECRET como variable de entorno en Render.com.
-  credentialSecret: process.env.NODE_RED_CREDENTIAL_SECRET || "miClaveSecreta123"
-  
-  // Puedes agregar más configuraciones de Node‑RED aquí si lo necesitas.
+  // Especifica el nombre del archivo de flujos que quieres usar
+  flowFile: 'flows.json',
+  // Clave que Node-RED usa para cifrar/descifrar tus credenciales de nodo
+  // (asegúrate de tener definida NODE_RED_CREDENTIAL_SECRET en Render)
+  credentialSecret: process.env.NODE_RED_CREDENTIAL_SECRET || "miClaveSecreta123",
+  // Aquí podrías añadir más configuraciones si las necesitas...
 };
