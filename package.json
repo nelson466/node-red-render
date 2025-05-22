@@ -4,8 +4,7 @@
   "description": "Node-RED instance on Render.com",
   "main": "node_modules/node-red/red.js",
   "scripts": {
-    "prestart": "node ./inject-creds.js",
-    "start": "node node_modules/node-red/red.js -u . -p $PORT"
+    "start": "node node_modules/node-red/red.js -p $PORT"
   },
   "dependencies": {
     "node-red": "^4.0.9",
