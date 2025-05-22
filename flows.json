@@ -28,7 +28,7 @@
         "y": 40,
         "wires": [
             [
-                "057f0d931ddff8f7"
+                "8411e4c891ed177d"
             ]
         ]
     },
@@ -85,7 +85,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 440,
+        "x": 460,
         "y": 40,
         "wires": [
             [
@@ -156,25 +156,6 @@
         "wires": []
     },
     {
-        "id": "057f0d931ddff8f7",
-        "type": "GSheet",
-        "z": "30bfffe14836de0f",
-        "creds": "3d0e07754521693a",
-        "method": "get",
-        "action": "",
-        "sheet": "1CGfI2dkxgYdfw37UlectzlLVmVtBW0EQ8MUh9ni5R6Q",
-        "cells": "hoja1!A1:Z1000",
-        "flatten": false,
-        "name": "",
-        "x": 270,
-        "y": 40,
-        "wires": [
-            [
-                "6a33ce06083b440a"
-            ]
-        ]
-    },
-    {
         "id": "e24b42ecf91cc75f",
         "type": "inject",
         "z": "30bfffe14836de0f",
@@ -213,7 +194,7 @@
         "sheet": "1CGfI2dkxgYdfw37UlectzlLVmVtBW0EQ8MUh9ni5R6Q",
         "cells": "hoja1!A5",
         "flatten": false,
-        "name": "",
+        "name": "GSheet-ESCRIBIR",
         "x": 290,
         "y": 240,
         "wires": [
@@ -486,7 +467,7 @@
         "sheet": "1CGfI2dkxgYdfw37UlectzlLVmVtBW0EQ8MUh9ni5R6Q",
         "cells": "hoja1!A5",
         "flatten": false,
-        "name": "",
+        "name": "GSheet-TRIGGER",
         "x": 450,
         "y": 540,
         "wires": [
@@ -616,6 +597,25 @@
         ]
     },
     {
+        "id": "8411e4c891ed177d",
+        "type": "GSheet",
+        "z": "30bfffe14836de0f",
+        "creds": "31eb7ebe017eeb2d",
+        "method": "get",
+        "action": "",
+        "sheet": "1CGfI2dkxgYdfw37UlectzlLVmVtBW0EQ8MUh9ni5R6Q",
+        "cells": "hoja1!A1:Z1000",
+        "flatten": false,
+        "name": "GSH-LEER",
+        "x": 270,
+        "y": 40,
+        "wires": [
+            [
+                "6a33ce06083b440a"
+            ]
+        ]
+    },
+    {
         "id": "d29e82e65c35133b",
         "type": "ui_spacer",
         "z": "30bfffe14836de0f",
@@ -651,6 +651,11 @@
         "width": 16,
         "collapse": false,
         "className": ""
+    },
+    {
+        "id": "31eb7ebe017eeb2d",
+        "type": "gauth",
+        "name": "node-red-sheets@ninth-optics-458601-r5.iam.gserviceaccount.com"
     },
     {
         "id": "13b7d650bf779565",
