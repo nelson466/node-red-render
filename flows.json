@@ -8,6 +8,14 @@
         "env": []
     },
     {
+        "id": "3c32cf9f885b3815",
+        "type": "tab",
+        "label": "Flujo 2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "13b7d650bf779565",
         "type": "ui_tab",
         "name": "Tab 1",
@@ -37,16 +45,6 @@
         "width": 16,
         "collapse": false,
         "className": ""
-    },
-    {
-        "id": "d29e82e65c35133b",
-        "type": "ui_spacer",
-        "z": "30bfffe14836de0f",
-        "name": "spacer",
-        "group": "6fc5ca55e78a0a84",
-        "order": 2,
-        "width": 8,
-        "height": 1
     },
     {
         "id": "d649c9bfc5a38812",
@@ -161,6 +159,44 @@
         "name": "node-red-sheets@ninth-optics-458601-r5.iam.gserviceaccount.com"
     },
     {
+        "id": "11ddd173db60c776",
+        "type": "ui_tab",
+        "name": "Tab 2",
+        "icon": "dashboard",
+        "order": 2,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "484a932f282fa153",
+        "type": "ui_group",
+        "name": "Group 1",
+        "tab": "11ddd173db60c776",
+        "order": 1,
+        "disp": true,
+        "width": 6
+    },
+    {
+        "id": "5e8d33565b1f7a49",
+        "type": "ui_spacer",
+        "z": "30bfffe14836de0f",
+        "name": "spacer",
+        "group": "6fc5ca55e78a0a84",
+        "order": 2,
+        "width": 8,
+        "height": 1
+    },
+    {
+        "id": "18b2189986c7d58e",
+        "type": "ui_spacer",
+        "z": "30bfffe14836de0f",
+        "name": "spacer",
+        "group": "6fc5ca55e78a0a84",
+        "order": 3,
+        "width": 8,
+        "height": 1
+    },
+    {
         "id": "74a8d5bdab068bb6",
         "type": "inject",
         "z": "30bfffe14836de0f",
@@ -193,8 +229,8 @@
         "name": "LINK",
         "order": 1,
         "width": 8,
-        "height": 1,
-        "format": "<div ng-bind-html=\"msg.enlace\"></div>",
+        "height": 2,
+        "format": "<!-- Node-RED Dashboard Template Node: Menú Desplegable con Angular -->\n<!-- Conectar este nodo \"template (LINK)\" a un nodo HTTP Response -->\n<style>\n  .menu-container {\n    position: relative;\n    text-align: center;\n    margin-top: 20px;\n    display: inline-block;\n  }\n  .menu-button {\n    padding: 8px 12px;\n    font-size: 14px;\n    border: 1px solid #ccc;\n    border-radius: 4px;\n    background-color: #f9f9f9;\n    cursor: pointer;\n  }\n  .menu-list {\n    list-style: none;\n    padding: 0;\n    margin: 4px 0 0;\n    border: 1px solid #ccc;\n    border-radius: 4px;\n    background-color: #f9f9f9;\n    position: absolute;\n    width: 100%;\n    box-shadow: 0 2px 6px rgba(0,0,0,0.1);\n    z-index: 1000;\n    overflow: visible;\n    max-height: none;\n  }\n  .menu-item {\n    padding: 8px 12px;\n    cursor: pointer;\n  }\n  .menu-item:hover {\n    background-color: #e6e6e6;\n  }\n  .menu-item a {\n    text-decoration: none;\n    color: inherit;\n    display: block;\n    width: 100%;\n    height: 100%;\n  }\n</style>\n<div class=\"menu-container\" ng-init=\"visible=false\">\n  <!-- Botón principal -->\n  <button class=\"menu-button\" ng-click=\"visible = !visible\">Menu</button>\n  <!-- Lista de opciones -->\n  <ul class=\"menu-list\" ng-show=\"visible\">\n    <!-- Descargar Reporte: navega directamente al endpoint DOWNLOAD -->\n    <li class=\"menu-item\">\n      <a href=\"/download\" target=\"_blank\">Descargar Reporte</a>\n    </li>\n    <!-- Cerrar Sesion: redirige directamente a tu página de inicio de sesión -->\n    <li class=\"menu-item\">\n      <a href=\"https://siot.kesug.com\">Cerrar Sesion</a>\n    </li>\n  </ul>\n</div>\n",
         "storeOutMessages": true,
         "fwdInMessages": true,
         "resendOnRefresh": true,
@@ -211,7 +247,7 @@
         "type": "function",
         "z": "30bfffe14836de0f",
         "name": "function 7",
-        "func": "// Guarda el archivo Excel en la variable de contexto \nflow.set(\"archivoExcel\", msg.payload); \nmsg.payload = \"\";\nvar enlace = \" \"; \n// Crea el enlace HTML de descarga \nmsg.enlace = '<div style=\"text-align: center; margin-top: 20px;\">' + \n             '<a href=\"/download\" target=\"_blank\">Descargar reporte Excel</a>' +              \n             '</div>'; \nreturn msg; ",
+        "func": "// Guarda el archivo Excel en la variable de contexto \nflow.set(\"archivoExcel\", msg.payload); \nmsg.payload = \"\";\nvar enlace = \" \"; \n// Crea el enlace HTML de descarga \nmsg.enlace = '<div style=\"text-align: center; margin-top: 20px;\">' + \n             '<a href=\"/download\" target=\"_blank\">Descargar Reporte </a>' +              \n             '</div>'; \nreturn msg; ",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -330,7 +366,7 @@
         "payload": "[$moment().format('YYYY-MM-DD'), $round($random()*100, 2), $round($random()*100, 2), $round($random()*100, 2), $round($random()*100, 2)]",
         "payloadType": "jsonata",
         "x": 100,
-        "y": 240,
+        "y": 320,
         "wires": [
             [
                 "e7534f9ecc49c258"
@@ -349,7 +385,7 @@
         "flatten": false,
         "name": "GSheet-ESCRIBIR",
         "x": 290,
-        "y": 240,
+        "y": 320,
         "wires": [
             []
         ]
@@ -372,7 +408,7 @@
         "onceDelay": 0.1,
         "topic": "",
         "x": 90,
-        "y": 300,
+        "y": 380,
         "wires": [
             [
                 "f6733eada21bfe70"
@@ -397,7 +433,7 @@
         "payload": "$round($random()*100, 2)",
         "payloadType": "jsonata",
         "x": 90,
-        "y": 360,
+        "y": 440,
         "wires": [
             [
                 "fd4552a50750bcbe"
@@ -422,7 +458,7 @@
         "payload": "$round($random()*100, 2)",
         "payloadType": "jsonata",
         "x": 90,
-        "y": 420,
+        "y": 500,
         "wires": [
             [
                 "92bf6e3362acc412"
@@ -447,7 +483,7 @@
         "payload": "$round($random()*100, 2)",
         "payloadType": "jsonata",
         "x": 90,
-        "y": 480,
+        "y": 560,
         "wires": [
             [
                 "26a335dff747a918"
@@ -467,7 +503,7 @@
         "finalize": "",
         "libs": [],
         "x": 240,
-        "y": 300,
+        "y": 380,
         "wires": [
             [
                 "63db2af75a40515c"
@@ -487,7 +523,7 @@
         "finalize": "",
         "libs": [],
         "x": 240,
-        "y": 360,
+        "y": 440,
         "wires": [
             [
                 "9dfe85bee29d5596"
@@ -507,7 +543,7 @@
         "finalize": "",
         "libs": [],
         "x": 250,
-        "y": 420,
+        "y": 500,
         "wires": [
             [
                 "e5e524232045f503"
@@ -527,7 +563,7 @@
         "finalize": "",
         "libs": [],
         "x": 250,
-        "y": 480,
+        "y": 560,
         "wires": [
             [
                 "e7a45bd7690a2d8b"
@@ -559,7 +595,7 @@
         "diff": false,
         "className": "",
         "x": 410,
-        "y": 420,
+        "y": 500,
         "wires": []
     },
     {
@@ -587,7 +623,7 @@
         "diff": false,
         "className": "",
         "x": 410,
-        "y": 480,
+        "y": 560,
         "wires": []
     },
     {
@@ -603,7 +639,7 @@
         "finalize": "",
         "libs": [],
         "x": 260,
-        "y": 540,
+        "y": 620,
         "wires": [
             [
                 "c3f645121877dab0"
@@ -622,7 +658,7 @@
         "flatten": false,
         "name": "GSheet-TRIGGER",
         "x": 450,
-        "y": 540,
+        "y": 620,
         "wires": [
             []
         ]
@@ -649,7 +685,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 100,
-        "y": 540,
+        "y": 620,
         "wires": [
             [
                 "5c190e65348f47a9"
@@ -704,7 +740,7 @@
         "bgcolorFromTheme": true,
         "diffCenter": "",
         "x": 390,
-        "y": 360,
+        "y": 440,
         "wires": []
     },
     {
@@ -723,7 +759,7 @@
         "templateScope": "global",
         "className": "",
         "x": 120,
-        "y": 600,
+        "y": 680,
         "wires": [
             []
         ]
@@ -744,7 +780,7 @@
         "templateScope": "local",
         "className": "",
         "x": 390,
-        "y": 300,
+        "y": 380,
         "wires": [
             []
         ]
@@ -766,6 +802,75 @@
             [
                 "6a33ce06083b440a"
             ]
+        ]
+    },
+    {
+        "id": "ffe2b43397f510b2",
+        "type": "http in",
+        "z": "30bfffe14836de0f",
+        "name": "LOGOUT",
+        "url": " /logout",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 80,
+        "y": 240,
+        "wires": [
+            [
+                "bfaaceadabca0c6e"
+            ]
+        ]
+    },
+    {
+        "id": "bfaaceadabca0c6e",
+        "type": "function",
+        "z": "30bfffe14836de0f",
+        "name": "function 3",
+        "func": "// Destruir sesión (si usas express-session)\nvar req = msg.req;\nvar res = msg.res;\nif (req.session) {\n  req.session.destroy();\n}\n// Redirigir a la página de login\nres.redirect('https://siot.kesug.com');\n// No enviar payload adicional\nreturn null;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 240,
+        "y": 240,
+        "wires": [
+            [
+                "6b7413fc8c68986e"
+            ]
+        ]
+    },
+    {
+        "id": "6b7413fc8c68986e",
+        "type": "http response",
+        "z": "30bfffe14836de0f",
+        "name": "LOG-OUT",
+        "statusCode": "",
+        "headers": {},
+        "x": 410,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "1c97df7f36d5f322",
+        "type": "ui_template",
+        "z": "3c32cf9f885b3815",
+        "group": "484a932f282fa153",
+        "name": "",
+        "order": 1,
+        "width": 6,
+        "height": 2,
+        "format": "<div ng-bind-html=\"msg.payload\"></div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 120,
+        "y": 80,
+        "wires": [
+            []
         ]
     }
 ]
