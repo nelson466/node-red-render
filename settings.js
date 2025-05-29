@@ -32,11 +32,11 @@ module.exports = {
             return next();
           }
           // Si no es 200 (401), redirige al login PHP
-          return res.redirect("https://siot.kesug.com");
+          return res.redirect("https://siot.kesug.com/cerrar_sesion.php");
         }
       } catch (err) {
         // En caso de error imprevisto, redirige al login
-        return res.redirect("https://siot.kesug.com");
+        return res.redirect("https://siot.kesug.com/cerrar_sesion.php");
       }
       // Cualquier otra ruta no UI la dejamos pasar
       next();
