@@ -13,6 +13,7 @@
     "node-red-contrib-google-sheets": "^1.1.2",
     "node-red-contrib-web-worldmap": "^5.1.4",
     "node-red-contrib-ui-artless-gauge2": "^0.3.13",
-    "express-session": "^1.18.1"
+    "express-session": "^1.18.1",
+    "node-fetch": "^3.3.2"
   }
 }
