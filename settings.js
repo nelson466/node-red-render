@@ -1,33 +1,51 @@
-// 1) Requerimos el módulo 'cookie' para parsear cookies (opcional, simplifica lectura)
-const cookie = require("cookie"); 
-// 2) No necesitamos express-session para este flujo, bastará la cookie 'auth' que creamos.
-// 3) Exportamos la configuración de Node-RED
+// 1) Importa el paquete 'cookie' para parsear la cabecera 'Cookie' de las peticiones HTTP.
+//    Esto nos permitirá leer la cookie 'auth=1' en cada solicitud a /ui.
+const cookie = require("cookie");
+
+// 2) Importa el módulo nativo 'crypto' de Node.js. 
+//    No es necesario instalarlo en package.json porque 'crypto' ya viene incorporado en Node.js.
+const cryptoModule = require("crypto");
+
 module.exports = {
-  // 4) Mantén aquí tu credentialSecret (para credenciales internas de Node-RED)
+  // 3) 'credentialSecret' protege las credenciales que Node-RED guarda internamente.
+  //    Se recomienda definir NODE_RED_CREDENTIAL_SECRET como variable de entorno en Render.
   credentialSecret: process.env.NODE_RED_CREDENTIAL_SECRET || "miClaveSecreta123",
-  // 5) Agregamos un middleware global a todas las rutas httpNode (incluye /ui)
+
+  // 4) 'functionGlobalContext' expone valores o módulos dentro de los nodos Function.
+  //    Aquí hacemos disponible 'cryptoModule' como 'crypto', de modo que en cualquier nodo Function
+  //    podamos llamarlo mediante global.get("crypto").
+  functionGlobalContext: {
+    // 4.1) Asignamos la instancia de crypto a la clave 'crypto'.
+    crypto: cryptoModule
+  },
+
+  // 5) 'httpNodeMiddleware' es un array de middlewares que Node-RED ejecuta antes de cada ruta HTTP In.
+  //    Incluye tanto las rutas regulares como las del Dashboard (/ui).
   httpNodeMiddleware: [
-    // ┌───────────────────────────────────────────────────────────────────────────
-    // 6) Middleware anónimo que intercepta TODO acceso a HTTP In (p.ej. /validador) 
-    //    y especialmente a rutas que empiecen con /ui
     function (req, res, next) {
-      // 7) Si la ruta solicitada no comienza con '/ui', dejamos pasar libremente
+      // 5.1) Verifica si la ruta solicitada empieza con "/ui". 
+      //      Si NO empieza con "/ui", permitimos la petición sin más validaciones.
       if (!req.path.startsWith("/ui")) {
         return next();
       }
-      // 8) Para rutas que sí comienzan con '/ui', buscamos la cookie 'auth'
-      //    req.headers.cookie es algo como "other=foo; auth=1; otro=bar"
+
+      // 5.2) Si la ruta SÍ comienza con "/ui", leemos la cabecera 'Cookie' de la petición.
+      //      'req.headers.cookie' contiene todas las cookies en formato "clave1=valor1; clave2=valor2; ..."
       const rawCookies = req.headers.cookie || "";
-      // 9) Usamos el módulo 'cookie' para parsear todas en un objeto
+
+      // 5.3) Usamos 'cookie.parse' para convertir la cadena en un objeto:
+      //      ej. "auth=1; foo=bar" → { auth: '1', foo: 'bar' }
       const cookies = cookie.parse(rawCookies);
-      // 10) Si no tenemos 'auth' o su valor no es '1', redirigimos al login PHP
+
+      // 5.4) Verificamos que exista la cookie 'auth' y que su valor sea exactamente '1'.
+      //      Si no existe o no coincide, redirigimos al login PHP en InfinityFree.
       if (!cookies.auth || cookies.auth !== "1") {
-        // 10.1) La URL de tu login PHP en InfinityFree
+        // 5.4.1) Enviamos un redirect 302 al usuario para que vaya a https://siot.kesug.com
         return res.redirect("https://siot.kesug.com/cerrar_sesion.php");
       }
-      // 11) Si llegamos aquí, la cookie 'auth=1' existe => usuario autorizado
+
+      // 5.5) Si la cookie 'auth=1' está presente, dejamos pasar la petición a /ui.
       next();
     }
-    // └───────────────────────────────────────────────────────────────────────────
   ]
 };
