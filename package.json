@@ -15,6 +15,7 @@
     "node-red-contrib-ui-artless-gauge2": "^0.3.13",
     "express-session": "^1.18.1",
     "node-fetch": "^3.3.2",
-    "cookie": "^1.0.2"
+    "cookie": "^1.0.2",
+    "node-red-contrib-crypto-js": "^0.1.1"
   }
 }
