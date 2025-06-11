@@ -826,7 +826,7 @@
         "type": "function",
         "z": "30bfffe14836de0f",
         "name": "Decodificar y extraer",
-        "func": "// msg.req.query.token viene de GET /validador?token=...\nvar token = msg.req.query.token;\n\n// 1) Si falta el token: 401\nif (!token) {\n    msg.statusCode = 401;\n    msg.payload    = \"Token faltante\";\n    return msg;\n}\n\n// 2) Decodifica Base64 a UTF-8: \"usuario|timestamp|firma\"\ntry {\n    msg.decoded = Buffer.from(token, \"base64\").toString(\"utf8\");\n} catch (e) {\n    msg.statusCode = 400;\n    msg.payload    = \"Token inválido (Base64)\";\n    return msg;\n}\n\n// 3) Separa en 3: usuario | timestamp | firma\nvar parts = msg.decoded.split(\"|\");\nif (parts.length !== 3) {\n    msg.statusCode = 400;\n    msg.payload    = \"Formato de token incorrecto\";\n    return msg;\n}\n\nmsg.username  = parts[0];   // p.ej. 'juan'\nmsg.ts_string = parts[1];   // p.ej. '1623000000'\nmsg.sig       = parts[2];   // hex HMAC-SHA256\nreturn msg;",
+        "func": "// msg.req.query.token viene de GET /validador?token=...\nvar token = msg.req.query.token;\n\n// 1) Si falta el token: 401\nif (!token) {\n    msg.statusCode = 401;\n    msg.payload    = \"Token faltante\";\n    return msg;\n}\n\n// 2) Decodifica Base64 a UTF-8: \"usuario|timestamp|firma\"\ntry {\n    msg.decoded = Buffer.from(token, \"base64\").toString(\"utf8\");\n} catch (e) {\n    msg.statusCode = 400;\n    msg.payload    = \"Token inválido (Base64)\";\n    return msg;\n}\n\n// 3) Separa en 3: usuario | timestamp | firma\nvar parts = msg.decoded.split(\"|\");\nif (parts.length !== 3) {\n    msg.statusCode = 400;\n    msg.payload    = \"Formato de token incorrecto\";\n    return msg;\n}\n\nmsg.username  = parts[0];   // p.ej. 'juan'\nmsg.ts_string = parts[1];   // p.ej. '1623000000'\n//msg.sig       = parts[2];   // hex HMAC-SHA256\nflow.set(\"username1\", parts[0]);\nflow.set(\"ts_string1\", parts[1]);\nflow.set(\"sig\", parts[2]); \nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -846,7 +846,7 @@
         "type": "function",
         "z": "30bfffe14836de0f",
         "name": "Prepara para HMAC",
-        "func": "// Reconstruye el payload que firmó el PHP:\nmsg.payload = msg.username + \"|\" + msg.ts_string;\n\n// Define tu secreto compartido (16–24 carácteres):\n// Línea en tu Function que define el secreto:\n// Debe coincidir carácter por carácter con el string de PHP,\n// pero en JS las barras invertidas se escapan con otra barra invertida.\nmsg.secret = \"7u\\\\I2B1mQJf)KoH(3q3AmInMvn9z;+1=\";\n\n// Dejamos msg.sig para comparar luego:\n// msg.sig = firma que vino en el token\nreturn msg;",
+        "func": "// Reconstruye el payload que firmó el PHP:\nmsg.payload = msg.username+\"|\"+msg.ts_string;\n\n// Define tu secreto compartido (16–24 carácteres):\n// Línea en tu Function que define el secreto:\n// Debe coincidir carácter por carácter con el string de PHP,\n// pero en JS las barras invertidas se escapan con otra barra invertida.\n//msg.secret = \"7uhI2B1mQJf)KoH(3q3AmInMvn9z;+1=\";\n\n// Dejamos msg.sig para comparar luego:\n// msg.sig = firma que vino en el token\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -867,12 +867,13 @@
         "z": "30bfffe14836de0f",
         "name": "HMAC-SHA256",
         "algorithm": "HmacSHA256",
-        "key": "{{secret}}",
+        "key": "7uhI2B1mQJf)KoH(3q3AmInMvn9z;+1=",
         "x": 140,
         "y": 300,
         "wires": [
             [
-                "17f1e3d441219857"
+                "17f1e3d441219857",
+                "062f0592d6c418f0"
             ]
         ]
     },
@@ -881,7 +882,7 @@
         "type": "function",
         "z": "30bfffe14836de0f",
         "name": "Compara firma y expiración",
-        "func": "// 1) Compara la firma calculada con la del token\nif (msg.sig !== msg.hmac) {\n    msg.statusCode = 401;\n    msg.payload = \"Firma inválida\";\n    return msg;\n}\n\n// 2) Comprueba expiración (1 hora = 3600 s)\nvar ts = parseInt(msg.ts_string, 10);\nvar now = Math.floor(Date.now() / 1000);\nif (now - ts > 3600) {\n    msg.statusCode = 401;\n    msg.payload = \"Token expirado\";\n    return msg;\n}\n\n// 3) Si todo OK, preparamos la cookie y redirect:\nmsg.headers = {\n    // HttpOnly y Path=/ para que exista en todas las rutas\n    \"Set-Cookie\": \"auth=1; Path=/; HttpOnly\"\n};\n// Redirige al dashboard completo (incl. #! y socketid)\nmsg.statusCode = 302;\nmsg.headers[\"Location\"] = \"https://node-red-bh0b.onrender.com/ui/#!/0?socketid=NKUKX8V5cUyfuiTHAAAB\";\nmsg.payload = \"\";\nreturn msg;",
+        "func": "// 1) Compara la firma calculada con la del token\nvar sign = flow.get(\"sig\"); \nif (sign !== msg.payload) {\n    msg.statusCode = 401;\n    msg.payload = \"Firma inválida\";\n    return msg;\n}\n\n// 2) Comprueba expiración (1 hora = 3600 s)\nvar ts = parseInt(msg.ts_string, 10);\nvar now = Math.floor(Date.now() / 1000);\nif (now - ts > 3600) {\n    msg.statusCode = 401;\n    msg.payload = \"Token expirado\";\n    return msg;\n}\n\n// 3) Si todo OK, preparamos la cookie y redirect:\nmsg.headers = {\n    // HttpOnly y Path=/ para que exista en todas las rutas\n    \"Set-Cookie\": \"auth=1; Path=/; HttpOnly\"\n};\n// Redirige al dashboard completo (incl. #! y socketid)\nmsg.statusCode = 302;\nmsg.headers[\"Location\"] = \"https://node-red-bh0b.onrender.com/ui/#!/0?socketid=NKUKX8V5cUyfuiTHAAAB\";\nmsg.payload = \"\";\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -905,6 +906,218 @@
         "headers": {},
         "x": 600,
         "y": 300,
+        "wires": []
+    },
+    {
+        "id": "34c988a702f67522",
+        "type": "function",
+        "z": "30bfffe14836de0f",
+        "name": "function 3",
+        "func": "var sign = flow.get(\"sig\");\nmsg.payload = sign;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 580,
+        "y": 360,
+        "wires": [
+            [
+                "2aacd4e6bb74b9d1"
+            ]
+        ]
+    },
+    {
+        "id": "062f0592d6c418f0",
+        "type": "debug",
+        "z": "30bfffe14836de0f",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 300,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "2aacd4e6bb74b9d1",
+        "type": "debug",
+        "z": "30bfffe14836de0f",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "3f01263e5fc7c21c",
+        "type": "inject",
+        "z": "30bfffe14836de0f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 490,
+        "y": 420,
+        "wires": [
+            [
+                "34c988a702f67522"
+            ]
+        ]
+    },
+    {
+        "id": "9d5a0a8dd8c72143",
+        "type": "inject",
+        "z": "30bfffe14836de0f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 550,
+        "y": 480,
+        "wires": [
+            [
+                "6675ad64b3758043"
+            ]
+        ]
+    },
+    {
+        "id": "6675ad64b3758043",
+        "type": "function",
+        "z": "30bfffe14836de0f",
+        "name": "function 4",
+        "func": "var userna = flow.get(\"username1\");\nmsg.payload = userna;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 720,
+        "y": 480,
+        "wires": [
+            [
+                "542e709812b81958"
+            ]
+        ]
+    },
+    {
+        "id": "542e709812b81958",
+        "type": "debug",
+        "z": "30bfffe14836de0f",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 860,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "f9a6ea68ad0f7ea0",
+        "type": "inject",
+        "z": "30bfffe14836de0f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 550,
+        "y": 540,
+        "wires": [
+            [
+                "6318ae513753503a"
+            ]
+        ]
+    },
+    {
+        "id": "6318ae513753503a",
+        "type": "function",
+        "z": "30bfffe14836de0f",
+        "name": "function 5",
+        "func": "var ts_strin = flow.get(\"ts_string1\");\nmsg.payload = ts_strin;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 720,
+        "y": 540,
+        "wires": [
+            [
+                "151ead2ba47526b8"
+            ]
+        ]
+    },
+    {
+        "id": "151ead2ba47526b8",
+        "type": "debug",
+        "z": "30bfffe14836de0f",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 860,
+        "y": 540,
         "wires": []
     },
     {
