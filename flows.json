@@ -230,7 +230,7 @@
         "order": 1,
         "width": 8,
         "height": 2,
-        "format": "<!-- Node-RED Dashboard Template Node: Menú Desplegable -->\n<style>\n  .menu-container {\n    position: relative;\n    text-align: center;\n    margin-top: 20px;\n    display: inline-block;\n  }\n  .menu-button {\n    padding: 8px 12px;\n    font-size: 14px;\n    border: 1px solid #ccc;\n    border-radius: 4px;\n    background-color: #f9f9f9;\n    cursor: pointer;\n  }\n  .menu-list {\n    list-style: none;\n    padding: 0;\n    margin: 4px 0 0;\n    border: 1px solid #ccc;\n    border-radius: 4px;\n    background-color: #f9f9f9;\n    position: absolute;\n    width: 100%;\n    box-shadow: 0 2px 6px rgba(0,0,0,0.1);\n    z-index: 1000;\n  }\n  .menu-item {\n    padding: 8px 12px;\n    cursor: pointer;\n  }\n  .menu-item:hover {\n    background-color: #e6e6e6;\n  }\n  .menu-item a {\n    text-decoration: none;\n    color: inherit;\n    display: block;\n    width: 100%;\n  }\n</style>\n\n<div class=\"menu-container\" ng-init=\"visible=false\">\n  <!-- Botón para mostrar/ocultar -->\n  <button class=\"menu-button\" ng-click=\"visible = !visible\">Menu</button>\n\n  <!-- Opciones desplegables -->\n  <ul class=\"menu-list\" ng-show=\"visible\">\n    <li class=\"menu-item\">\n      <a href=\"/download\" target=\"_blank\">Descargar Reporte</a>\n    </li>\n    <li class=\"menu-item\">\n      <a href=\"http://siot.kesug.com/cerrar_sesion.php\">Cerrar Sesión</a>\n    </li>\n  </ul>\n</div>\n",
+        "format": "<!-- Node-RED Dashboard Template Node: Menú Desplegable -->\n<style>\n  .menu-container {\n    position: relative;\n    text-align: center;\n    margin-top: 20px;\n    display: inline-block;\n  }\n  .menu-button {\n    padding: 8px 12px;\n    font-size: 14px;\n    border: 1px solid #ccc;\n    border-radius: 4px;\n    background-color: #f9f9f9;\n    cursor: pointer;\n  }\n  .menu-list {\n    list-style: none;\n    padding: 0;\n    margin: 4px 0 0;\n    border: 1px solid #ccc;\n    border-radius: 4px;\n    background-color: #f9f9f9;\n    position: absolute;\n    width: 100%;\n    box-shadow: 0 2px 6px rgba(0,0,0,0.1);\n    z-index: 1000;\n  }\n  .menu-item {\n    padding: 8px 12px;\n    cursor: pointer;\n  }\n  .menu-item:hover {\n    background-color: #e6e6e6;\n  }\n  .menu-item a {\n    text-decoration: none;\n    color: inherit;\n    display: block;\n    width: 100%;\n  }\n</style>\n\n<div class=\"menu-container\" ng-init=\"visible=false\">\n  <!-- Botón para mostrar/ocultar -->\n  <button class=\"menu-button\" ng-click=\"visible = !visible\">Menu</button>\n\n  <!-- Opciones desplegables -->\n  <ul class=\"menu-list\" ng-show=\"visible\">\n    <li class=\"menu-item\">\n      <a href=\"/download\" target=\"_blank\">Descargar Reporte</a>\n    </li>\n    <li class=\"menu-item\">\n      <a href=\"/logout\">Cerrar Sesión</a>\n    </li>\n  </ul>\n</div>\n",
         "storeOutMessages": true,
         "fwdInMessages": true,
         "resendOnRefresh": true,
@@ -337,10 +337,10 @@
         "id": "776dbb7d54fc8326",
         "type": "http response",
         "z": "30bfffe14836de0f",
-        "name": "",
+        "name": "download",
         "statusCode": "",
         "headers": {},
-        "x": 430,
+        "x": 440,
         "y": 180,
         "wires": []
     },
@@ -366,7 +366,7 @@
         "payload": "[$moment().format('YYYY-MM-DD'), $round($random()*100, 2), $round($random()*100, 2), $round($random()*100, 2), $round($random()*100, 2)]",
         "payloadType": "jsonata",
         "x": 100,
-        "y": 420,
+        "y": 460,
         "wires": [
             [
                 "e7534f9ecc49c258"
@@ -385,7 +385,7 @@
         "flatten": false,
         "name": "GSheet-ESCRIBIR",
         "x": 290,
-        "y": 420,
+        "y": 460,
         "wires": [
             []
         ]
@@ -408,7 +408,7 @@
         "onceDelay": 0.1,
         "topic": "",
         "x": 90,
-        "y": 480,
+        "y": 520,
         "wires": [
             [
                 "f6733eada21bfe70"
@@ -433,7 +433,7 @@
         "payload": "$round($random()*100, 2)",
         "payloadType": "jsonata",
         "x": 90,
-        "y": 540,
+        "y": 580,
         "wires": [
             [
                 "fd4552a50750bcbe"
@@ -458,7 +458,7 @@
         "payload": "$round($random()*100, 2)",
         "payloadType": "jsonata",
         "x": 90,
-        "y": 600,
+        "y": 640,
         "wires": [
             [
                 "92bf6e3362acc412"
@@ -483,7 +483,7 @@
         "payload": "$round($random()*100, 2)",
         "payloadType": "jsonata",
         "x": 90,
-        "y": 660,
+        "y": 700,
         "wires": [
             [
                 "26a335dff747a918"
@@ -503,7 +503,7 @@
         "finalize": "",
         "libs": [],
         "x": 240,
-        "y": 480,
+        "y": 520,
         "wires": [
             [
                 "63db2af75a40515c"
@@ -523,7 +523,7 @@
         "finalize": "",
         "libs": [],
         "x": 240,
-        "y": 540,
+        "y": 580,
         "wires": [
             [
                 "9dfe85bee29d5596"
@@ -543,7 +543,7 @@
         "finalize": "",
         "libs": [],
         "x": 250,
-        "y": 600,
+        "y": 640,
         "wires": [
             [
                 "e5e524232045f503"
@@ -563,7 +563,7 @@
         "finalize": "",
         "libs": [],
         "x": 250,
-        "y": 660,
+        "y": 700,
         "wires": [
             [
                 "e7a45bd7690a2d8b"
@@ -595,7 +595,7 @@
         "diff": false,
         "className": "",
         "x": 410,
-        "y": 600,
+        "y": 640,
         "wires": []
     },
     {
@@ -623,7 +623,7 @@
         "diff": false,
         "className": "",
         "x": 410,
-        "y": 660,
+        "y": 700,
         "wires": []
     },
     {
@@ -639,7 +639,7 @@
         "finalize": "",
         "libs": [],
         "x": 260,
-        "y": 720,
+        "y": 760,
         "wires": [
             [
                 "c3f645121877dab0"
@@ -658,7 +658,7 @@
         "flatten": false,
         "name": "GSheet-TRIGGER",
         "x": 450,
-        "y": 720,
+        "y": 760,
         "wires": [
             []
         ]
@@ -685,7 +685,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 100,
-        "y": 720,
+        "y": 760,
         "wires": [
             [
                 "5c190e65348f47a9"
@@ -740,7 +740,7 @@
         "bgcolorFromTheme": true,
         "diffCenter": "",
         "x": 390,
-        "y": 540,
+        "y": 580,
         "wires": []
     },
     {
@@ -759,7 +759,7 @@
         "templateScope": "global",
         "className": "",
         "x": 120,
-        "y": 780,
+        "y": 820,
         "wires": [
             []
         ]
@@ -780,7 +780,7 @@
         "templateScope": "local",
         "className": "",
         "x": 390,
-        "y": 480,
+        "y": 520,
         "wires": [
             []
         ]
@@ -882,7 +882,7 @@
         "type": "function",
         "z": "30bfffe14836de0f",
         "name": "Compara firma y expiración",
-        "func": "// 1) Compara la firma calculada con la del token\nvar sign = flow.get(\"sig\"); \nif (sign !== msg.payload) {\n    msg.statusCode = 401;\n    msg.payload = \"Firma inválida\";\n    return msg;\n}\n\n// 2) Comprueba expiración (1 hora = 3600 s)\nvar ts = parseInt(msg.ts_string, 10);\nvar now = Math.floor(Date.now() / 1000);\nif (now - ts > 3600) {\n    msg.statusCode = 401;\n    msg.payload = \"Token expirado\";\n    return msg;\n}\n\n// 3) Si todo OK, preparamos la cookie y redirect:\nmsg.headers = {\n    // HttpOnly y Path=/ para que exista en todas las rutas\n    \"Set-Cookie\": \"auth=1; Path=/; HttpOnly\"\n};\n// Redirige al dashboard completo (incl. #! y socketid)\nmsg.statusCode = 302;\nmsg.headers[\"Location\"] = \"https://node-red-bh0b.onrender.com/ui/#!/0?socketid=NKUKX8V5cUyfuiTHAAAB\";\nmsg.payload = \"\";\nreturn msg;",
+        "func": "// 1) Compara la firma calculada con la del token\nvar sign = flow.get(\"sig\"); \nif (sign !== msg.payload) {\n    msg.statusCode = 401;\n    msg.payload = \"Firma inválida\";\n    return msg;\n}\n\n// 2) Comprueba expiración (1 hora = 3600 s)\nvar ts = parseInt(msg.ts_string, 10);\nvar now = Math.floor(Date.now() / 1000);\nif (now - ts > 3600) {\n    msg.statusCode = 401;\n    msg.payload = \"Token expirado\";\n    return msg;\n}\n\n// 3) Si todo OK, preparamos la cookie y redirect:\nmsg.headers = {\n  // Quitamos HttpOnly para que el script en <head> pueda leerla\n  \"Set-Cookie\": \"auth=1; Path=/; SameSite=Lax\"\n};\n// Redirige al dashboard completo (incl. #! y socketid)\nmsg.statusCode = 302;\nmsg.headers[\"Location\"] = \"https://node-red-bh0b.onrender.com/ui/#!/0?socketid=NKUKX8V5cUyfuiTHAAAB\";\nmsg.payload = \"\";\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -982,7 +982,7 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 490,
+        "x": 570,
         "y": 420,
         "wires": [
             [
@@ -1119,6 +1119,75 @@
         "x": 860,
         "y": 540,
         "wires": []
+    },
+    {
+        "id": "afb33c17fa01f1e9",
+        "type": "http in",
+        "z": "30bfffe14836de0f",
+        "name": "LOGOUT",
+        "url": "/logout",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 80,
+        "y": 400,
+        "wires": [
+            [
+                "405b522e5126e381"
+            ]
+        ]
+    },
+    {
+        "id": "405b522e5126e381",
+        "type": "function",
+        "z": "30bfffe14836de0f",
+        "name": "function 6",
+        "func": "// 1) Preparamos la cookie para borrarla: \n//    - Asignamos valor vacío y expiración pasada.\n//    - Path=/ para que afecte a toda la ruta.\nmsg.headers = {\n  // Igual, sin HttpOnly\n  \"Set-Cookie\": \"auth=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Lax\"\n};\n\n// 2) Redirigimos al usuario de vuelta al login PHP en InfinityFree\nmsg.statusCode = 302;\nmsg.headers[\"Location\"] = \"https://siot.kesug.com/cerrar_sesion.php\";\n\n// 3) Vacíamos el cuerpo de la respuesta (solo interesan cabeceras)\nmsg.payload = \"\";\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 240,
+        "y": 400,
+        "wires": [
+            [
+                "ecaabebbdae859c8"
+            ]
+        ]
+    },
+    {
+        "id": "ecaabebbdae859c8",
+        "type": "http response",
+        "z": "30bfffe14836de0f",
+        "name": "logout",
+        "statusCode": "",
+        "headers": {},
+        "x": 390,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "b83deb375cd1fa6e",
+        "type": "ui_template",
+        "z": "30bfffe14836de0f",
+        "group": "",
+        "name": "Bloqueo URL",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "format": "<script>\n(function(){\n  // 1) Solo actuamos si la ruta está en /ui\n  if (!window.location.pathname.startsWith(\"/ui\")) {\n    return; // no hacemos nada en /validador ni /logout ni otras rutas\n  }\n\n  // 2) Leemos la cookie 'auth'\n  var cookies = document.cookie.split(\";\").map(c => c.trim());\n  var auth = cookies.find(c => c.indexOf(\"auth=\") === 0);\n\n  // 3) Si no existe auth=1, redirigimos al login PHP\n  if (!auth || auth.split(\"=\")[1] !== \"1\") {\n    window.top.location.href = \"https://siot.kesug.com/cerrar_sesion.php\";\n  }\n})();\n</script>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "global",
+        "className": "",
+        "x": 330,
+        "y": 820,
+        "wires": [
+            []
+        ]
     },
     {
         "id": "1c97df7f36d5f322",
