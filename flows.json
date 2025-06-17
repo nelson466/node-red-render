@@ -200,7 +200,7 @@
         "id": "74a8d5bdab068bb6",
         "type": "inject",
         "z": "30bfffe14836de0f",
-        "name": "LEER",
+        "name": "DESCARGAR",
         "props": [
             {
                 "p": "payload"
@@ -213,8 +213,8 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 100,
-        "y": 40,
+        "x": 120,
+        "y": 80,
         "wires": [
             [
                 "8411e4c891ed177d"
@@ -226,7 +226,7 @@
         "type": "ui_template",
         "z": "30bfffe14836de0f",
         "group": "6fc5ca55e78a0a84",
-        "name": "LINK",
+        "name": "MENU",
         "order": 1,
         "width": 8,
         "height": 2,
@@ -237,7 +237,7 @@
         "templateScope": "local",
         "className": "",
         "x": 430,
-        "y": 120,
+        "y": 160,
         "wires": [
             []
         ]
@@ -247,7 +247,7 @@
         "type": "function",
         "z": "30bfffe14836de0f",
         "name": "function 7",
-        "func": "// Guarda el archivo Excel en la variable de contexto \nflow.set(\"archivoExcel\", msg.payload); \nmsg.payload = \"\";\nvar enlace = \" \"; \n// Crea el enlace HTML de descarga \nmsg.enlace = '<div style=\"text-align: center; margin-top: 20px;\">' + \n             '<a href=\"/download\" target=\"_blank\">Descargar Reporte </a>' +              \n             '</div>'; \nreturn msg; ",
+        "func": "// Guarda el archivo Excel en la variable de contexto \nflow.set(\"archivoExcel\", msg.payload); \nmsg.payload = \" \";\n//var enlace = \" \"; \n// Crea el enlace HTML de descarga \n/*msg.enlace = '<div style=\"text-align: center; margin-top: 20px;\">' + \n             '<a href=\"/download\" target=\"_blank\">Descargar Reporte </a>' +              \n             '</div>';*/ \nreturn null; ",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -255,11 +255,9 @@
         "finalize": "",
         "libs": [],
         "x": 280,
-        "y": 120,
+        "y": 160,
         "wires": [
-            [
-                "da67b0e70f777c1a"
-            ]
+            []
         ]
     },
     {
@@ -274,8 +272,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 440,
-        "y": 40,
+        "x": 480,
+        "y": 80,
         "wires": [
             [
                 "3ec5b3220afae997"
@@ -289,7 +287,7 @@
         "name": "",
         "sheetName": "",
         "x": 120,
-        "y": 120,
+        "y": 160,
         "wires": [
             [
                 "33e4d5e26b0ea206"
@@ -300,13 +298,13 @@
         "id": "23bd4b6af81b7207",
         "type": "http in",
         "z": "30bfffe14836de0f",
-        "name": "DOWNLOAD",
+        "name": "DOWNLOAD XLSX",
         "url": "/download",
         "method": "get",
         "upload": false,
         "swaggerDoc": "",
-        "x": 90,
-        "y": 180,
+        "x": 110,
+        "y": 220,
         "wires": [
             [
                 "b4aa11862d755621"
@@ -325,8 +323,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 270,
-        "y": 180,
+        "x": 310,
+        "y": 220,
         "wires": [
             [
                 "776dbb7d54fc8326"
@@ -340,8 +338,8 @@
         "name": "download",
         "statusCode": "",
         "headers": {},
-        "x": 440,
-        "y": 180,
+        "x": 480,
+        "y": 220,
         "wires": []
     },
     {
@@ -366,7 +364,7 @@
         "payload": "[$moment().format('YYYY-MM-DD'), $round($random()*100, 2), $round($random()*100, 2), $round($random()*100, 2), $round($random()*100, 2)]",
         "payloadType": "jsonata",
         "x": 100,
-        "y": 460,
+        "y": 660,
         "wires": [
             [
                 "e7534f9ecc49c258"
@@ -385,7 +383,7 @@
         "flatten": false,
         "name": "GSheet-ESCRIBIR",
         "x": 290,
-        "y": 460,
+        "y": 660,
         "wires": [
             []
         ]
@@ -408,7 +406,7 @@
         "onceDelay": 0.1,
         "topic": "",
         "x": 90,
-        "y": 520,
+        "y": 780,
         "wires": [
             [
                 "f6733eada21bfe70"
@@ -433,7 +431,7 @@
         "payload": "$round($random()*100, 2)",
         "payloadType": "jsonata",
         "x": 90,
-        "y": 580,
+        "y": 840,
         "wires": [
             [
                 "fd4552a50750bcbe"
@@ -458,7 +456,7 @@
         "payload": "$round($random()*100, 2)",
         "payloadType": "jsonata",
         "x": 90,
-        "y": 640,
+        "y": 900,
         "wires": [
             [
                 "92bf6e3362acc412"
@@ -483,7 +481,7 @@
         "payload": "$round($random()*100, 2)",
         "payloadType": "jsonata",
         "x": 90,
-        "y": 700,
+        "y": 960,
         "wires": [
             [
                 "26a335dff747a918"
@@ -503,7 +501,7 @@
         "finalize": "",
         "libs": [],
         "x": 240,
-        "y": 520,
+        "y": 780,
         "wires": [
             [
                 "63db2af75a40515c"
@@ -523,7 +521,7 @@
         "finalize": "",
         "libs": [],
         "x": 240,
-        "y": 580,
+        "y": 840,
         "wires": [
             [
                 "9dfe85bee29d5596"
@@ -543,7 +541,7 @@
         "finalize": "",
         "libs": [],
         "x": 250,
-        "y": 640,
+        "y": 900,
         "wires": [
             [
                 "e5e524232045f503"
@@ -563,7 +561,7 @@
         "finalize": "",
         "libs": [],
         "x": 250,
-        "y": 700,
+        "y": 960,
         "wires": [
             [
                 "e7a45bd7690a2d8b"
@@ -595,7 +593,7 @@
         "diff": false,
         "className": "",
         "x": 410,
-        "y": 640,
+        "y": 900,
         "wires": []
     },
     {
@@ -623,7 +621,7 @@
         "diff": false,
         "className": "",
         "x": 410,
-        "y": 700,
+        "y": 960,
         "wires": []
     },
     {
@@ -639,7 +637,7 @@
         "finalize": "",
         "libs": [],
         "x": 260,
-        "y": 760,
+        "y": 1080,
         "wires": [
             [
                 "c3f645121877dab0"
@@ -658,7 +656,7 @@
         "flatten": false,
         "name": "GSheet-TRIGGER",
         "x": 450,
-        "y": 760,
+        "y": 1080,
         "wires": [
             []
         ]
@@ -685,7 +683,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 100,
-        "y": 760,
+        "y": 1080,
         "wires": [
             [
                 "5c190e65348f47a9"
@@ -740,7 +738,7 @@
         "bgcolorFromTheme": true,
         "diffCenter": "",
         "x": 390,
-        "y": 580,
+        "y": 840,
         "wires": []
     },
     {
@@ -759,7 +757,7 @@
         "templateScope": "global",
         "className": "",
         "x": 120,
-        "y": 820,
+        "y": 1140,
         "wires": [
             []
         ]
@@ -780,7 +778,7 @@
         "templateScope": "local",
         "className": "",
         "x": 390,
-        "y": 520,
+        "y": 780,
         "wires": [
             []
         ]
@@ -796,8 +794,8 @@
         "cells": "hoja1!A1:Z1000",
         "flatten": false,
         "name": "GSH-LEER",
-        "x": 270,
-        "y": 40,
+        "x": 310,
+        "y": 80,
         "wires": [
             [
                 "6a33ce06083b440a"
@@ -814,7 +812,7 @@
         "upload": false,
         "swaggerDoc": "",
         "x": 70,
-        "y": 240,
+        "y": 340,
         "wires": [
             [
                 "bfaaceadabca0c6e"
@@ -826,7 +824,7 @@
         "type": "function",
         "z": "30bfffe14836de0f",
         "name": "Decodificar y extraer",
-        "func": "// msg.req.query.token viene de GET /validador?token=...\nvar token = msg.req.query.token;\n\n// 1) Si falta el token: 401\nif (!token) {\n    msg.statusCode = 401;\n    msg.payload    = \"Token faltante\";\n    return msg;\n}\n\n// 2) Decodifica Base64 a UTF-8: \"usuario|timestamp|firma\"\ntry {\n    msg.decoded = Buffer.from(token, \"base64\").toString(\"utf8\");\n} catch (e) {\n    msg.statusCode = 400;\n    msg.payload    = \"Token inválido (Base64)\";\n    return msg;\n}\n\n// 3) Separa en 3: usuario | timestamp | firma\nvar parts = msg.decoded.split(\"|\");\nif (parts.length !== 3) {\n    msg.statusCode = 400;\n    msg.payload    = \"Formato de token incorrecto\";\n    return msg;\n}\n\nmsg.username  = parts[0];   // p.ej. 'juan'\nmsg.ts_string = parts[1];   // p.ej. '1623000000'\n//msg.sig       = parts[2];   // hex HMAC-SHA256\nflow.set(\"username1\", parts[0]);\nflow.set(\"ts_string1\", parts[1]);\nflow.set(\"sig\", parts[2]); \nreturn msg;",
+        "func": "// msg.req.query.token viene de GET /validador?token=...\nvar token = msg.req.query.token;\n\n// 1) Si falta el token: 401\nif (!token) {\n    msg.statusCode = 401;\n    msg.payload    = \"Token faltante\";\n    return msg;\n}\n\n// 2) Decodifica Base64 a UTF-8: \"usuario|timestamp|firma\"\ntry {\n    msg.decoded = Buffer.from(token, \"base64\").toString(\"utf8\");\n} catch (e) {\n    msg.statusCode = 400;\n    msg.payload    = \"Token inválido (Base64)\";\n    return msg;\n}\n\n// 3) Separa en 3: usuario | timestamp | firma\nvar parts = msg.decoded.split(\"|\");\nif (parts.length !== 3) {\n    msg.statusCode = 400;\n    msg.payload    = \"Formato de token incorrecto\";\n    return msg;\n}\n\nmsg.username  = parts[0];   // p.ej. 'juan'\nmsg.ts_string = parts[1];   // p.ej. '1623000000'\n//msg.sig       = parts[2];   // hex HMAC-SHA256\nflow.set(\"sig\", parts[2]); \nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -834,7 +832,7 @@
         "finalize": "",
         "libs": [],
         "x": 260,
-        "y": 240,
+        "y": 340,
         "wires": [
             [
                 "e91048a4cbeebc79"
@@ -854,7 +852,7 @@
         "finalize": "",
         "libs": [],
         "x": 500,
-        "y": 240,
+        "y": 340,
         "wires": [
             [
                 "8beceab8f9990f77"
@@ -869,11 +867,10 @@
         "algorithm": "HmacSHA256",
         "key": "7uhI2B1mQJf)KoH(3q3AmInMvn9z;+1=",
         "x": 140,
-        "y": 300,
+        "y": 420,
         "wires": [
             [
-                "17f1e3d441219857",
-                "062f0592d6c418f0"
+                "17f1e3d441219857"
             ]
         ]
     },
@@ -890,7 +887,7 @@
         "finalize": "",
         "libs": [],
         "x": 380,
-        "y": 300,
+        "y": 420,
         "wires": [
             [
                 "d79410c172c2b443"
@@ -905,219 +902,7 @@
         "statusCode": "",
         "headers": {},
         "x": 600,
-        "y": 300,
-        "wires": []
-    },
-    {
-        "id": "34c988a702f67522",
-        "type": "function",
-        "z": "30bfffe14836de0f",
-        "name": "function 3",
-        "func": "var sign = flow.get(\"sig\");\nmsg.payload = sign;\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 580,
-        "y": 360,
-        "wires": [
-            [
-                "2aacd4e6bb74b9d1"
-            ]
-        ]
-    },
-    {
-        "id": "062f0592d6c418f0",
-        "type": "debug",
-        "z": "30bfffe14836de0f",
-        "name": "debug 1",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 300,
-        "y": 360,
-        "wires": []
-    },
-    {
-        "id": "2aacd4e6bb74b9d1",
-        "type": "debug",
-        "z": "30bfffe14836de0f",
-        "name": "debug 2",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 720,
-        "y": 360,
-        "wires": []
-    },
-    {
-        "id": "3f01263e5fc7c21c",
-        "type": "inject",
-        "z": "30bfffe14836de0f",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 570,
         "y": 420,
-        "wires": [
-            [
-                "34c988a702f67522"
-            ]
-        ]
-    },
-    {
-        "id": "9d5a0a8dd8c72143",
-        "type": "inject",
-        "z": "30bfffe14836de0f",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 550,
-        "y": 480,
-        "wires": [
-            [
-                "6675ad64b3758043"
-            ]
-        ]
-    },
-    {
-        "id": "6675ad64b3758043",
-        "type": "function",
-        "z": "30bfffe14836de0f",
-        "name": "function 4",
-        "func": "var userna = flow.get(\"username1\");\nmsg.payload = userna;\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 720,
-        "y": 480,
-        "wires": [
-            [
-                "542e709812b81958"
-            ]
-        ]
-    },
-    {
-        "id": "542e709812b81958",
-        "type": "debug",
-        "z": "30bfffe14836de0f",
-        "name": "debug 3",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 860,
-        "y": 480,
-        "wires": []
-    },
-    {
-        "id": "f9a6ea68ad0f7ea0",
-        "type": "inject",
-        "z": "30bfffe14836de0f",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 550,
-        "y": 540,
-        "wires": [
-            [
-                "6318ae513753503a"
-            ]
-        ]
-    },
-    {
-        "id": "6318ae513753503a",
-        "type": "function",
-        "z": "30bfffe14836de0f",
-        "name": "function 5",
-        "func": "var ts_strin = flow.get(\"ts_string1\");\nmsg.payload = ts_strin;\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 720,
-        "y": 540,
-        "wires": [
-            [
-                "151ead2ba47526b8"
-            ]
-        ]
-    },
-    {
-        "id": "151ead2ba47526b8",
-        "type": "debug",
-        "z": "30bfffe14836de0f",
-        "name": "debug 4",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 860,
-        "y": 540,
         "wires": []
     },
     {
@@ -1130,7 +915,7 @@
         "upload": false,
         "swaggerDoc": "",
         "x": 80,
-        "y": 400,
+        "y": 540,
         "wires": [
             [
                 "405b522e5126e381"
@@ -1142,7 +927,7 @@
         "type": "function",
         "z": "30bfffe14836de0f",
         "name": "function 6",
-        "func": "// 1) Preparamos la cookie para borrarla: \n//    - Asignamos valor vacío y expiración pasada.\n//    - Path=/ para que afecte a toda la ruta.\nmsg.headers = {\n  // Igual, sin HttpOnly\n  \"Set-Cookie\": \"auth=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Lax\"\n};\n\n// 2) Redirigimos al usuario de vuelta al login PHP en InfinityFree\nmsg.statusCode = 302;\nmsg.headers[\"Location\"] = \"https://siot.kesug.com/cerrar_sesion.php\";\n\n// 3) Vacíamos el cuerpo de la respuesta (solo interesan cabeceras)\nmsg.payload = \"\";\n\nreturn msg;",
+        "func": "// 1) Preparamos la cookie para borrarla: \n//    - Asignamos valor vacío y expiración pasada.\n//    - Path=/ para que afecte a toda la ruta.\nmsg.headers = {\n  // Igual, sin HttpOnly\n  \"Set-Cookie\": \"auth=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Lax\"\n};\n\n// 2) Redirigimos al usuario de vuelta al login PHP en InfinityFree\nmsg.statusCode = 302;\nmsg.headers[\"Location\"] = \"https://siot.kesug.com/cerrar_sesion.php\";\n\n// 3) Vacíamos el cuerpo de la respuesta (solo interesan cabeceras)\nmsg.payload = \"\";\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1150,7 +935,7 @@
         "finalize": "",
         "libs": [],
         "x": 240,
-        "y": 400,
+        "y": 540,
         "wires": [
             [
                 "ecaabebbdae859c8"
@@ -1165,7 +950,7 @@
         "statusCode": "",
         "headers": {},
         "x": 390,
-        "y": 400,
+        "y": 540,
         "wires": []
     },
     {
@@ -1184,10 +969,70 @@
         "templateScope": "global",
         "className": "",
         "x": 330,
-        "y": 820,
+        "y": 1140,
         "wires": [
             []
         ]
+    },
+    {
+        "id": "0c12eb0275573479",
+        "type": "comment",
+        "z": "30bfffe14836de0f",
+        "name": "DESCARGA DESDE EL MENU EL ARCHIVO \"reporte.xlsx\" DE GOOGLE SHEETS",
+        "info": "",
+        "x": 310,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "4d12960a1b3e2233",
+        "type": "comment",
+        "z": "30bfffe14836de0f",
+        "name": "FLUJO PARA ACCEDER AL DASHBOARD CUANDO EL USUARIO INICIA SESION",
+        "info": "",
+        "x": 310,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "3316df79b95001db",
+        "type": "comment",
+        "z": "30bfffe14836de0f",
+        "name": "FLUJO QUE CIERRA SESION DESDE EL MENU",
+        "info": "",
+        "x": 200,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "95c2123b4aacbcdc",
+        "type": "comment",
+        "z": "30bfffe14836de0f",
+        "name": "FLUJO DE PRUEBA PARA ESCRIBIR MANUALMENTE DATOS EN EL ARCHIVO \"reporte.xlsx\"",
+        "info": "",
+        "x": 350,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "bd7067cbb5cc9c60",
+        "type": "comment",
+        "z": "30bfffe14836de0f",
+        "name": "SIMULA DATOS DE SENSORES  Y LOS MUESTRA EN WIDGETS DEL DASHBOARD",
+        "info": "",
+        "x": 320,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "87141044b16e21ee",
+        "type": "comment",
+        "z": "30bfffe14836de0f",
+        "name": "CADA CIERTO TIEMPO SE GUARDAN LOS DATOS EN EL ARCHIVO \"reporte.xlsx\"",
+        "info": "",
+        "x": 310,
+        "y": 1020,
+        "wires": []
     },
     {
         "id": "1c97df7f36d5f322",
