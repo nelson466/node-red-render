@@ -146,12 +146,12 @@
     {
         "id": "9792cacabb6ea8a4",
         "type": "gauth",
-        "name": "node-red-sheets@ninth-optics-458601-r5.iam.gserviceaccount.com"
+        "name": "Unknown"
     },
     {
         "id": "f9217116a51feb2e",
         "type": "gauth",
-        "name": "node-red-sheets@ninth-optics-458601-r5.iam.gserviceaccount.com"
+        "name": "Unknown"
     },
     {
         "id": "7c54979535cd1fda",
@@ -197,6 +197,11 @@
         "height": 1
     },
     {
+        "id": "4e36b7698ef13de3",
+        "type": "gauth",
+        "name": "node-red-sheets@ninth-optics-458601-r5.iam.gserviceaccount.com"
+    },
+    {
         "id": "74a8d5bdab068bb6",
         "type": "inject",
         "z": "30bfffe14836de0f",
@@ -217,7 +222,7 @@
         "y": 80,
         "wires": [
             [
-                "8411e4c891ed177d"
+                "334f6101f1411a55"
             ]
         ]
     },
@@ -236,8 +241,8 @@
         "resendOnRefresh": true,
         "templateScope": "local",
         "className": "",
-        "x": 430,
-        "y": 160,
+        "x": 70,
+        "y": 1580,
         "wires": [
             []
         ]
@@ -247,15 +252,15 @@
         "type": "function",
         "z": "30bfffe14836de0f",
         "name": "function 7",
-        "func": "// Guarda el archivo Excel en la variable de contexto \nflow.set(\"archivoExcel\", msg.payload); \nmsg.payload = \" \";\n//var enlace = \" \"; \n// Crea el enlace HTML de descarga \n/*msg.enlace = '<div style=\"text-align: center; margin-top: 20px;\">' + \n             '<a href=\"/download\" target=\"_blank\">Descargar Reporte </a>' +              \n             '</div>';*/ \nreturn null; ",
+        "func": "// Guarda el archivo Excel en la variable de contexto \nflow.set(\"archivoExcel\", msg.payload); \nmsg.payload = \" \";\nreturn null; ",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 280,
-        "y": 160,
+        "x": 740,
+        "y": 440,
         "wires": [
             []
         ]
@@ -272,8 +277,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 480,
-        "y": 80,
+        "x": 420,
+        "y": 440,
         "wires": [
             [
                 "3ec5b3220afae997"
@@ -286,8 +291,8 @@
         "z": "30bfffe14836de0f",
         "name": "",
         "sheetName": "",
-        "x": 120,
-        "y": 160,
+        "x": 580,
+        "y": 440,
         "wires": [
             [
                 "33e4d5e26b0ea206"
@@ -304,7 +309,7 @@
         "upload": false,
         "swaggerDoc": "",
         "x": 110,
-        "y": 220,
+        "y": 320,
         "wires": [
             [
                 "b4aa11862d755621"
@@ -324,7 +329,7 @@
         "finalize": "",
         "libs": [],
         "x": 310,
-        "y": 220,
+        "y": 320,
         "wires": [
             [
                 "776dbb7d54fc8326"
@@ -339,14 +344,14 @@
         "statusCode": "",
         "headers": {},
         "x": 480,
-        "y": 220,
+        "y": 320,
         "wires": []
     },
     {
         "id": "e24b42ecf91cc75f",
         "type": "inject",
         "z": "30bfffe14836de0f",
-        "name": "ESCRIBIR",
+        "name": "escribir",
         "props": [
             {
                 "p": "payload"
@@ -363,8 +368,8 @@
         "topic": "",
         "payload": "[$moment().format('YYYY-MM-DD'), $round($random()*100, 2), $round($random()*100, 2), $round($random()*100, 2), $round($random()*100, 2)]",
         "payloadType": "jsonata",
-        "x": 100,
-        "y": 660,
+        "x": 90,
+        "y": 860,
         "wires": [
             [
                 "e7534f9ecc49c258"
@@ -375,15 +380,15 @@
         "id": "e7534f9ecc49c258",
         "type": "GSheet",
         "z": "30bfffe14836de0f",
-        "creds": "f9217116a51feb2e",
+        "creds": "7c54979535cd1fda",
         "method": "append",
         "action": "",
         "sheet": "1CGfI2dkxgYdfw37UlectzlLVmVtBW0EQ8MUh9ni5R6Q",
         "cells": "hoja1!A5",
         "flatten": false,
         "name": "GSheet-ESCRIBIR",
-        "x": 290,
-        "y": 660,
+        "x": 270,
+        "y": 860,
         "wires": [
             []
         ]
@@ -406,7 +411,7 @@
         "onceDelay": 0.1,
         "topic": "",
         "x": 90,
-        "y": 780,
+        "y": 980,
         "wires": [
             [
                 "f6733eada21bfe70"
@@ -431,7 +436,7 @@
         "payload": "$round($random()*100, 2)",
         "payloadType": "jsonata",
         "x": 90,
-        "y": 840,
+        "y": 1040,
         "wires": [
             [
                 "fd4552a50750bcbe"
@@ -456,7 +461,7 @@
         "payload": "$round($random()*100, 2)",
         "payloadType": "jsonata",
         "x": 90,
-        "y": 900,
+        "y": 1100,
         "wires": [
             [
                 "92bf6e3362acc412"
@@ -481,7 +486,7 @@
         "payload": "$round($random()*100, 2)",
         "payloadType": "jsonata",
         "x": 90,
-        "y": 960,
+        "y": 1160,
         "wires": [
             [
                 "26a335dff747a918"
@@ -501,7 +506,7 @@
         "finalize": "",
         "libs": [],
         "x": 240,
-        "y": 780,
+        "y": 980,
         "wires": [
             [
                 "63db2af75a40515c"
@@ -521,7 +526,7 @@
         "finalize": "",
         "libs": [],
         "x": 240,
-        "y": 840,
+        "y": 1040,
         "wires": [
             [
                 "9dfe85bee29d5596"
@@ -541,7 +546,7 @@
         "finalize": "",
         "libs": [],
         "x": 250,
-        "y": 900,
+        "y": 1100,
         "wires": [
             [
                 "e5e524232045f503"
@@ -561,7 +566,7 @@
         "finalize": "",
         "libs": [],
         "x": 250,
-        "y": 960,
+        "y": 1160,
         "wires": [
             [
                 "e7a45bd7690a2d8b"
@@ -593,7 +598,7 @@
         "diff": false,
         "className": "",
         "x": 410,
-        "y": 900,
+        "y": 1100,
         "wires": []
     },
     {
@@ -621,7 +626,7 @@
         "diff": false,
         "className": "",
         "x": 410,
-        "y": 960,
+        "y": 1160,
         "wires": []
     },
     {
@@ -637,7 +642,7 @@
         "finalize": "",
         "libs": [],
         "x": 260,
-        "y": 1080,
+        "y": 1520,
         "wires": [
             [
                 "c3f645121877dab0"
@@ -656,7 +661,7 @@
         "flatten": false,
         "name": "GSheet-TRIGGER",
         "x": 450,
-        "y": 1080,
+        "y": 1520,
         "wires": [
             []
         ]
@@ -683,7 +688,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 100,
-        "y": 1080,
+        "y": 1520,
         "wires": [
             [
                 "5c190e65348f47a9"
@@ -738,7 +743,7 @@
         "bgcolorFromTheme": true,
         "diffCenter": "",
         "x": 390,
-        "y": 840,
+        "y": 1040,
         "wires": []
     },
     {
@@ -756,8 +761,8 @@
         "resendOnRefresh": true,
         "templateScope": "global",
         "className": "",
-        "x": 120,
-        "y": 1140,
+        "x": 240,
+        "y": 1580,
         "wires": [
             []
         ]
@@ -778,7 +783,7 @@
         "templateScope": "local",
         "className": "",
         "x": 390,
-        "y": 780,
+        "y": 980,
         "wires": [
             []
         ]
@@ -787,15 +792,15 @@
         "id": "8411e4c891ed177d",
         "type": "GSheet",
         "z": "30bfffe14836de0f",
-        "creds": "9792cacabb6ea8a4",
+        "creds": "4e36b7698ef13de3",
         "method": "get",
         "action": "",
         "sheet": "1CGfI2dkxgYdfw37UlectzlLVmVtBW0EQ8MUh9ni5R6Q",
         "cells": "hoja1!A1:Z1000",
         "flatten": false,
         "name": "GSH-LEER",
-        "x": 310,
-        "y": 80,
+        "x": 250,
+        "y": 440,
         "wires": [
             [
                 "6a33ce06083b440a"
@@ -812,7 +817,7 @@
         "upload": false,
         "swaggerDoc": "",
         "x": 70,
-        "y": 340,
+        "y": 560,
         "wires": [
             [
                 "bfaaceadabca0c6e"
@@ -832,7 +837,7 @@
         "finalize": "",
         "libs": [],
         "x": 260,
-        "y": 340,
+        "y": 560,
         "wires": [
             [
                 "e91048a4cbeebc79"
@@ -852,7 +857,7 @@
         "finalize": "",
         "libs": [],
         "x": 500,
-        "y": 340,
+        "y": 560,
         "wires": [
             [
                 "8beceab8f9990f77"
@@ -866,8 +871,8 @@
         "name": "HMAC-SHA256",
         "algorithm": "HmacSHA256",
         "key": "7uhI2B1mQJf)KoH(3q3AmInMvn9z;+1=",
-        "x": 140,
-        "y": 420,
+        "x": 120,
+        "y": 620,
         "wires": [
             [
                 "17f1e3d441219857"
@@ -886,8 +891,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 380,
-        "y": 420,
+        "x": 360,
+        "y": 620,
         "wires": [
             [
                 "d79410c172c2b443"
@@ -901,8 +906,8 @@
         "name": "dashbo",
         "statusCode": "",
         "headers": {},
-        "x": 600,
-        "y": 420,
+        "x": 580,
+        "y": 620,
         "wires": []
     },
     {
@@ -915,7 +920,7 @@
         "upload": false,
         "swaggerDoc": "",
         "x": 80,
-        "y": 540,
+        "y": 740,
         "wires": [
             [
                 "405b522e5126e381"
@@ -927,7 +932,7 @@
         "type": "function",
         "z": "30bfffe14836de0f",
         "name": "function 6",
-        "func": "// 1) Preparamos la cookie para borrarla: \n//    - Asignamos valor vacío y expiración pasada.\n//    - Path=/ para que afecte a toda la ruta.\nmsg.headers = {\n  // Igual, sin HttpOnly\n  \"Set-Cookie\": \"auth=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Lax\"\n};\n\n// 2) Redirigimos al usuario de vuelta al login PHP en InfinityFree\nmsg.statusCode = 302;\nmsg.headers[\"Location\"] = \"https://siot.kesug.com/cerrar_sesion.php\";\n\n// 3) Vacíamos el cuerpo de la respuesta (solo interesan cabeceras)\nmsg.payload = \"\";\nreturn msg;",
+        "func": "// 1) Preparamos la cookie para borrarla: \n//    - Asignamos valor vacío y expiración pasada.\n//    - Path=/ para que afecte a toda la ruta.\nmsg.headers = {\n  // Igual, sin HttpOnly\n  \"Set-Cookie\": \"auth=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Lax\"\n};\n\n// 2) Redirigimos al usuario de vuelta al login PHP en InfinityFree\nmsg.statusCode = 302;\nmsg.headers[\"Location\"] = \"https://datagauge.kesug.com/cerrar_sesion.php\";\n\n// 3) Vacíamos el cuerpo de la respuesta (solo interesan cabeceras)\nmsg.payload = \"\";\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -935,7 +940,7 @@
         "finalize": "",
         "libs": [],
         "x": 240,
-        "y": 540,
+        "y": 740,
         "wires": [
             [
                 "ecaabebbdae859c8"
@@ -950,7 +955,7 @@
         "statusCode": "",
         "headers": {},
         "x": 390,
-        "y": 540,
+        "y": 740,
         "wires": []
     },
     {
@@ -968,8 +973,8 @@
         "resendOnRefresh": true,
         "templateScope": "global",
         "className": "",
-        "x": 330,
-        "y": 1140,
+        "x": 430,
+        "y": 1580,
         "wires": [
             []
         ]
@@ -978,9 +983,9 @@
         "id": "0c12eb0275573479",
         "type": "comment",
         "z": "30bfffe14836de0f",
-        "name": "DESCARGA DESDE EL MENU EL ARCHIVO \"reporte.xlsx\" DE GOOGLE SHEETS",
+        "name": "DESCARGA DESDE EL MENU EL ARCHIVO \"mediciones.xlsx\" DE GOOGLE SHEETS",
         "info": "",
-        "x": 310,
+        "x": 320,
         "y": 20,
         "wires": []
     },
@@ -991,7 +996,7 @@
         "name": "FLUJO PARA ACCEDER AL DASHBOARD CUANDO EL USUARIO INICIA SESION",
         "info": "",
         "x": 310,
-        "y": 280,
+        "y": 500,
         "wires": []
     },
     {
@@ -1001,7 +1006,7 @@
         "name": "FLUJO QUE CIERRA SESION DESDE EL MENU",
         "info": "",
         "x": 200,
-        "y": 480,
+        "y": 680,
         "wires": []
     },
     {
@@ -1011,7 +1016,7 @@
         "name": "FLUJO DE PRUEBA PARA ESCRIBIR MANUALMENTE DATOS EN EL ARCHIVO \"reporte.xlsx\"",
         "info": "",
         "x": 350,
-        "y": 600,
+        "y": 800,
         "wires": []
     },
     {
@@ -1021,18 +1026,522 @@
         "name": "SIMULA DATOS DE SENSORES  Y LOS MUESTRA EN WIDGETS DEL DASHBOARD",
         "info": "",
         "x": 320,
-        "y": 720,
+        "y": 920,
         "wires": []
     },
     {
         "id": "87141044b16e21ee",
         "type": "comment",
         "z": "30bfffe14836de0f",
-        "name": "CADA CIERTO TIEMPO SE GUARDAN LOS DATOS EN EL ARCHIVO \"reporte.xlsx\"",
+        "name": "CADA CIERTO TIEMPO SE GUARDAN LOS DATOS EN EL ARCHIVO \"mediciones.xlsx\"",
         "info": "",
-        "x": 310,
-        "y": 1020,
+        "x": 330,
+        "y": 1220,
         "wires": []
+    },
+    {
+        "id": "334f6101f1411a55",
+        "type": "function",
+        "z": "30bfffe14836de0f",
+        "name": "function 3",
+        "func": "// 1. Hora actual \nconst now = Math.floor(Date.now()/1000);\n\n// 2. Claim estándar para Google OAuth2 JWT\nconst claim = {\n  iss: \"node-red-sheets@ninth-optics-458601-r5.iam.gserviceaccount.com\", // client_email\n  scope: \"https://www.googleapis.com/auth/spreadsheets\",     // lectura y escritura\n  aud: \"https://oauth2.googleapis.com/token\",                          // endpoint token\n  iat: now,                                                            // issued at                                                             // expiration\n};\n\nmsg.payload = claim;       // lo mandamos al nodo JWT sign\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 80,
+        "wires": [
+            [
+                "3d841198350871ef"
+            ]
+        ]
+    },
+    {
+        "id": "1c9eb34a5a727347",
+        "type": "http request",
+        "z": "30bfffe14836de0f",
+        "name": "",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "https://oauth2.googleapis.com/token ",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "Content-Type",
+                "keyValue": "",
+                "valueType": "other",
+                "valueValue": "application/x-www-form-urlencoded"
+            }
+        ],
+        "x": 270,
+        "y": 140,
+        "wires": [
+            [
+                "448b17e2dd670179"
+            ]
+        ]
+    },
+    {
+        "id": "c239f2ccb962c8ce",
+        "type": "function",
+        "z": "30bfffe14836de0f",
+        "name": "function 4",
+        "func": "// Function: “Build Token Request Body”\nmsg.payload =\n  \"grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer\" +\n  \"&assertion=\" + encodeURIComponent(msg.token);\n// Como estamos en POST, msg.payload es el cuerpo\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 100,
+        "y": 140,
+        "wires": [
+            [
+                "1c9eb34a5a727347"
+            ]
+        ]
+    },
+    {
+        "id": "448b17e2dd670179",
+        "type": "function",
+        "z": "30bfffe14836de0f",
+        "name": "function 5",
+        "func": "// 1. Tomamos el JSON entero devuelto por Google\nconst tokenResponse = msg.payload;       \n// 2. Extraemos el access_token\nconst accessToken = tokenResponse.access_token;  \n// 3. Preparamos los headers con Bearer token\nmsg.headers = {\n  Authorization: `Bearer ${accessToken}`   // formato: \"Bearer ABC123...\"\n};\n// 4. Construimos la URL apuntando al rango hoja1!A1:Z1000\nconst spreadsheetId = \"1CGfI2dkxgYdfw37UlectzlLVmVtBW0EQ8MUh9ni5R6Q\";\nconst range        = \"hoja1!A1:Z1000\";         \nmsg.url = \n  `https://sheets.googleapis.com/v4/spreadsheets/` +  // endpoint base\n  `${spreadsheetId}/values/${encodeURIComponent(range)}`;  \n// 5. Devolvemos msg con url y headers listos  \nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 140,
+        "wires": [
+            [
+                "47ebe0f4c96e1290"
+            ]
+        ]
+    },
+    {
+        "id": "47ebe0f4c96e1290",
+        "type": "http request",
+        "z": "30bfffe14836de0f",
+        "name": "solicitud",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 100,
+        "y": 200,
+        "wires": [
+            [
+                "3b093067f75c5ef7"
+            ]
+        ]
+    },
+    {
+        "id": "3b093067f75c5ef7",
+        "type": "function",
+        "z": "30bfffe14836de0f",
+        "name": "function 13",
+        "func": "// 1) Extraemos de msg.payload la matriz de valores (array de arrays)\n//    que devolvió la API de Google Sheets. Si no existe, usamos [].\nconst allValues = msg.payload.values || [];\n\n// 2) Si no hay al menos 2 filas (una de encabezados y otra de datos),  \n//    devolvemos un array vacío y paramos aquí.\nif (allValues.length < 2) {\n    msg.payload = [];\n    return msg;\n}\n\n// 3) La fila 0 de allValues es el array de encabezados (nombres de columnas)\nconst headers = allValues[0];\n\n// 4) A partir de la fila 1 empiezan los datos reales\nconst rows = allValues.slice(1);\n\n// 5) Convertimos cada fila en un objeto:\n//    - Map devuelve un nuevo array con el mismo número de filas.\n//    - Por cada fila, creamos un objeto vacío.\n//    - Recorremos cada encabezado (headers) para asignar:\n//        obj[ headers[i] ] = row[i] (o '' si no existe valor).\nconst objects = rows.map(row => {\n    const obj = {};                          // Objeto para esta fila\n    headers.forEach((colName, idx) => {\n        // Cada columna recibe su valor; si falta, ponemos cadena vacía\n        obj[colName] = row[idx] !== undefined ? row[idx] : '';\n    });\n    return obj;                              // Devolvemos el objeto construido\n});\n\n// 6) Finalmente, msg.payload debe ser el array de objetos\nmsg.payload = objects;\n\n// 7) Y retornamos el mensaje para que lo procese XLSX-Out\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 270,
+        "y": 200,
+        "wires": [
+            [
+                "f10e5b18be1c2dc6"
+            ]
+        ]
+    },
+    {
+        "id": "f10e5b18be1c2dc6",
+        "type": "xlsx-out",
+        "z": "30bfffe14836de0f",
+        "name": "",
+        "sheetName": "",
+        "x": 440,
+        "y": 200,
+        "wires": [
+            [
+                "5ec76fd76af01919"
+            ]
+        ]
+    },
+    {
+        "id": "5ec76fd76af01919",
+        "type": "function",
+        "z": "30bfffe14836de0f",
+        "name": "function 14",
+        "func": "// 1. Guardamos el Buffer (.xlsx) en la variable de contexto \"archivoExcel\"\nflow.set(\"archivoExcel\", msg.payload);  \n\n// 2. Limpiamos msg.payload para no propagar datos binarios\nmsg.payload = \"\";                       \n\n// 3. Retornamos null: no enviamos mensaje hacia abajo\nreturn null;                            ",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6a3955b6f32809d1",
+        "type": "inject",
+        "z": "30bfffe14836de0f",
+        "name": "trigger descarga jwt sign",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 150,
+        "y": 260,
+        "wires": [
+            [
+                "67e195b021851d15"
+            ]
+        ]
+    },
+    {
+        "id": "67e195b021851d15",
+        "type": "template",
+        "z": "30bfffe14836de0f",
+        "name": "template descarga",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "text",
+        "syntax": "plain",
+        "template": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCQpXIz5f7jOI0F\n9+xpUidIG+Ebjg1I/KKdmhETaBFvuAH+GwJBsLtIU9wVJYG05PCKR0a9H3Zwe6m9\narY+qXGJbgqegJZRdEMdfl9hKKrp+LPn8YxrXEs3AsYouHWnq9EBjQnujtcsqLY8\n9op9B2Y0qppyfc8QwijqZ4h54bUMFembm90o+MI0mquxpAMWLhmgPs6P8RPEN1ky\nrPNX//bnKcwU+g2didH6LyEmleIwoIzpdroeKwASm080jZ/8tOqjUh8hq2SdGrBq\nhB7oWwskHZUwlEfPwoWM00sNhaX1Mugkc2d2zj5npY/22DKyrYX2GV/xyWeD4lTC\n4VRur92pAgMBAAECggEAA7d8m8DJL+WAGisos/wcbknpGuAnjzyOoSYYUjtWV1yP\nEIx5Hl8AMPeWrCRulMtdMvBp7OomDPXggrF/RVTtSe697xy2wBkQsG1S3hhBbAmr\n9cXLKecRN7Smit1SiKBtmnCZVLvu44LiS+a54ESUZ74Kge6hp3iVvJA0fY1DLbBI\njKsfa8sktOnd57fpwColfODoHlIDtdFbY671cUo7/Gbu4f+2M6YIBtucX7ldVifr\nuaOF7CdTOv4o+lL6K+sOxGzEa8WViMb5qPhkgcf0NXsGfAWukqTG0vxnOMzl9Dso\nTfv1IyDFN5B1hNs20t/tvATNwfO8N3z/M90z5oEOAQKBgQDLrkRo5RfL8RD0iB3z\nB9LJOWZ1jAKA/3GgaeiUN9F20m0dVdVtpkn2qsL6g33KgdQbE+OnLWFk1Zlzw/8w\nPLT+7gY47hXRFaab0lyH/XB2Zecjvdabq6WuGCXrPKWVuNn+BF7GYcf5dPMEj1gR\nxOLoMd7+SMnJk0rjUM056NMLkQKBgQC1zSnVuNj7HqmD18Pc90P0uwDv74qKR/Rc\nMtLLU08keASLVijZ1I29YRycGMvr+WacKZpwBn0VG/WzO6kd0+Eb0ym35+DHdvU6\n6VMlfC0quD+R0i789zbECI6ihXSfkerFd5qKHT9gQrVrlZpTFOXjGF1hPcAMHp7w\nZxJQr6y0mQKBgFi+AtxZBHc8/xArxjC/Nd2qfrO0XtrpcQ5dVpJNh5vnrtbbMPRn\nQU6RtAYGCGaVDl8F2WhbY1XVothHiwXvTUTNXDSttx+z+TVnAB3YFInheEWgTsLg\nlH031D2b3OFQ+tmr+cchj0lm5QMVmV+UkvBr2iacfB6xaC2GZQRYJquhAoGBAK/k\nirhDunLjzKBJri9ocDAkiZiaitCVI1/csEOWG7kuAT+KIcX3NxdmEJcaCpoJV3R5\nb/k43eYBgith6pJ4P5B7Mh7DUp/JgSP5QL/Ar7ZoQuDjmSCYUj1CBjZJpncIZzuc\nJ0G/YGTSxdIMER6W1oBsP1RouRlAuwfewUKdZRvpAoGACL0nGDrllmUCCYR8xAyO\nuNRfd0hLCefQwU/+FIGYY4ovtFBOHiAtrcF01G0Jwi5rOmlZwpexjI7quhn22lcI\nj8atgncu9n5ScMGpP2oLSD19Zt0Ax75lF1HR9f7/YkRZ0COnAOdvxbMxTcDCMIvf\nM5yN5NHDKZ0L1TdUsPkJGk0=\n-----END PRIVATE KEY-----",
+        "output": "str",
+        "x": 390,
+        "y": 260,
+        "wires": [
+            [
+                "8d9133b29d9b154f"
+            ]
+        ]
+    },
+    {
+        "id": "8d9133b29d9b154f",
+        "type": "file",
+        "z": "30bfffe14836de0f",
+        "name": "file para descarga",
+        "filename": "service-account.pem",
+        "filenameType": "str",
+        "appendNewline": false,
+        "createDir": true,
+        "overwriteFile": "true",
+        "encoding": "utf8",
+        "x": 610,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3d841198350871ef",
+        "type": "jwt sign",
+        "z": "30bfffe14836de0f",
+        "name": "",
+        "alg": "RS256",
+        "exp": "3600",
+        "jwkurl": "",
+        "jwkkid": "",
+        "secret": "",
+        "key": "service-account.pem",
+        "signvar": "payload",
+        "storetoken": "token",
+        "x": 460,
+        "y": 80,
+        "wires": [
+            [
+                "c239f2ccb962c8ce"
+            ]
+        ]
+    },
+    {
+        "id": "bd5004c3bf8fc6e9",
+        "type": "inject",
+        "z": "30bfffe14836de0f",
+        "name": "trigger",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 90,
+        "y": 440,
+        "wires": [
+            [
+                "8411e4c891ed177d"
+            ]
+        ]
+    },
+    {
+        "id": "8d2799f628675dd6",
+        "type": "comment",
+        "z": "30bfffe14836de0f",
+        "name": "FLUJO DESACTIVADO COMO OTRA  ALTERNATIVA DE DESCARGA ",
+        "info": "",
+        "x": 270,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "54267ffc1afa3fc4",
+        "type": "inject",
+        "z": "30bfffe14836de0f",
+        "name": "ESCRIBIR",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 100,
+        "y": 1280,
+        "wires": [
+            [
+                "131dd4a4861bc86e"
+            ]
+        ]
+    },
+    {
+        "id": "131dd4a4861bc86e",
+        "type": "function",
+        "z": "30bfffe14836de0f",
+        "name": "function 15",
+        "func": "// 1. Hora actual \nconst now = Math.floor(Date.now()/1000);\n\n// 2. Claim estándar para Google OAuth2 JWT\nconst claim = {\n  iss: \"node-red-sheets@ninth-optics-458601-r5.iam.gserviceaccount.com\", // client_email\n  scope: \"https://www.googleapis.com/auth/spreadsheets\",     // lectura y escritura\n  aud: \"https://oauth2.googleapis.com/token\",                          // endpoint token\n  iat: now,                                                            // issued at                                                             // expiration\n};\n\nmsg.payload = claim;       // lo mandamos al nodo JWT sign\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 270,
+        "y": 1280,
+        "wires": [
+            [
+                "fae89dcfd90cd41d"
+            ]
+        ]
+    },
+    {
+        "id": "fae89dcfd90cd41d",
+        "type": "jwt sign",
+        "z": "30bfffe14836de0f",
+        "name": "JWT sign write",
+        "alg": "RS256",
+        "exp": "3600",
+        "jwkurl": "",
+        "jwkkid": "",
+        "secret": "",
+        "key": "service-account.pem",
+        "signvar": "payload",
+        "storetoken": "token",
+        "x": 480,
+        "y": 1280,
+        "wires": [
+            [
+                "bfa58f8c67cad6f7"
+            ]
+        ]
+    },
+    {
+        "id": "bfa58f8c67cad6f7",
+        "type": "function",
+        "z": "30bfffe14836de0f",
+        "name": "function 16",
+        "func": "// Function: “Build Token Request Body”\nmsg.payload =\n  \"grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer\" +\n  \"&assertion=\" + encodeURIComponent(msg.token);\n// Como estamos en POST, msg.payload es el cuerpo\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 130,
+        "y": 1340,
+        "wires": [
+            [
+                "1a33a2f04ca1cd08"
+            ]
+        ]
+    },
+    {
+        "id": "1a33a2f04ca1cd08",
+        "type": "http request",
+        "z": "30bfffe14836de0f",
+        "name": "solicitud http write",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "https://oauth2.googleapis.com/token ",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "Content-Type",
+                "keyValue": "",
+                "valueType": "other",
+                "valueValue": "application/x-www-form-urlencoded"
+            }
+        ],
+        "x": 330,
+        "y": 1340,
+        "wires": [
+            [
+                "50ceda244267ba10"
+            ]
+        ]
+    },
+    {
+        "id": "50ceda244267ba10",
+        "type": "function",
+        "z": "30bfffe14836de0f",
+        "name": "function 17",
+        "func": "// 1. Tomamos el JSON entero devuelto por Google\nconst tokenResponse = msg.payload;       \n// 2. Extraemos el access_token\nconst accessToken = tokenResponse.access_token;  \n// 3. Preparamos los headers con Bearer token\nmsg.headers = {\n  Authorization: `Bearer ${accessToken}`   // formato: \"Bearer ABC123...\"\n};\n// 4. Construimos la URL apuntando al rango hoja1!A1:Z1000\nconst spreadsheetId = \"1CGfI2dkxgYdfw37UlectzlLVmVtBW0EQ8MUh9ni5R6Q\";\nconst range        = \"hoja1!A1:Z1000\";         \nmsg.url = \n  `https://sheets.googleapis.com/v4/spreadsheets/` +  // endpoint base\n  `${spreadsheetId}/values/${encodeURIComponent(range)}`;  \n// 5. Devolvemos msg con url y headers listos  \nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 530,
+        "y": 1340,
+        "wires": [
+            [
+                "bcc3a1f786f44836"
+            ]
+        ]
+    },
+    {
+        "id": "bcc3a1f786f44836",
+        "type": "http request",
+        "z": "30bfffe14836de0f",
+        "name": "solicitud write",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 140,
+        "y": 1400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "87655007c0d43eb5",
+        "type": "inject",
+        "z": "30bfffe14836de0f",
+        "name": "trigger escribir  jwt sign",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 150,
+        "y": 1460,
+        "wires": [
+            [
+                "d2e5ff0df1744286"
+            ]
+        ]
+    },
+    {
+        "id": "d2e5ff0df1744286",
+        "type": "template",
+        "z": "30bfffe14836de0f",
+        "name": "template escritura",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "text",
+        "syntax": "plain",
+        "template": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCQpXIz5f7jOI0F\n9+xpUidIG+Ebjg1I/KKdmhETaBFvuAH+GwJBsLtIU9wVJYG05PCKR0a9H3Zwe6m9\narY+qXGJbgqegJZRdEMdfl9hKKrp+LPn8YxrXEs3AsYouHWnq9EBjQnujtcsqLY8\n9op9B2Y0qppyfc8QwijqZ4h54bUMFembm90o+MI0mquxpAMWLhmgPs6P8RPEN1ky\nrPNX//bnKcwU+g2didH6LyEmleIwoIzpdroeKwASm080jZ/8tOqjUh8hq2SdGrBq\nhB7oWwskHZUwlEfPwoWM00sNhaX1Mugkc2d2zj5npY/22DKyrYX2GV/xyWeD4lTC\n4VRur92pAgMBAAECggEAA7d8m8DJL+WAGisos/wcbknpGuAnjzyOoSYYUjtWV1yP\nEIx5Hl8AMPeWrCRulMtdMvBp7OomDPXggrF/RVTtSe697xy2wBkQsG1S3hhBbAmr\n9cXLKecRN7Smit1SiKBtmnCZVLvu44LiS+a54ESUZ74Kge6hp3iVvJA0fY1DLbBI\njKsfa8sktOnd57fpwColfODoHlIDtdFbY671cUo7/Gbu4f+2M6YIBtucX7ldVifr\nuaOF7CdTOv4o+lL6K+sOxGzEa8WViMb5qPhkgcf0NXsGfAWukqTG0vxnOMzl9Dso\nTfv1IyDFN5B1hNs20t/tvATNwfO8N3z/M90z5oEOAQKBgQDLrkRo5RfL8RD0iB3z\nB9LJOWZ1jAKA/3GgaeiUN9F20m0dVdVtpkn2qsL6g33KgdQbE+OnLWFk1Zlzw/8w\nPLT+7gY47hXRFaab0lyH/XB2Zecjvdabq6WuGCXrPKWVuNn+BF7GYcf5dPMEj1gR\nxOLoMd7+SMnJk0rjUM056NMLkQKBgQC1zSnVuNj7HqmD18Pc90P0uwDv74qKR/Rc\nMtLLU08keASLVijZ1I29YRycGMvr+WacKZpwBn0VG/WzO6kd0+Eb0ym35+DHdvU6\n6VMlfC0quD+R0i789zbECI6ihXSfkerFd5qKHT9gQrVrlZpTFOXjGF1hPcAMHp7w\nZxJQr6y0mQKBgFi+AtxZBHc8/xArxjC/Nd2qfrO0XtrpcQ5dVpJNh5vnrtbbMPRn\nQU6RtAYGCGaVDl8F2WhbY1XVothHiwXvTUTNXDSttx+z+TVnAB3YFInheEWgTsLg\nlH031D2b3OFQ+tmr+cchj0lm5QMVmV+UkvBr2iacfB6xaC2GZQRYJquhAoGBAK/k\nirhDunLjzKBJri9ocDAkiZiaitCVI1/csEOWG7kuAT+KIcX3NxdmEJcaCpoJV3R5\nb/k43eYBgith6pJ4P5B7Mh7DUp/JgSP5QL/Ar7ZoQuDjmSCYUj1CBjZJpncIZzuc\nJ0G/YGTSxdIMER6W1oBsP1RouRlAuwfewUKdZRvpAoGACL0nGDrllmUCCYR8xAyO\nuNRfd0hLCefQwU/+FIGYY4ovtFBOHiAtrcF01G0Jwi5rOmlZwpexjI7quhn22lcI\nj8atgncu9n5ScMGpP2oLSD19Zt0Ax75lF1HR9f7/YkRZ0COnAOdvxbMxTcDCMIvf\nM5yN5NHDKZ0L1TdUsPkJGk0=\n-----END PRIVATE KEY-----",
+        "output": "str",
+        "x": 390,
+        "y": 1460,
+        "wires": [
+            [
+                "7c9c5575e5708e4a"
+            ]
+        ]
+    },
+    {
+        "id": "7c9c5575e5708e4a",
+        "type": "file",
+        "z": "30bfffe14836de0f",
+        "name": "file para escribir",
+        "filename": "service-account.pem",
+        "filenameType": "str",
+        "appendNewline": false,
+        "createDir": true,
+        "overwriteFile": "true",
+        "encoding": "utf8",
+        "x": 600,
+        "y": 1460,
+        "wires": [
+            []
+        ]
     },
     {
         "id": "1c97df7f36d5f322",
