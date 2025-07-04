@@ -967,7 +967,7 @@
         "order": 0,
         "width": 0,
         "height": 0,
-        "format": "<script>\n(function(){\n  // 1) Solo actuamos si la ruta está en /ui\n  if (!window.location.pathname.startsWith(\"/ui\")) {\n    return; // no hacemos nada en /validador ni /logout ni otras rutas\n  }\n\n  // 2) Leemos la cookie 'auth'\n  var cookies = document.cookie.split(\";\").map(c => c.trim());\n  var auth = cookies.find(c => c.indexOf(\"auth=\") === 0);\n\n  // 3) Si no existe auth=1, redirigimos al login PHP\n  if (!auth || auth.split(\"=\")[1] !== \"1\") {\n    window.top.location.href = \"https://siot.kesug.com/cerrar_sesion.php\";\n  }\n})();\n</script>",
+        "format": "<script>\n/*(function(){\n  // 1) Solo actuamos si la ruta está en /ui\n  if (!window.location.pathname.startsWith(\"/ui\")) {\n    return; // no hacemos nada en /validador ni /logout ni otras rutas\n  }\n\n  // 2) Leemos la cookie 'auth'\n  var cookies = document.cookie.split(\";\").map(c => c.trim());\n  var auth = cookies.find(c => c.indexOf(\"auth=\") === 0);\n\n  // 3) Si no existe auth=1, redirigimos al login PHP\n  if (!auth || auth.split(\"=\")[1] !== \"1\") {\n    window.top.location.href = \"https://siot.kesug.com/cerrar_sesion.php\";\n  }\n})();\n</script>",
         "storeOutMessages": true,
         "fwdInMessages": true,
         "resendOnRefresh": true,
@@ -1445,7 +1445,7 @@
         "type": "function",
         "z": "30bfffe14836de0f",
         "name": "function 17",
-        "func": "// 1. Tomamos el JSON entero devuelto por Google\nconst tokenResponse = msg.payload;       \n// 2. Extraemos el access_token\nconst accessToken = tokenResponse.access_token;  \n// 3. Preparamos los headers con Bearer token\nmsg.headers = {\n  Authorization: `Bearer ${accessToken}`   // formato: \"Bearer ABC123...\"\n};\n// 4. Construimos la URL apuntando al rango hoja1!A1:Z1000\nconst spreadsheetId = \"1CGfI2dkxgYdfw37UlectzlLVmVtBW0EQ8MUh9ni5R6Q\";\nconst range        = \"hoja1!A1:Z1000\";         \nmsg.url = \n  `https://sheets.googleapis.com/v4/spreadsheets/` +  // endpoint base\n  `${spreadsheetId}/values/${encodeURIComponent(range)}`;  \n// 5. Devolvemos msg con url y headers listos  \nreturn msg;",
+        "func": "// 1) LEER Y ACTUALIZAR EL CONTADOR DE FILA DESDE flow.context\n//    Si no existe, empezamos en la fila 2\nlet startRow = flow.get('rowCounter') || 5;\n//    Guardamos el próximo valor para la siguiente ejecución\nflow.set('rowCounter', startRow + 1);\n\n// 2) OBTENER LOS DATOS A ESCRIBIR DESDE flow.context\nconst fecha = new Date().toLocaleDateString('en-CA', { timeZone: 'America/La_Paz' }); // YYYY-MM-DD       || '';  // Fecha o cadena vacía si no existe\nconst t = flow.get('temp')          || '';  // Temperatura\nconst l = flow.get('luz')           || '';  // Intensidad de luz\nconst hs = flow.get('hum_suelo')    || '';  // Humedad de suelo\nconst ha = flow.get('hum_ambiente') || '';  // Humedad ambiente\n// Si tienes más datos, continúa así:\n// const dato6 = flow.get('otroDato') || '';\n\n// 3) MONTAR EL ARRAY newValues CON TODOS LOS DATOS\nconst newValues = [fecha, t, l, hs, ha];\n\n// 4) DATOS FIJOS DE CONFIGURACIÓN\nconst spreadsheetId = \"1CGfI2dkxgYdfw37UlectzlLVmVtBW0EQ8MUh9ni5R6Q\";\nconst sheetName = \"hoja1\";\n\n// 5) FUNCIÓN AUXILIAR: CONVERTIR ÍNDICE DE COLUMNA A LETRA EXCEL\nfunction columnLetter(colIndex) {\n    let letter = \"\";\n    while (colIndex > 0) {\n        const mod = (colIndex - 1) % 26;\n        letter = String.fromCharCode(65 + mod) + letter;\n        colIndex = Math.floor((colIndex - 1) / 26);\n    }\n    return letter;\n}\n\n// 6) CALCULAR EL RANGO DE ESCRITURA EN BASE A startRow Y newValues.length\nconst firstCell = \"A\" + startRow;\nconst lastCol = columnLetter(newValues.length);\nconst lastCell = lastCol + startRow;\nconst range = `${sheetName}!${firstCell}:${lastCell}`;\n\n// 7) EXTRAER EL access_token DE msg.payload (resultado del nodo anterior)\nconst tokenResponse = msg.payload;\nconst accessToken = tokenResponse.access_token;\n\n// 8) PREPARAR ENCABEZADOS Y MÉTODO PARA EL HTTP REQUEST\nmsg.headers = {\n    Authorization: `Bearer ${accessToken}`,\n    \"Content-Type\": \"application/json\"\n};                                                // Usamos PUT para actualizar rangos\n\n// 9) MONTAR EL CUERPO DE LA PETICIÓN CON EL FORMATO DE LA API\nmsg.payload = {\n    range: range,\n    majorDimension: \"ROWS\",\n    values: [newValues]\n};\n\n// 10) CONSTRUIR LA URL CON valueInputOption=RAW\nmsg.url =\n    `https://sheets.googleapis.com/v4/spreadsheets/` +\n    `${spreadsheetId}/values/${encodeURIComponent(range)}` +\n    `?valueInputOption=RAW`;\n\n// 11) RETORNAR msg PARA QUE EL NODO HTTP REQUEST LO PROCESO\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1465,7 +1465,7 @@
         "type": "http request",
         "z": "30bfffe14836de0f",
         "name": "solicitud write",
-        "method": "GET",
+        "method": "PUT",
         "ret": "obj",
         "paytoqs": "ignore",
         "url": "",
@@ -1479,7 +1479,9 @@
         "x": 140,
         "y": 1400,
         "wires": [
-            []
+            [
+                "8014f7276410e208"
+            ]
         ]
     },
     {
@@ -1542,6 +1544,84 @@
         "wires": [
             []
         ]
+    },
+    {
+        "id": "8014f7276410e208",
+        "type": "debug",
+        "z": "30bfffe14836de0f",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 320,
+        "y": 1400,
+        "wires": []
+    },
+    {
+        "id": "c3f0c410a55866c8",
+        "type": "inject",
+        "z": "30bfffe14836de0f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 90,
+        "y": 1660,
+        "wires": [
+            [
+                "c15eb70345f819ad"
+            ]
+        ]
+    },
+    {
+        "id": "c15eb70345f819ad",
+        "type": "function",
+        "z": "30bfffe14836de0f",
+        "name": "function 18",
+        "func": "// --- Contador dinámico con reinicio por cambio de initial o de límite ---\n\n// 1) Valores configurables manualmente\nconst newInitial = -2;     // ← valor de partida\nconst maxValue   = 5;  // ← tope donde reinicia\n\n// 2) Recuperar estados previos\nconst lastInitial    = flow.get('last_initial');\nconst lastMax        = flow.get('last_max');\nconst currentCounter = flow.get('counter');\n\n// 3) Determinar si hay que reiniciar por primera vez,\n//    o porque cambió newInitial, o porque cambió maxValue\nconst initialChanged = (lastInitial === undefined) || (newInitial !== lastInitial);\nconst maxChanged     = (lastMax === undefined) || (maxValue   !== lastMax);\n\nif (initialChanged || maxChanged) {\n    // Reinicio total\n    flow.set('counter', newInitial);\n    flow.set('last_initial', newInitial);\n    flow.set('last_max', maxValue);\n    msg.payload = newInitial;\n} else {\n    // Incremento normal\n    let nextValue = currentCounter + 1;\n\n    // Cuando se alcanza el tope actual, reiniciar a newInitial\n    if (nextValue > maxValue) {\n        nextValue = newInitial;\n    }\n\n    // Guardar y preparar salida\n    flow.set('counter', nextValue);\n    msg.payload = nextValue;\n}\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 270,
+        "y": 1660,
+        "wires": [
+            [
+                "fc2ee315231214fb"
+            ]
+        ]
+    },
+    {
+        "id": "fc2ee315231214fb",
+        "type": "debug",
+        "z": "30bfffe14836de0f",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 440,
+        "y": 1660,
+        "wires": []
     },
     {
         "id": "1c97df7f36d5f322",
