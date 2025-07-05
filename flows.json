@@ -1445,7 +1445,7 @@
         "type": "function",
         "z": "30bfffe14836de0f",
         "name": "function 17",
-        "func": "// 1) LEER Y ACTUALIZAR EL CONTADOR DE FILA DESDE flow.context\n//    Si no existe, empezamos en la fila 2\nlet startRow = flow.get('rowCounter') || 5;\n//    Guardamos el próximo valor para la siguiente ejecución\nflow.set('rowCounter', startRow + 1);\n\n// 2) OBTENER LOS DATOS A ESCRIBIR DESDE flow.context\nconst fecha = new Date().toLocaleDateString('en-CA', { timeZone: 'America/La_Paz' }); // YYYY-MM-DD       || '';  // Fecha o cadena vacía si no existe\nconst t = flow.get('temp')          || '';  // Temperatura\nconst l = flow.get('luz')           || '';  // Intensidad de luz\nconst hs = flow.get('hum_suelo')    || '';  // Humedad de suelo\nconst ha = flow.get('hum_ambiente') || '';  // Humedad ambiente\n// Si tienes más datos, continúa así:\n// const dato6 = flow.get('otroDato') || '';\n\n// 3) MONTAR EL ARRAY newValues CON TODOS LOS DATOS\nconst newValues = [fecha, t, l, hs, ha];\n\n// 4) DATOS FIJOS DE CONFIGURACIÓN\nconst spreadsheetId = \"1CGfI2dkxgYdfw37UlectzlLVmVtBW0EQ8MUh9ni5R6Q\";\nconst sheetName = \"hoja1\";\n\n// 5) FUNCIÓN AUXILIAR: CONVERTIR ÍNDICE DE COLUMNA A LETRA EXCEL\nfunction columnLetter(colIndex) {\n    let letter = \"\";\n    while (colIndex > 0) {\n        const mod = (colIndex - 1) % 26;\n        letter = String.fromCharCode(65 + mod) + letter;\n        colIndex = Math.floor((colIndex - 1) / 26);\n    }\n    return letter;\n}\n\n// 6) CALCULAR EL RANGO DE ESCRITURA EN BASE A startRow Y newValues.length\nconst firstCell = \"A\" + startRow;\nconst lastCol = columnLetter(newValues.length);\nconst lastCell = lastCol + startRow;\nconst range = `${sheetName}!${firstCell}:${lastCell}`;\n\n// 7) EXTRAER EL access_token DE msg.payload (resultado del nodo anterior)\nconst tokenResponse = msg.payload;\nconst accessToken = tokenResponse.access_token;\n\n// 8) PREPARAR ENCABEZADOS Y MÉTODO PARA EL HTTP REQUEST\nmsg.headers = {\n    Authorization: `Bearer ${accessToken}`,\n    \"Content-Type\": \"application/json\"\n};                                                // Usamos PUT para actualizar rangos\n\n// 9) MONTAR EL CUERPO DE LA PETICIÓN CON EL FORMATO DE LA API\nmsg.payload = {\n    range: range,\n    majorDimension: \"ROWS\",\n    values: [newValues]\n};\n\n// 10) CONSTRUIR LA URL CON valueInputOption=RAW\nmsg.url =\n    `https://sheets.googleapis.com/v4/spreadsheets/` +\n    `${spreadsheetId}/values/${encodeURIComponent(range)}` +\n    `?valueInputOption=RAW`;\n\n// 11) RETORNAR msg PARA QUE EL NODO HTTP REQUEST LO PROCESO\nreturn msg;\n",
+        "func": "// --- Contador dinámico con reinicio por cambio de initial o de límite ---\n\n// 1) Valores configurables manualmente\nconst newInitial = 5;     // ← valor de partida\nconst maxValue   = 10;  // ← tope donde reinicia\nvar startRow;\n\n// 1.1) Recuperar estados previos\nconst lastInitial    = flow.get('last_initial');\nconst lastMax        = flow.get('last_max');\nconst currentCounter = flow.get('counter');\n\n// 1.2) Determinar si hay que reiniciar por primera vez,\n//    o porque cambió newInitial, o porque cambió maxValue\nconst initialChanged = (lastInitial === undefined) || (newInitial !== lastInitial);\nconst maxChanged     = (lastMax === undefined) || (maxValue   !== lastMax);\n\nif (initialChanged || maxChanged) {\n    // Reinicio total\n    flow.set('counter', newInitial);\n    flow.set('last_initial', newInitial);\n    flow.set('last_max', maxValue);\n    startRow = newInitial;\n} else {\n    // Incremento normal\n    let nextValue = currentCounter + 1;\n\n    // Cuando se alcanza el tope actual, reiniciar a newInitial\n    if (nextValue > maxValue) {\n        nextValue = newInitial;\n    }\n\n    // Guardar y preparar salida\n    flow.set('counter', nextValue);\n    startRow = nextValue;\n}\n\n// 2) OBTENER LOS DATOS A ESCRIBIR DESDE flow.context\nconst fecha = new Date().toLocaleDateString('en-CA', { timeZone: 'America/La_Paz' }); // YYYY-MM-DD       || '';  // Fecha o cadena vacía si no existe\nconst t = flow.get('temp')          || '';  // Temperatura\nconst l = flow.get('luz')           || '';  // Intensidad de luz\nconst hs = flow.get('hum_suelo')    || '';  // Humedad de suelo\nconst ha = flow.get('hum_ambiente') || '';  // Humedad ambiente\n// Si tienes más datos, continúa así:\n// const dato6 = flow.get('otroDato') || '';\n\n// 3) MONTAR EL ARRAY newValues CON TODOS LOS DATOS\nconst newValues = [fecha, t, l, hs, ha];\n\n// 4) DATOS FIJOS DE CONFIGURACIÓN\nconst spreadsheetId = \"1CGfI2dkxgYdfw37UlectzlLVmVtBW0EQ8MUh9ni5R6Q\";\nconst sheetName = \"hoja1\";\n\n// 5) FUNCIÓN AUXILIAR: CONVERTIR ÍNDICE DE COLUMNA A LETRA EXCEL\nfunction columnLetter(colIndex) {\n    let letter = \"\";\n    while (colIndex > 0) {\n        const mod = (colIndex - 1) % 26;\n        letter = String.fromCharCode(65 + mod) + letter;\n        colIndex = Math.floor((colIndex - 1) / 26);\n    }\n    return letter;\n}\n\n// 6) CALCULAR EL RANGO DE ESCRITURA EN BASE A startRow Y newValues.length\nconst firstCell = \"A\" + startRow;\nconst lastCol = columnLetter(newValues.length);\nconst lastCell = lastCol + startRow;\nconst range = `${sheetName}!${firstCell}:${lastCell}`;\n\n// 7) EXTRAER EL access_token DE msg.payload (resultado del nodo anterior)\nconst tokenResponse = msg.payload;\nconst accessToken = tokenResponse.access_token;\n\n// 8) PREPARAR ENCABEZADOS Y MÉTODO PARA EL HTTP REQUEST\nmsg.headers = {\n    Authorization: `Bearer ${accessToken}`,\n    \"Content-Type\": \"application/json\"\n};                                                // Usamos PUT para actualizar rangos\n\n// 9) MONTAR EL CUERPO DE LA PETICIÓN CON EL FORMATO DE LA API\nmsg.payload = {\n    range: range,\n    majorDimension: \"ROWS\",\n    values: [newValues]\n};\n\n// 10) CONSTRUIR LA URL CON valueInputOption=RAW\nmsg.url =\n    `https://sheets.googleapis.com/v4/spreadsheets/` +\n    `${spreadsheetId}/values/${encodeURIComponent(range)}` +\n    `?valueInputOption=RAW`;\n\n// 11) RETORNAR msg PARA QUE EL NODO HTTP REQUEST LO PROCESO\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1479,87 +1479,8 @@
         "x": 140,
         "y": 1400,
         "wires": [
-            [
-                "8014f7276410e208"
-            ]
-        ]
-    },
-    {
-        "id": "87655007c0d43eb5",
-        "type": "inject",
-        "z": "30bfffe14836de0f",
-        "name": "trigger escribir  jwt sign",
-        "props": [
-            {
-                "p": "payload"
-            }
-        ],
-        "repeat": "1",
-        "crontab": "",
-        "once": true,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 150,
-        "y": 1460,
-        "wires": [
-            [
-                "d2e5ff0df1744286"
-            ]
-        ]
-    },
-    {
-        "id": "d2e5ff0df1744286",
-        "type": "template",
-        "z": "30bfffe14836de0f",
-        "name": "template escritura",
-        "field": "payload",
-        "fieldType": "msg",
-        "format": "text",
-        "syntax": "plain",
-        "template": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCQpXIz5f7jOI0F\n9+xpUidIG+Ebjg1I/KKdmhETaBFvuAH+GwJBsLtIU9wVJYG05PCKR0a9H3Zwe6m9\narY+qXGJbgqegJZRdEMdfl9hKKrp+LPn8YxrXEs3AsYouHWnq9EBjQnujtcsqLY8\n9op9B2Y0qppyfc8QwijqZ4h54bUMFembm90o+MI0mquxpAMWLhmgPs6P8RPEN1ky\nrPNX//bnKcwU+g2didH6LyEmleIwoIzpdroeKwASm080jZ/8tOqjUh8hq2SdGrBq\nhB7oWwskHZUwlEfPwoWM00sNhaX1Mugkc2d2zj5npY/22DKyrYX2GV/xyWeD4lTC\n4VRur92pAgMBAAECggEAA7d8m8DJL+WAGisos/wcbknpGuAnjzyOoSYYUjtWV1yP\nEIx5Hl8AMPeWrCRulMtdMvBp7OomDPXggrF/RVTtSe697xy2wBkQsG1S3hhBbAmr\n9cXLKecRN7Smit1SiKBtmnCZVLvu44LiS+a54ESUZ74Kge6hp3iVvJA0fY1DLbBI\njKsfa8sktOnd57fpwColfODoHlIDtdFbY671cUo7/Gbu4f+2M6YIBtucX7ldVifr\nuaOF7CdTOv4o+lL6K+sOxGzEa8WViMb5qPhkgcf0NXsGfAWukqTG0vxnOMzl9Dso\nTfv1IyDFN5B1hNs20t/tvATNwfO8N3z/M90z5oEOAQKBgQDLrkRo5RfL8RD0iB3z\nB9LJOWZ1jAKA/3GgaeiUN9F20m0dVdVtpkn2qsL6g33KgdQbE+OnLWFk1Zlzw/8w\nPLT+7gY47hXRFaab0lyH/XB2Zecjvdabq6WuGCXrPKWVuNn+BF7GYcf5dPMEj1gR\nxOLoMd7+SMnJk0rjUM056NMLkQKBgQC1zSnVuNj7HqmD18Pc90P0uwDv74qKR/Rc\nMtLLU08keASLVijZ1I29YRycGMvr+WacKZpwBn0VG/WzO6kd0+Eb0ym35+DHdvU6\n6VMlfC0quD+R0i789zbECI6ihXSfkerFd5qKHT9gQrVrlZpTFOXjGF1hPcAMHp7w\nZxJQr6y0mQKBgFi+AtxZBHc8/xArxjC/Nd2qfrO0XtrpcQ5dVpJNh5vnrtbbMPRn\nQU6RtAYGCGaVDl8F2WhbY1XVothHiwXvTUTNXDSttx+z+TVnAB3YFInheEWgTsLg\nlH031D2b3OFQ+tmr+cchj0lm5QMVmV+UkvBr2iacfB6xaC2GZQRYJquhAoGBAK/k\nirhDunLjzKBJri9ocDAkiZiaitCVI1/csEOWG7kuAT+KIcX3NxdmEJcaCpoJV3R5\nb/k43eYBgith6pJ4P5B7Mh7DUp/JgSP5QL/Ar7ZoQuDjmSCYUj1CBjZJpncIZzuc\nJ0G/YGTSxdIMER6W1oBsP1RouRlAuwfewUKdZRvpAoGACL0nGDrllmUCCYR8xAyO\nuNRfd0hLCefQwU/+FIGYY4ovtFBOHiAtrcF01G0Jwi5rOmlZwpexjI7quhn22lcI\nj8atgncu9n5ScMGpP2oLSD19Zt0Ax75lF1HR9f7/YkRZ0COnAOdvxbMxTcDCMIvf\nM5yN5NHDKZ0L1TdUsPkJGk0=\n-----END PRIVATE KEY-----",
-        "output": "str",
-        "x": 390,
-        "y": 1460,
-        "wires": [
-            [
-                "7c9c5575e5708e4a"
-            ]
-        ]
-    },
-    {
-        "id": "7c9c5575e5708e4a",
-        "type": "file",
-        "z": "30bfffe14836de0f",
-        "name": "file para escribir",
-        "filename": "service-account.pem",
-        "filenameType": "str",
-        "appendNewline": false,
-        "createDir": true,
-        "overwriteFile": "true",
-        "encoding": "utf8",
-        "x": 600,
-        "y": 1460,
-        "wires": [
             []
         ]
-    },
-    {
-        "id": "8014f7276410e208",
-        "type": "debug",
-        "z": "30bfffe14836de0f",
-        "name": "debug 1",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 320,
-        "y": 1400,
-        "wires": []
     },
     {
         "id": "c3f0c410a55866c8",
