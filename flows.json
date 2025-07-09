@@ -1044,7 +1044,7 @@
         "type": "function",
         "z": "30bfffe14836de0f",
         "name": "function 3",
-        "func": "// 1. Hora actual \nconst now = Math.floor(Date.now()/1000);\n\n// 2. Claim estándar para Google OAuth2 JWT\nconst claim = {\n  iss: \"node-red-sheets@ninth-optics-458601-r5.iam.gserviceaccount.com\", // client_email\n  scope: \"https://www.googleapis.com/auth/spreadsheets\",     // lectura y escritura\n  aud: \"https://oauth2.googleapis.com/token\",                          // endpoint token\n  iat: now,                                                            // issued at                                                             // expiration\n};\n\nmsg.payload = claim;       // lo mandamos al nodo JWT sign\nreturn msg;",
+        "func": "// 1. Hora actual \nconst now = Math.floor(Date.now()/1000);\n\n// 2. Claim estándar para Google OAuth2 JWT\n/*const claim = {\n  iss: \"node-red-sheets@ninth-optics-458601-r5.iam.gserviceaccount.com\", // client_email\n  scope: \"https://www.googleapis.com/auth/spreadsheets\",     // lectura y escritura\n  aud: \"https://oauth2.googleapis.com/token\",                          // endpoint token\n  iat: now,                                                            // issued at                                                             // expiration\n};*/\nconst claim = {\n  iss: \"node-red-sheets@ninth-optics-458601-r5.iam.gserviceaccount.com\",\n  // Tu client_email de la cuenta de servicio\n  scope: [\n    \"https://www.googleapis.com/auth/spreadsheets\",      // Sheets API: read & write\n    \"https://www.googleapis.com/auth/drive.readonly\"     // Drive API: export .xlsx\n  ].join(\" \"),                                           // Ambos scopes separados por espacio\n  aud: \"https://oauth2.googleapis.com/token\",            // Endpoint de token de Google\n  iat: now,                                              // “Issued At”: cuándo se generó                                               // “Expiration”: hasta cuándo es válido\n};\nmsg.payload = claim;       // lo mandamos al nodo JWT sign\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1115,7 +1115,7 @@
         "type": "function",
         "z": "30bfffe14836de0f",
         "name": "function 5",
-        "func": "// 1. Tomamos el JSON entero devuelto por Google\nconst tokenResponse = msg.payload;       \n// 2. Extraemos el access_token\nconst accessToken = tokenResponse.access_token;  \n// 3. Preparamos los headers con Bearer token\nmsg.headers = {\n  Authorization: `Bearer ${accessToken}`   // formato: \"Bearer ABC123...\"\n};\n// 4. Construimos la URL apuntando al rango hoja1!A1:Z1000\nconst spreadsheetId = \"1CGfI2dkxgYdfw37UlectzlLVmVtBW0EQ8MUh9ni5R6Q\";\nconst range        = \"hoja1!A1:Z1000\";         \nmsg.url = \n  `https://sheets.googleapis.com/v4/spreadsheets/` +  // endpoint base\n  `${spreadsheetId}/values/${encodeURIComponent(range)}`;  \n// 5. Devolvemos msg con url y headers listos  \nreturn msg;",
+        "func": "// 1. Obtener el JSON con el access_token del nodo anterior\nconst tokenResponse = msg.payload;  \n//    tokenResponse debe tener { access_token, expires_in, token_type }\nconst accessToken = tokenResponse.access_token;  // extraemos sólo el token\n\n// 2. Preparar los headers para la llamada a Drive\nmsg.headers = {\n  Authorization: `Bearer ${accessToken}`         // formato: \"Bearer <tu_token>\"\n};\n\n// 3. Definir el ID de tu Spreadsheet\nconst spreadsheetId = \"1CGfI2dkxgYdfw37UlectzlLVmVtBW0EQ8MUh9ni5R6Q\";\n\n// 4. Montar la URL de exportación de Drive\n//    Este endpoint exporta el archivo .xlsx completo, con todos los estilos intactos.\nmsg.url =\n  `https://www.googleapis.com/drive/v3/files/` +\n  `${spreadsheetId}/export` +\n  `?mimeType=` +\n  `application/vnd.openxmlformats-officedocument.spreadsheetml.sheet`;\n\n// 5. Devolver el mensaje para que el nodo HTTP Request descargue el buffer binario\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1136,7 +1136,7 @@
         "z": "30bfffe14836de0f",
         "name": "solicitud",
         "method": "GET",
-        "ret": "obj",
+        "ret": "bin",
         "paytoqs": "ignore",
         "url": "",
         "tls": "",
@@ -1150,7 +1150,8 @@
         "y": 200,
         "wires": [
             [
-                "3b093067f75c5ef7"
+                "5ec76fd76af01919",
+                "3ff82021f19a8cd5"
             ]
         ]
     },
@@ -1166,12 +1167,10 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 270,
-        "y": 200,
+        "x": 650,
+        "y": 140,
         "wires": [
-            [
-                "f10e5b18be1c2dc6"
-            ]
+            []
         ]
     },
     {
@@ -1180,12 +1179,10 @@
         "z": "30bfffe14836de0f",
         "name": "",
         "sheetName": "",
-        "x": 440,
-        "y": 200,
+        "x": 800,
+        "y": 140,
         "wires": [
-            [
-                "5ec76fd76af01919"
-            ]
+            []
         ]
     },
     {
@@ -1200,8 +1197,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 610,
-        "y": 200,
+        "x": 270,
+        "y": 220,
         "wires": [
             []
         ]
@@ -1542,6 +1539,23 @@
         "statusType": "auto",
         "x": 440,
         "y": 1660,
+        "wires": []
+    },
+    {
+        "id": "3ff82021f19a8cd5",
+        "type": "debug",
+        "z": "30bfffe14836de0f",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 620,
+        "y": 180,
         "wires": []
     },
     {
