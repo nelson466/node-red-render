@@ -18,6 +18,6 @@
     "cookie": "^1.0.2",
     "node-red-contrib-crypto-js": "^0.1.1",
     "node-red-contrib-jwt": "^0.1.0",
-    "node-red-contrib-uibuilder": "^7.4.2"
+    "@flowfuse/node-red-dashboard": "^1.25.0"
   }
 }
