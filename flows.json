@@ -1155,7 +1155,7 @@
         "type": "function",
         "z": "30bfffe14836de0f",
         "name": "Compara firma y expiración",
-        "func": "// 1) Compara la firma calculada con la del token\nvar sign = flow.get(\"sig\"); \nif (sign !== msg.payload) {\n    msg.statusCode = 401;\n    msg.payload = \"Firma inválida\";\n    return msg;\n}\n\n// 2) Comprueba expiración (1 hora = 3600 s)\nvar ts = parseInt(msg.ts_string, 10);\nvar now = Math.floor(Date.now() / 1000);\nif (now - ts > 3600) {\n    msg.statusCode = 401;\n    msg.payload = \"Token expirado\";\n    return msg;\n}\n\n// 3) Si todo OK, preparamos la cookie y redirect:\nmsg.headers = {\n  // Quitamos HttpOnly para que el script en <head> pueda leerla\n  \"Set-Cookie\": \"auth=1; Path=/; SameSite=Lax\"\n};\n// Redirige al dashboard completo (incl. #! y socketid)\nmsg.statusCode = 302;\nmsg.headers[\"Location\"] = \"https://node-red-bh0b.onrender.com/ui/#!/0?socketid=NKUKX8V5cUyfuiTHAAAB\";\nmsg.payload = \"\";\nreturn msg;",
+        "func": "// 1) Compara la firma calculada con la del token\nvar sign = flow.get(\"sig\"); \nif (sign !== msg.payload) {\n    msg.statusCode = 401;\n    msg.payload = \"Firma inválida\";\n    return msg;\n}\n\n// 2) Comprueba expiración (1 hora = 3600 s)\nvar ts = parseInt(msg.ts_string, 10);\nvar now = Math.floor(Date.now() / 1000);\nif (now - ts > 3600) {\n    msg.statusCode = 401;\n    msg.payload = \"Token expirado\";\n    return msg;\n}\n\n// 3) Si todo OK, preparamos la cookie y redirect:\nmsg.headers = {\n  // Quitamos HttpOnly para que el script en <head> pueda leerla\n  \"Set-Cookie\": \"auth=1; Path=/; SameSite=Lax\"\n};\n// Redirige al dashboard completo (incl. #! y socketid)\nmsg.statusCode = 302;\n//msg.headers[\"Location\"] = \"https://node-red-bh0b.onrender.com/ui/#!/0?socketid=NKUKX8V5cUyfuiTHAAAB\";\nmsg.headers[\"Location\"] = \"https://node-red-bh0b.onrender.com/prueba\";\nmsg.payload = \"\";\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1801,6 +1801,402 @@
         "wires": [
             []
         ]
+    },
+    {
+        "id": "e3fc07b626d8bbd8",
+        "type": "inject",
+        "z": "30bfffe14836de0f",
+        "name": "guardar index html",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "<!DOCTYPE html> <html lang=\"es\"> <head>   <meta charset=\"UTF-8\"/>   <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"/>   <link rel=\"stylesheet\" href=\"./index.css\"/>   <title>Hola Mundo</title> </head> <body>   <div class=\"container\">     <h1>¡Hola Mundo!</h1>     <button id=\"alertBtn\">Hazme clic</button>   </div>   <script src=\"./index.js\"></script> </body> </html>",
+        "payloadType": "str",
+        "x": 130,
+        "y": 1900,
+        "wires": [
+            [
+                "45ec213d7ac57574"
+            ]
+        ]
+    },
+    {
+        "id": "36845484c82a0de4",
+        "type": "inject",
+        "z": "30bfffe14836de0f",
+        "name": "Guardar index css",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "/* main.css */  body, html {   margin: 0;   padding: 0;   font-family: sans-serif;   background: #f4f4f4;   display: flex;   justify-content: center;   align-items: center;   height: 100vh; }  .container {   text-align: center;   padding: 2rem;   background: #ccffcc; /* Verde claro */   border-radius: 8px;   box-shadow: 0 2px 8px rgba(0,0,0,0.1); }  h1 {   color: orange; /* Texto en naranja */   margin-bottom: 1rem; }  button {   padding: 0.5rem 1rem;   border: none;   border-radius: 4px;   cursor: pointer;   font-size: 1rem; }  button:hover {   background: #eee; }",
+        "payloadType": "str",
+        "x": 130,
+        "y": 1960,
+        "wires": [
+            [
+                "7dd05b9b43fb3a41"
+            ]
+        ]
+    },
+    {
+        "id": "45ec213d7ac57574",
+        "type": "uib-save",
+        "z": "30bfffe14836de0f",
+        "url": "hola",
+        "uibId": "4f99ad8c86bfdf33",
+        "folder": "src",
+        "fname": "index.html",
+        "createFolder": false,
+        "reload": false,
+        "usePageName": false,
+        "encoding": "utf8",
+        "mode": 438,
+        "name": "index",
+        "topic": "",
+        "x": 310,
+        "y": 1900,
+        "wires": []
+    },
+    {
+        "id": "7dd05b9b43fb3a41",
+        "type": "uib-save",
+        "z": "30bfffe14836de0f",
+        "url": "hola",
+        "uibId": "4f99ad8c86bfdf33",
+        "folder": "src",
+        "fname": "index.css",
+        "createFolder": false,
+        "reload": false,
+        "usePageName": false,
+        "encoding": "utf8",
+        "mode": 438,
+        "name": "style",
+        "topic": "",
+        "x": 310,
+        "y": 1960,
+        "wires": []
+    },
+    {
+        "id": "a884c2ce98d9cb5d",
+        "type": "inject",
+        "z": "30bfffe14836de0f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 2080,
+        "wires": [
+            [
+                "4f99ad8c86bfdf33"
+            ]
+        ]
+    },
+    {
+        "id": "656b69d3bf6d0576",
+        "type": "inject",
+        "z": "30bfffe14836de0f",
+        "name": "Guardar index js",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "document.addEventListener('DOMContentLoaded', () => {   const btn = document.getElementById('alertBtn');   btn.addEventListener('click', () => {     alert('¡Hola desde uibuilder!');   });   uibuilder.onChange('msg', (msg) => {     console.log('Recibí de Node‑RED:', msg);   }); });",
+        "payloadType": "str",
+        "x": 120,
+        "y": 2020,
+        "wires": [
+            [
+                "180eaa1df95de9b8"
+            ]
+        ]
+    },
+    {
+        "id": "180eaa1df95de9b8",
+        "type": "uib-save",
+        "z": "30bfffe14836de0f",
+        "url": "hola",
+        "uibId": "4f99ad8c86bfdf33",
+        "folder": "src",
+        "fname": "index.js",
+        "createFolder": false,
+        "reload": false,
+        "usePageName": false,
+        "encoding": "utf8",
+        "mode": 438,
+        "name": "script",
+        "topic": "",
+        "x": 310,
+        "y": 2020,
+        "wires": []
+    },
+    {
+        "id": "4f99ad8c86bfdf33",
+        "type": "uibuilder",
+        "z": "30bfffe14836de0f",
+        "name": "ho",
+        "topic": "",
+        "url": "hola",
+        "okToGo": true,
+        "fwdInMessages": false,
+        "allowScripts": false,
+        "allowStyles": false,
+        "copyIndex": true,
+        "templateFolder": "blank",
+        "extTemplate": "",
+        "showfolder": false,
+        "reload": false,
+        "sourceFolder": "src",
+        "deployedVersion": "7.4.2",
+        "showMsgUib": false,
+        "title": "",
+        "descr": "",
+        "editurl": "vscode://vscode-remote/ssh-remote+node-red-bh0b.onrender.com/opt/render/.node-red/uibuilder/hola/?windowId=_blank",
+        "x": 300,
+        "y": 2080,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "1a768afac092f88c",
+        "type": "inject",
+        "z": "30bfffe14836de0f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 2240,
+        "wires": [
+            [
+                "80f4069f4ef9d82a",
+                "8cb60e244fa4abed",
+                "4fc5234c0cf83e76"
+            ]
+        ]
+    },
+    {
+        "id": "80f4069f4ef9d82a",
+        "type": "function",
+        "z": "30bfffe14836de0f",
+        "name": "function 18",
+        "func": "// Define el HTML\nmsg.payload = `<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>datagauge</title>\n    <link rel=\"icon\" href=\"logo1.ico\">\n    <link rel=\"stylesheet\" href=\"index.css\"> <!-- Enlace al archivo CSS -->\n</head>\n<body>\n   <!-- Contenedor principal del formulario -->\n   <div class=\"form-container\">\n    <!-- Icono de encabezado del formulario -->\n    <div class=\"form-header\">\n        <img src=\"logo2.ico\" alt=\"Icono de empresa\" class=\"header-icon\">\n    </div>\n    \n    <!-- Campos del formulario -->\n    <form action=\"login_usuario.php\" method=\"POST\"class=\"login-form\">\n        <!-- Campo Username con icono -->\n        <div class=\"input-group\">\n            <img src=\"username.png\" alt=\"Icono de usuario\" class=\"input-icon\">\n            <input type=\"text\" placeholder=\"Username\" class=\"form-input\" name=\"nombre_usuario\">\n        </div>\n        \n        <!-- Campo Password con icono -->\n        <div class=\"input-group\">\n            <img src=\"password.png\" alt=\"Icono de contraseña\" class=\"input-icon\">\n            <input type=\"password\" placeholder=\"Password\" class=\"form-input\" name=\"contrasena\">\n        </div>\n        \n        <!-- Botón de Login -->\n        <button type=\"submit\" class=\"login-button\">Iniciar sesion</button>\n    </form>\n</div> \n</body>\n</html>`;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 2200,
+        "wires": [
+            [
+                "05b13b9c0d0f7069"
+            ]
+        ]
+    },
+    {
+        "id": "8cb60e244fa4abed",
+        "type": "function",
+        "z": "30bfffe14836de0f",
+        "name": "function 19",
+        "func": "// Function node “Build style.css”\nmsg.payload = `\n/* Estilos generales del cuerpo de la página */\nbody {\n    margin: 0;\n    padding: 0;\n    min-height: 100vh; /* Altura mínima igual al 100% del viewport */\n    background-image: url('fondo.jpg'); /* Imagen de fondo */\n    background-size: cover; /* Ajusta la imagen al tamaño de la pantalla */\n    background-position: center; /* Centra la imagen */\n    background-repeat: no-repeat; /* Evita repetición */\n    font-family: Arial, sans-serif; /* Fuente predeterminada */\n}\n\n/* Contenedor del formulario */\n.form-container {\n    width: 305px; /* Ancho según especificación */\n    height: 415px; /* Alto según especificación */\n    background: rgba(255, 255, 255, 0.9); /* Fondo blanco semitransparente */\n    position: absolute; /* Posicionamiento absoluto para centrar */\n    top: 50%; /* Centrado vertical */\n    left: 50%; /* Centrado horizontal */\n    transform: translate(-50%, -50%); /* Ajuste fino para centrar */\n    border-radius: 20px; /* Bordes redondeados */\n    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Sombra suave */\n    padding: 20px; /* Espaciado interno */\n}\n\n/* Encabezado del formulario */\n.form-header {\n    text-align: center; /* Centra el icono */\n    margin-bottom: 20px; /* Espacio debajo del icono */\n}\n\n/* Icono del encabezado */\n.header-icon {\n    width: 100px; /* Ancho según especificación */\n    height: 100px; /* Alto según especificación */\n}\n\n/* Grupo de entrada (icono + campo) */\n.input-group {\n    display: flex; /* Alinea icono y campo horizontalmente */\n    align-items: center; /* Centra verticalmente */\n    margin-bottom: 15px; /* Espacio entre grupos */\n}\n\n/* Icono de los campos */\n.input-icon {\n    width: 32px; /* Ancho según especificación */\n    height: 32px; /* Alto según especificación */\n    margin-right: 10px; /* Espacio entre icono y campo */\n}\n\n/* Campos de entrada */\n.form-input {\n    width: 100%; /* Ocupa todo el espacio disponible */\n    padding: 10px; /* Espaciado interno */\n    border: 1px solid #ddd; /* Borde gris */\n    border-radius: 10px; /* Bordes redondeados */\n    font-size: 14px; /* Tamaño de fuente */\n}\n\n/* Botón de Login */\n.login-button {\n    width: 60%; /* Ahora ocupa el 50% del ancho del formulario */\n    padding: 8px; /* Espaciado interno */\n    background-color: #006C66  ; /* Color #16a285 especificado */\n    color: white; /* Texto blanco */\n    border: 2px solid #006C66 ; /* Borde sólido del mismo color #16a285 que el fondo */\n    border-radius: 20px; /* Bordes redondeados */\n    cursor: pointer; /* Cursor tipo \"mano\" */\n    font-size: 20px; /* Tamaño de fuente */\n    margin-top: 10px; /* Espacio superior */\n    display: block; /* Permite el uso de margen automático para centrar */\n    margin-left: auto; /* Centrado horizontal */\n    margin-right: auto; /* Centrado horizontal */\n    transition: all 0.3s ease; /* Suaviza transiciones de estados (hover) */\n    position: relative; /* Habilitamos posicionamiento relativo */\n    bottom: -80px; /* Empujamos el botón 15px hacia abajo desde su posición original */\n    text-align: center; /* Centra el texto horizontalmente */\n    line-height: center; /* Alinea verticalmente el texto (ajustar según fuente) */\n}\n\n/* Efecto hover para el botón */\n.login-button:hover {\n    background-color: #006C66; /* Color oscuro al pasar el mouse */\n}\n\n/* Estilos responsivos para dispositivos móviles */\n@media (max-width: 480px) {\n    .form-container {\n        width: 90%; /* Ancho adaptable */\n        max-width: 305px; /* Límite máximo según especificación */\n    }\n}\n`;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 2280,
+        "wires": [
+            [
+                "f9c9096259ac117e"
+            ]
+        ]
+    },
+    {
+        "id": "05b13b9c0d0f7069",
+        "type": "uib-save",
+        "z": "30bfffe14836de0f",
+        "url": "prueba",
+        "uibId": "9ba114eae656b5fa",
+        "folder": "src",
+        "fname": "index.html",
+        "createFolder": false,
+        "reload": false,
+        "usePageName": false,
+        "encoding": "utf8",
+        "mode": 438,
+        "name": "index",
+        "topic": "",
+        "x": 470,
+        "y": 2200,
+        "wires": []
+    },
+    {
+        "id": "f9c9096259ac117e",
+        "type": "uib-save",
+        "z": "30bfffe14836de0f",
+        "url": "prueba",
+        "uibId": "9ba114eae656b5fa",
+        "folder": "src",
+        "fname": "index.css",
+        "createFolder": false,
+        "reload": false,
+        "usePageName": false,
+        "encoding": "utf8",
+        "mode": 438,
+        "name": "style",
+        "topic": "",
+        "x": 470,
+        "y": 2280,
+        "wires": []
+    },
+    {
+        "id": "6a079b00f565c7fe",
+        "type": "inject",
+        "z": "30bfffe14836de0f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 2420,
+        "wires": [
+            [
+                "9ba114eae656b5fa"
+            ]
+        ]
+    },
+    {
+        "id": "9ba114eae656b5fa",
+        "type": "uibuilder",
+        "z": "30bfffe14836de0f",
+        "name": "pru",
+        "topic": "",
+        "url": "prueba",
+        "okToGo": true,
+        "fwdInMessages": false,
+        "allowScripts": false,
+        "allowStyles": false,
+        "copyIndex": true,
+        "templateFolder": "blank",
+        "extTemplate": "",
+        "showfolder": false,
+        "reload": false,
+        "sourceFolder": "src",
+        "deployedVersion": "7.4.2",
+        "showMsgUib": false,
+        "title": "",
+        "descr": "",
+        "editurl": "vscode://vscode-remote/ssh-remote+node-red-bh0b.onrender.com/opt/render/.node-red/uibuilder/prueba/?windowId=_blank",
+        "x": 300,
+        "y": 2420,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "4fc5234c0cf83e76",
+        "type": "function",
+        "z": "30bfffe14836de0f",
+        "name": "function 20",
+        "func": "msg.payload = `/* no hay script*/`;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 2360,
+        "wires": [
+            [
+                "a80e8174357a7920"
+            ]
+        ]
+    },
+    {
+        "id": "a80e8174357a7920",
+        "type": "uib-save",
+        "z": "30bfffe14836de0f",
+        "url": "prueba",
+        "uibId": "9ba114eae656b5fa",
+        "folder": "src",
+        "fname": "index.js",
+        "createFolder": false,
+        "reload": false,
+        "usePageName": false,
+        "encoding": "utf8",
+        "mode": 438,
+        "name": "script",
+        "topic": "",
+        "x": 470,
+        "y": 2360,
+        "wires": []
     },
     {
         "id": "1c97df7f36d5f322",
