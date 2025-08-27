@@ -1999,7 +1999,7 @@
         "type": "function",
         "z": "30bfffe14836de0f",
         "name": "function 18",
-        "func": "msg.payload = `<!DOCTYPE html> <!-- Declaración del tipo de documento -->\n<html lang=\"es\"> <!-- Etiqueta raíz con idioma español -->\n<head> <!-- Metadatos y enlaces a recursos externos -->\n  <meta charset=\"UTF-8\"> <!-- Codificación de caracteres -->\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"> <!-- Escalado responsivo -->\n  <title>Dashboard IoT</title> <!-- Título de la pestaña -->\n  <!-- Carga de librería FontAwesome para los íconos -->\n  <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css\">\n  <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css\">\n  <!-- Enlace al archivo de estilos CSS -->\n  <link rel=\"stylesheet\" href=\"index.css\">\n</head>\n<body> <!-- Contenido principal de la página -->\n  <!-- Contenedor principal del dashboard -->\n  <div class=\"dashboard\">\n    <!-- GRID: menú superior -->\n    <div class=\"item menu\">\n         <div class=\"menu-container\"> <!-- Contenedor principal del menú: agrupa botón y lista desplegable. -->\n         <details class=\"menu-details\"> <!-- Elemento <details> que permite abrir/cerrar el bloque sin JS. -->\n           <summary class=\"menu-button\" aria-haspopup=\"true\" aria-label=\"Abrir menú\"> <!-- Resumen que actúa como botón visible. -->\n             <i class=\"bi bi-list\" aria-hidden=\"true\"></i> <!-- Icono de menú (Bootstrap Icons) — decorativo. -->\n           </summary> <!-- Cierre del summary (botón) -->\n           <ul class=\"menu-list\" role=\"menu\"> <!-- Lista de opciones, actúa como menú; role para accesibilidad. -->\n             <li class=\"menu-item\" role=\"none\"> <!-- Item 1 del menú; role none porque el enlace tendrá role. -->\n             <a class=\"menu-link\" role=\"menuitem\" href=\"/download\" target=\"_blank\" rel=\"noopener\">Descargar Reporte</a> <!-- Enlace que abre /download en nueva pestaña. -->\n             </li> <!-- Fin item 1 -->\n             <li class=\"menu-item\" role=\"none\"> <!-- Item 2 del menú. -->\n             <a class=\"menu-link\" role=\"menuitem\" href=\"/logout\">Cerrar Sesión</a> <!-- Enlace que llama a /logout (navegación estándar). -->\n             </li> <!-- Fin item 2 -->\n           </ul> <!-- Cierre de la lista -->\n          </details> <!-- Cierre del details -->\n         </div> <!-- Cierre del contenedor principal -->\n    </div>\n\n    <!-- WIDGET: Temperatura -->\n    <div class=\"item temperature\">\n      <h2>Temperature</h2>\n      <!--<i class=\"fa-solid fa-temperature-three-quarters icon\"></i>-->\n      <i class=\"fa fa-thermometer-half icon\"></i>\n      <span class=\"value\">25,8&deg;C</span>\n    </div>\n\n    <!-- WIDGET: Luminosidad -->\n    <div class=\"item luminosity\">\n      <h2>Luminosity</h2>\n      <i class=\"bi bi-brightness-high icon\" aria-hidden=\"true\"></i> \n      <span class=\"value\">76 lux</span>\n    </div>\n\n    <!-- WIDGET: Humedad de suelo -->\n    <div class=\"item soil\">\n      <h2>Soil Humidity</h2>\n      <i class=\"fa-solid fa-seedling icon\" aria-hidden=\"true\"></i>\n      <span class=\"value\">43 %</span>\n    </div>\n\n    <!-- WIDGET: Humedad ambiente -->\n    <div class=\"item ambient\">\n      <h2>Ambient Humidity</h2>\n      <i class=\"fa-solid fa-droplet icon\"></i>\n      <span class=\"value\">58 %</span>\n    </div>\n\n    <!-- WIDGET: Switch -->\n    <div class=\"item button\">\n      <div class=\"switch_toggle\">\n        <input type=\"checkbox\" id=\"btn\"> <!-- Checkbox oculto -->\n        <label for=\"btn\"></label> <!-- Control deslizante visual -->\n      </div> <!-- cierre switch toggle -->  \n    </div> <!-- cierre item button -->\n  </div>\n</body>\n</html>`;\nreturn msg;\n",
+        "func": "msg.payload = `<!DOCTYPE html> <!-- Declaración del tipo de documento -->\n<html lang=\"es\"> <!-- Etiqueta raíz con idioma español -->\n<head> <!-- Metadatos y enlaces a recursos externos -->\n  <meta charset=\"UTF-8\"> <!-- Codificación de caracteres -->\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"> <!-- Escalado responsivo -->\n  <title>Dashboard IoT</title> <!-- Título de la pestaña -->\n  <!-- Carga de librería FontAwesome para los íconos -->\n  <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css\">\n  <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css\">\n  <!-- Enlace al archivo de estilos CSS -->\n  <link rel=\"stylesheet\" href=\"index.css\">\n  <script src=\"index.js\" defer></script>\n</head>\n<body> <!-- Contenido principal de la página -->\n  <!-- Contenedor principal del dashboard -->\n  <div class=\"dashboard\">\n    <!-- GRID: menú superior -->\n    <div class=\"item menu\">\n         <div class=\"menu-container\"> <!-- Contenedor principal del menú: agrupa botón y lista desplegable. -->\n         <details class=\"menu-details\"> <!-- Elemento <details> que permite abrir/cerrar el bloque sin JS. -->\n           <summary class=\"menu-button\" aria-haspopup=\"true\" aria-label=\"Abrir menú\"> <!-- Resumen que actúa como botón visible. -->\n             <i class=\"bi bi-list\" aria-hidden=\"true\"></i> <!-- Icono de menú (Bootstrap Icons) — decorativo. -->\n           </summary> <!-- Cierre del summary (botón) -->\n           <ul class=\"menu-list\" role=\"menu\"> <!-- Lista de opciones, actúa como menú; role para accesibilidad. -->\n             <li class=\"menu-item\" role=\"none\"> <!-- Item 1 del menú; role none porque el enlace tendrá role. -->\n             <a class=\"menu-link\" role=\"menuitem\" href=\"/download\" target=\"_blank\" rel=\"noopener\">Descargar Reporte</a> <!-- Enlace que abre /download en nueva pestaña. -->\n             </li> <!-- Fin item 1 -->\n             <li class=\"menu-item\" role=\"none\"> <!-- Item 2 del menú. -->\n             <a class=\"menu-link\" role=\"menuitem\" href=\"/logout\">Cerrar Sesión</a> <!-- Enlace que llama a /logout (navegación estándar). -->\n             </li> <!-- Fin item 2 -->\n           </ul> <!-- Cierre de la lista -->\n          </details> <!-- Cierre del details -->\n         </div> <!-- Cierre del contenedor principal -->\n    </div>\n\n    <!-- WIDGET: Temperatura -->\n    <div class=\"item temperature\">\n      <h2>Temperature</h2>\n      <!--<i class=\"fa-solid fa-temperature-three-quarters icon\"></i>-->\n      <i class=\"fa fa-thermometer-half icon\"></i>\n      <span class=\"value\">25,8&deg;C</span>\n    </div>\n\n    <!-- WIDGET: Luminosidad -->\n    <div class=\"item luminosity\">\n      <h2>Luminosity</h2>\n      <i class=\"bi bi-brightness-high icon\" aria-hidden=\"true\"></i> \n      <span class=\"value\">76 lux</span>\n    </div>\n\n    <!-- WIDGET: Humedad de suelo -->\n    <div class=\"item soil\">\n      <h2>Soil Humidity</h2>\n      <i class=\"fa-solid fa-seedling icon\" aria-hidden=\"true\"></i>\n      <span class=\"value\">43 %</span>\n    </div>\n\n    <!-- WIDGET: Humedad ambiente -->\n    <div class=\"item ambient\">\n      <h2>Ambient Humidity</h2>\n      <i class=\"fa-solid fa-droplet icon\"></i>\n      <span class=\"value\">58 %</span>\n    </div>\n\n    <!-- WIDGET: Switch -->\n    <div class=\"item button\">\n      <div class=\"switch_toggle\">\n        <input class=\"on-of\" type=\"checkbox\" id=\"btn\"> <!-- Checkbox oculto -->\n        <label for=\"btn\"></label> <!-- Control deslizante visual -->\n      </div> <!-- cierre switch toggle -->  \n    </div> <!-- cierre item button -->\n  </div>\n</body>\n</html>`;\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2106,7 +2106,7 @@
         "type": "function",
         "z": "30bfffe14836de0f",
         "name": "function 20",
-        "func": "msg.payload = `/* no hay script*/`;\nreturn msg;\n",
+        "func": "msg.payload = `/* Eventos del boton on-of*/\n\n/*Selecciona el primer elemento del documento que tenga la clase \"evt\" (tu checkbox toggle)*/ \nconst input = document.querySelector('.on-of');\n\n/*Inicializamos en false para que el primer click establezca 1 lógico*/\n  let estadoLocal = false; \n\n  function clickBoton(e) { \n    /*previene comportamientos por defecto*/\n      e.preventDefault(); \n    /*Alterna el estado local: false -> true, true -> false*/\n    estadoLocal = !estadoLocal; \n    /*Convierte el booleano estadoLocal en número lógico: 1 si true, 0 si false*/\n    const estado = estadoLocal ? 1 : 0; \n    /*Actualiza la propiedad 'checked' del input para que la interfaz refleje estadoLocal*/\n      input.checked = estadoLocal; \n    \n/* Petición HTTP simples POST al endpoint /set-state sin credenciales ni cookies*/\nfetch('https://node-red-bh0b.onrender.com/set-state', {\n  method: 'POST', \n  headers: { 'Content-Type': 'application/json' },\n  body: JSON.stringify({ state: estado }) \n});                                           \n}  \n\n/* Asocia el handler clickevt al evento 'click' del input*/\n  input.addEventListener('change', clickBoton);\n  `;\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2197,6 +2197,60 @@
             [],
             []
         ]
+    },
+    {
+        "id": "1361b76a4bc195d5",
+        "type": "http in",
+        "z": "30bfffe14836de0f",
+        "name": "on-of",
+        "url": "/set-state",
+        "method": "post",
+        "upload": true,
+        "swaggerDoc": "",
+        "x": 70,
+        "y": 2500,
+        "wires": [
+            [
+                "8b0b5c4bec3a82d4"
+            ]
+        ]
+    },
+    {
+        "id": "8b0b5c4bec3a82d4",
+        "type": "function",
+        "z": "30bfffe14836de0f",
+        "name": "function 21",
+        "func": "/* 1) Tomamos el cuerpo/parámetro enviado por el HTTP In. En Node-RED, para POST con JSON*/\n/*    msg.payload ya contiene el objeto parseado (p.ej. { state: 1 })*/\n/*    body: objeto con los datos enviados por el cliente*/\nvar body = msg.payload;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 230,
+        "y": 2500,
+        "wires": [
+            [
+                "89927bb1dcf38e38"
+            ]
+        ]
+    },
+    {
+        "id": "89927bb1dcf38e38",
+        "type": "debug",
+        "z": "30bfffe14836de0f",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 400,
+        "y": 2500,
+        "wires": []
     },
     {
         "id": "1c97df7f36d5f322",
