@@ -1796,7 +1796,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 110,
-        "y": 1880,
+        "y": 1940,
         "wires": [
             [
                 "80f4069f4ef9d82a",
@@ -1810,7 +1810,7 @@
         "type": "function",
         "z": "30bfffe14836de0f",
         "name": "html",
-        "func": "msg.payload = `<!DOCTYPE html> <!-- Declaración del tipo de documento -->\n<html lang=\"es\"> <!-- Etiqueta raíz con idioma español -->\n<head> <!-- Metadatos y enlaces a recursos externos -->\n  <meta charset=\"UTF-8\"> <!-- Codificación de caracteres -->\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"> <!-- Escalado responsivo -->\n  <title>Dashboard IoT</title> <!-- Título de la pestaña -->\n  <!-- Carga de librería FontAwesome para los íconos -->\n  <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css\">\n  <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css\">\n  <!-- Enlace al archivo de estilos CSS -->\n  <link rel=\"stylesheet\" href=\"index.css\">\n  <script src=\"index.js\" defer></script>\n</head>\n<body> <!-- Contenido principal de la página -->\n  <!-- Contenedor principal del dashboard -->\n  <div class=\"dashboard\">\n    <!-- GRID: menú superior -->\n    <div class=\"item menu\">\n         <div class=\"menu-container\"> <!-- Contenedor principal del menú: agrupa botón y lista desplegable. -->\n         <details class=\"menu-details\"> <!-- Elemento <details> que permite abrir/cerrar el bloque sin JS. -->\n           <summary class=\"menu-button\" aria-haspopup=\"true\" aria-label=\"Abrir menú\"> <!-- Resumen que actúa como botón visible. -->\n             <i class=\"bi bi-list\" aria-hidden=\"true\"></i> <!-- Icono de menú (Bootstrap Icons) — decorativo. -->\n           </summary> <!-- Cierre del summary (botón) -->\n           <ul class=\"menu-list\" role=\"menu\"> <!-- Lista de opciones, actúa como menú; role para accesibilidad. -->\n             <li class=\"menu-item\" role=\"none\"> <!-- Item 1 del menú; role none porque el enlace tendrá role. -->\n             <a class=\"menu-link\" role=\"menuitem\" href=\"/download\" target=\"_blank\" rel=\"noopener\">Descargar Reporte</a> <!-- Enlace que abre /download en nueva pestaña. -->\n             </li> <!-- Fin item 1 -->\n             <li class=\"menu-item\" role=\"none\"> <!-- Item 2 del menú. -->\n             <a class=\"menu-link\" role=\"menuitem\" href=\"/logout\">Cerrar Sesión</a> <!-- Enlace que llama a /logout (navegación estándar). -->\n             </li> <!-- Fin item 2 -->\n           </ul> <!-- Cierre de la lista -->\n          </details> <!-- Cierre del details -->\n         </div> <!-- Cierre del contenedor principal -->\n    </div>\n\n    <!-- WIDGET: Temperatura -->\n    <div class=\"item temperature\">\n      <h2>Temperature</h2>\n      <i class=\"fa fa-thermometer-half icon\"></i>\n      <p class=\"value\"><span class=\"tem\"></span> &deg;C</p>\n    </div>\n\n    <!-- WIDGET: Luminosidad -->\n    <div class=\"item luminosity\">\n      <h2>Luminosity</h2>\n      <i class=\"bi bi-brightness-high icon\" aria-hidden=\"true\"></i> \n      <p class=\"value\"><span class=\"lum\"></span> lux</p>\n    </div>\n\n    <!-- WIDGET: Humedad de suelo -->\n    <div class=\"item soil\">\n      <h2>Soil Humidity</h2>\n      <i class=\"fa-solid fa-seedling icon\" aria-hidden=\"true\"></i>\n      <p class=\"value\"><span class=\"hums\"></span> %</p>\n    </div>\n\n    <!-- WIDGET: Humedad ambiente -->\n    <div class=\"item ambient\">\n      <h2>Ambient Humidity</h2>\n      <i class=\"fa-solid fa-droplet icon\"></i>\n      <p class=\"value\"><span class=\"huma\"></span> %</p>\n    </div>\n\n    <!-- WIDGET: Switch_Control_Manual_De_Alguna_Variable -->\n    <div class=\"item button\">\n      <div class=\"switch_toggle\">\n        <input class=\"on-of\" type=\"checkbox\" id=\"btn\"> <!-- Checkbox oculto -->\n        <label for=\"btn\"></label> <!-- Control deslizante visual -->\n      </div> <!-- cierre switch toggle -->  \n    </div> <!-- cierre item button -->\n\n    <!-- WIDGET: Switch_Control_Automatico_Temperatura -->\n    <div class=\"item btn_control\">\n      <h2>Control Temperatura</h2>\n      <div class=\"control_toggle\">\n        <input class=\"micheckbox\" type=\"checkbox\" id=\"actv\"> <!-- Checkbox oculto -->\n        <label for=\"actv\"></label> <!-- Control deslizante visual -->\n        <input class=\"captura\" type=\"text\" placeholder=\"20.25\"> <!-- Numero ingresado -->\n      </div> <!-- cierre control_toggle -->\n    </div> <!-- cierre item btn_control -->\n  </div>\n</body>\n</html>`;\nreturn msg;\n",
+        "func": "msg.payload = `<!DOCTYPE html> <!-- Declaración del tipo de documento -->\n<html lang=\"es\"> <!-- Etiqueta raíz con idioma español -->\n<head> <!-- Metadatos y enlaces a recursos externos -->\n  <meta charset=\"UTF-8\"> <!-- Codificación de caracteres -->\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"> <!-- Escalado responsivo -->\n  <title>Dashboard IoT</title> <!-- Título de la pestaña -->\n  <!-- Carga de librería FontAwesome para los íconos -->\n  <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css\">\n  <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css\">\n  <!-- Enlace al archivo de estilos CSS -->\n  <link rel=\"stylesheet\" href=\"index.css\">\n  <script src=\"index.js\" defer></script>\n  <script src=\"./uibuilder.iife.min.js\"></script>\n</head>\n<body> <!-- Contenido principal de la página -->\n  <!-- Contenedor principal del dashboard -->\n  <div class=\"dashboard\">\n    <!-- GRID: menú superior -->\n    <div class=\"item menu\">\n         <div class=\"menu-container\"> <!-- Contenedor principal del menú: agrupa botón y lista desplegable. -->\n         <details class=\"menu-details\"> <!-- Elemento <details> que permite abrir/cerrar el bloque sin JS. -->\n           <summary class=\"menu-button\" aria-haspopup=\"true\" aria-label=\"Abrir menú\"> <!-- Resumen que actúa como botón visible. -->\n             <i class=\"bi bi-list\" aria-hidden=\"true\"></i> <!-- Icono de menú (Bootstrap Icons) — decorativo. -->\n           </summary> <!-- Cierre del summary (botón) -->\n           <ul class=\"menu-list\" role=\"menu\"> <!-- Lista de opciones, actúa como menú; role para accesibilidad. -->\n             <li class=\"menu-item\" role=\"none\"> <!-- Item 1 del menú; role none porque el enlace tendrá role. -->\n             <a class=\"menu-link\" role=\"menuitem\" href=\"/download\" target=\"_blank\" rel=\"noopener\">Descargar Reporte</a> <!-- Enlace que abre /download en nueva pestaña. -->\n             </li> <!-- Fin item 1 -->\n             <li class=\"menu-item\" role=\"none\"> <!-- Item 2 del menú. -->\n             <a class=\"menu-link\" role=\"menuitem\" href=\"/logout\">Cerrar Sesión</a> <!-- Enlace que llama a /logout (navegación estándar). -->\n             </li> <!-- Fin item 2 -->\n           </ul> <!-- Cierre de la lista -->\n          </details> <!-- Cierre del details -->\n         </div> <!-- Cierre del contenedor principal -->\n    </div>\n\n    <!-- WIDGET: Temperatura -->\n    <div class=\"item temperature\">\n      <h2>Temperature</h2>\n      <i class=\"fa fa-thermometer-half icon\"></i>\n      <p class=\"value\"><span class=\"tem\"></span> &deg;C</p>\n    </div>\n\n    <!-- WIDGET: Luminosidad -->\n    <div class=\"item luminosity\">\n      <h2>Luminosity</h2>\n      <i class=\"bi bi-brightness-high icon\" aria-hidden=\"true\"></i> \n      <p class=\"value\"><span class=\"lum\"></span> lux</p>\n    </div>\n\n    <!-- WIDGET: Humedad de suelo -->\n    <div class=\"item soil\">\n      <h2>Soil Humidity</h2>\n      <i class=\"fa-solid fa-seedling icon\" aria-hidden=\"true\"></i>\n      <p class=\"value\"><span class=\"hums\"></span> %</p>\n    </div>\n\n    <!-- WIDGET: Humedad ambiente -->\n    <div class=\"item ambient\">\n      <h2>Ambient Humidity</h2>\n      <i class=\"fa-solid fa-droplet icon\"></i>\n      <p class=\"value\"><span class=\"huma\"></span> %</p>\n    </div>\n\n    <!-- WIDGET: Switch_Control_Manual_De_Alguna_Variable -->\n    <div class=\"item button\">\n      <div class=\"switch_toggle\">\n        <input class=\"on-of\" type=\"checkbox\" id=\"btn\"> <!-- Checkbox oculto -->\n        <label for=\"btn\"></label> <!-- Control deslizante visual -->\n      </div> <!-- cierre switch toggle -->  \n    </div> <!-- cierre item button -->\n\n    <!-- WIDGET: Switch_Control_Automatico_Temperatura -->\n    <div class=\"item btn_control\">\n      <h2>Control Temperatura</h2>\n      <div class=\"control_toggle\">\n        <input class=\"micheckbox\" type=\"checkbox\" id=\"actv\"> <!-- Checkbox oculto -->\n        <label for=\"actv\"></label> <!-- Control deslizante visual -->\n        <input class=\"captura\" type=\"text\" placeholder=\"20.25\"> <!-- Numero ingresado -->\n      </div> <!-- cierre control_toggle -->\n    </div> <!-- cierre item btn_control -->\n  </div>\n</body>\n</html>`;\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1818,7 +1818,7 @@
         "finalize": "",
         "libs": [],
         "x": 290,
-        "y": 1820,
+        "y": 1880,
         "wires": [
             [
                 "05b13b9c0d0f7069"
@@ -1838,7 +1838,7 @@
         "finalize": "",
         "libs": [],
         "x": 290,
-        "y": 1880,
+        "y": 1940,
         "wires": [
             [
                 "f9c9096259ac117e"
@@ -1861,7 +1861,7 @@
         "name": "index",
         "topic": "",
         "x": 430,
-        "y": 1820,
+        "y": 1880,
         "wires": []
     },
     {
@@ -1880,7 +1880,7 @@
         "name": "style",
         "topic": "",
         "x": 430,
-        "y": 1880,
+        "y": 1940,
         "wires": []
     },
     {
@@ -1891,10 +1891,6 @@
         "props": [
             {
                 "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
             }
         ],
         "repeat": "",
@@ -1904,8 +1900,8 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 110,
-        "y": 2000,
+        "x": 330,
+        "y": 1640,
         "wires": [
             [
                 "9ba114eae656b5fa"
@@ -1917,7 +1913,7 @@
         "type": "function",
         "z": "30bfffe14836de0f",
         "name": "js",
-        "func": "msg.payload = `\"use strict\"; // Activa modo estricto para atrapar errores comunes (mejor práctica).\n\n/* ======================================\n   BLOQUE 1 - ON-OF: alterna y envía 0/1\n   ====================================== */\n\n/* Selecciona el primer elemento del documento que tenga la clase \"on-of\".\n   Esperamos que el <input type=\"checkbox\" class=\"on-of\"> exista en el DOM\n   (por ejemplo el script está incluido al final del body). */\nconst input = document.querySelector('.on-of'); \n\n/* Si no existe el input, detenemos el script en este punto para evitar errores.\n   Esto evita llamadas a propiedades de null/undefined. */\nif (!input) {\n  console.warn('No se encontró ningún elemento con la clase .on-of'); // aviso en consola\n} else {\n  /* Inicializamos estadoLocal en false para que el primer cambio establezca 1 lógico.\n     estadoLocal es la réplica en memoria del estado del switch (no persiste al recargar). */\n  let estadoLocal = false;\n\n  /* Handler que se ejecuta cuando cambia el input (evento 'change').\n     Usamos 'change' porque ocurre cuando el checked ya cambió (o cuando el usuario lo cambia). */\n  function clickBoton(e) {\n    /* Prevenir comportamiento por defecto si existiera (por seguridad; normalmente change no tiene un \"default\" visible). */\n    if (e && typeof e.preventDefault === 'function') {\n      e.preventDefault();\n    }\n\n    /* Alterna el estado local: false -> true, true -> false */\n    estadoLocal = !estadoLocal;\n\n    /* Convierte el booleano estadoLocal en número lógico: 1 si true, 0 si false */\n    const estado = estadoLocal ? 1 : 0;\n\n    /* Actualiza la propiedad 'checked' del input para que la interfaz muestre el estadoLocal.\n       Si el evento 'change' ya cambió checked automáticamente, esto asegura coherencia. */\n    if ('checked' in input) {\n      input.checked = estadoLocal;\n    }\n\n    /* Petición HTTP POST al endpoint /set-state sin credenciales ni cookies.\n       Enviamos JSON con la forma { state: 0 } o { state: 1 }. Fire-and-forget: no manejamos la respuesta. */\n    fetch('https://node-red-bh0b.onrender.com/set-state', {\n      method: 'POST',                                   // método POST para comunicar cambio de estado\n      headers: { 'Content-Type': 'application/json' },  // indicamos que el cuerpo es JSON\n      body: JSON.stringify({ state: estado })           // cuerpo: { state: 0 } o { state: 1 }\n    }); // intencional: no await ni then para comportamiento fire-and-forget\n  }\n\n  /* Asocia el handler clickBoton al evento 'change' del input */\n  input.addEventListener('change', clickBoton);\n}\n\n/* ======================================\n   BLOQUE 2 - ON-OF: alterna automaticamente 0/1 y envía\n   ====================================== */\n\n/* Selecciona los elementos del documento que tengan las clases \"micheckbox\" y \"captura\".\n   Esperamos que <input type=\"checkbox\" class=\"micheckbox\"> y <input type=\"text\" class=\"captura\"> existan en el DOM\n   (por ejemplo el script está incluido al final del body). */\n\n   const inputCheckbox = document.querySelector('.micheckbox');\n   const inputNumero = document.querySelector('.captura');\n   var activar = false;\n   var intervaloID = null;\n   // 1) Crear el elemento <style> dinámico en memoria\n   const styleEl = document.createElement('style'); // crear un elemento <style> nuevo\n\n   // 2) Marcar el <style> dinámico con un atributo para identificarlo fácilmente (no es obligatorio)\n   styleEl.setAttribute('data-dynamic', 'inline-rules'); // etiqueta para identificar la hoja dinámica\n\n   // 3) Añadir el <style> dinámico al <head> del documento (ahora forma parte del DOM)\n   document.head.appendChild(styleEl); // insertar la hoja en el head para que sea activa\n\n   // 4) Obtener el objeto CSSStyleSheet asociado a ese <style> (donde están las reglas)\n   const sheet = styleEl.sheet; // sheet es la hoja de estilos dinámica en la que trabajaremos\n\n   // 6) Guardar el selector exactamente como pediste (usar comillas externas simples para no romper la cadena)\n   const dynamicSelector1 = '.control_toggle input[type=\"checkbox\"]:checked + label::before'; // selector con pseudo-elemento\n   const dynamicSelector2 = '.control_toggle input[type=\"checkbox\"]:checked + label';\n   \n   function activarControl(e) {\n   /* Prevenir comportamiento por defecto si existiera (por seguridad; normalmente change no tiene un \"default\" visible).*/\n    if (e && typeof e.preventDefault === 'function') {\n      e.preventDefault();\n    }  \n    activar = !activar;\n\n    if (activar === true){\n        var numIngresado = inputNumero.value;\n        if (numIngresado !== \"\"){\n             if (inputCheckbox.checked !== true){\n                 inputCheckbox.checked = true;\n             }\n             for (let i = sheet.cssRules.length - 1; i >= 0; i--) { // recorremos las reglas hacia atrás\n             sheet.deleteRule(i); // eliminamos la regla i-ésima de la hoja dinámica\n             }\n             inputNumero.value = \"\";\n             var ultimoDatoEnviado = null;\n                async function controlando() {\n                     var datoEnviado = temperature <= numIngresado.trim() ? 1 : 0;\n                     if (datoEnviado !== ultimoDatoEnviado){\n                         await fetch('https://node-red-bh0b.onrender.com/control', {\n                         method: 'POST',                                   // método POST para comunicar cambio de estado\n                         headers: { 'Content-Type': 'application/json' },  // indicamos que el cuerpo es JSON\n                         body: JSON.stringify({ control: datoEnviado })    // cuerpo: { control: 0 } o { control: 1 }\n                         }); // intencional: no await ni then para comportamiento fire-and-forget\n                         ultimoDatoEnviado = datoEnviado; \n                      }                       \n                }\n              /* Llamada inicial para no esperar 3 segundos en la primera carga*/\n              controlando();\n\n              /* Ejecuta obtenerDatos cada 3000 ms (3 segundos) para mantener las variables actualizadas.*/\n              intervaloID = setInterval(controlando, 3000);\n        } else {\n              alert(\"Ingrese datos....\");\n              // 5) Eliminar todas las reglas actuales de ESTA hoja dinámica (borrar desde el final hacia el inicio)\n              for (let i = sheet.cssRules.length - 1; i >= 0; i--) { // recorremos las reglas hacia atrás\n              sheet.deleteRule(i); // eliminamos la regla i-ésima de la hoja dinámica\n              }\n              // 8) Construir la regla completa combinando selector y cuerpo (aquí usando concatenación como pediste)\n              var ruleText1 = dynamicSelector1 + '{ background-color: #eee; content: \"OF\"; color: #000000; border: none; }';\n              var ruleText2 = dynamicSelector2 + '{ border: 3px solid #CCCCCC; }';\n              sheet.insertRule(ruleText1, sheet.cssRules.length); // insertar la regla nueva\n              sheet.insertRule(ruleText2, sheet.cssRules.length);\n              activar = !activar;\n        }     \n    } else { \n              clearInterval(intervaloID);\n              async function detener() {\n                  await fetch('https://node-red-bh0b.onrender.com/control', {\n                  method: 'POST',                                   // método POST para comunicar cambio de estado\n                  headers: { 'Content-Type': 'application/json' },  // indicamos que el cuerpo es JSON\n                  body: JSON.stringify({ control: 0 })    // cuerpo: { control: 0 } o { control: 1 }\n                  }); // intencional: no await ni then para comportamiento fire-and-forget\n              }\n              detener();\n    }    \n  }\n\n/* Asocia el handler activarControl al evento 'change' del input */\n   inputCheckbox.addEventListener('change', activarControl);\n\n/* =================================================\n   BLOQUE 3 - RECEPCIÓN: polling cada 3 segundos (/latest)\n   ================================================= */\n\n/* URL pública del endpoint que devuelve los datos desde Node-RED.\n   Debe corresponder exactamente al HTTP In que configuraste: GET /latest */\nconst NODE_RED_URL = 'https://node-red-bh0b.onrender.com/latest';\n\n/* Variables separadas que almacenan cada campo recibido.\n   Inicialmente null para indicar \"sin dato aún\". */\nvar temperature = null;     // temperatura (ej. 23.4)\nlet luminosity = null;      // luminosidad en lux (ej. 1200)\nlet soilHumidity = null;    // humedad del suelo en % (ej. 45)\nlet ambientHumidity = null; // humedad ambiente en % (ej. 60)\n\n/* Función que solicita los datos al endpoint y actualiza las variables.\n   Es mínima: GET -> parse JSON -> asignaciones por campo. */\nfunction obtenerDatos() {\n  /* Realiza la petición GET al endpoint. No se envían credenciales ni cookies. */\n  fetch(NODE_RED_URL, { method: 'GET' })\n    .then(function(response) {\n      /* Convierte la respuesta a JSON; esperamos que Node-RED devuelva application/json. */\n      return response.json();\n    })\n    .then(function(data) {\n      /* Asigna cada campo a su variable correspondiente solo si existe en la respuesta.\n         Esto evita sobreescribir con undefined si algún campo no se envía. */\n      if ('temperature' in data) {\n        temperature = data.temperature; // guardar temperatura\n        document.querySelector(\".tem\").textContent = temperature;\n      }\n      if ('luminosity' in data) {\n        luminosity = data.luminosity; // guardar luminosidad\n        document.querySelector(\".lum\").textContent = luminosity;\n      }\n      if ('soilHumidity' in data) {\n        soilHumidity = data.soilHumidity; // guardar humedad del suelo\n        document.querySelector(\".hums\").textContent = soilHumidity;\n      }\n      if ('ambientHumidity' in data) {\n        ambientHumidity = data.ambientHumidity; // guardar humedad ambiente\n        document.querySelector(\".huma\").textContent = ambientHumidity;\n        \n      }\n\n      /* FIN: aquí ya están actualizadas las variables. No manipulamos DOM ni generamos eventos. */\n    })\n    .catch(function(err) {\n      /* Mínimo logging de errores para depuración (no detenemos el polling). */\n      console.error('Error obteniendo datos de Node-RED:', err);\n    });\n}\n\n/* Llamada inicial para no esperar 3 segundos en la primera carga */\nobtenerDatos();\n\n/* Ejecuta obtenerDatos cada 3000 ms (3 segundos) para mantener las variables actualizadas. */\nsetInterval(obtenerDatos, 3000);\n`;\nreturn msg;\n",
+        "func": "msg.payload = `\"use strict\"; // Activa modo estricto para atrapar errores comunes (mejor práctica).\n\n/* ======================================\n   BLOQUE 1 - ON-OF: alterna y envía 0/1\n   ====================================== */\n\n/* Selecciona el primer elemento del documento que tenga la clase \"on-of\".\n   Esperamos que el <input type=\"checkbox\" class=\"on-of\"> exista en el DOM\n   (por ejemplo el script está incluido al final del body). */\nconst input = document.querySelector('.on-of'); \n\n/* Si no existe el input, detenemos el script en este punto para evitar errores.\n   Esto evita llamadas a propiedades de null/undefined. */\nif (!input) {\n  console.warn('No se encontró ningún elemento con la clase .on-of'); // aviso en consola\n} else {\n  /* Inicializamos estadoLocal en false para que el primer cambio establezca 1 lógico.\n     estadoLocal es la réplica en memoria del estado del switch (no persiste al recargar). */\n  let estadoLocal = false;\n\n  /* Handler que se ejecuta cuando cambia el input (evento 'change').\n     Usamos 'change' porque ocurre cuando el checked ya cambió (o cuando el usuario lo cambia). */\n  function clickBoton(e) {\n    /* Prevenir comportamiento por defecto si existiera (por seguridad; normalmente change no tiene un \"default\" visible). */\n    if (e && typeof e.preventDefault === 'function') {\n      e.preventDefault();\n    }\n\n    /* Alterna el estado local: false -> true, true -> false */\n    estadoLocal = !estadoLocal;\n\n    /* Convierte el booleano estadoLocal en número lógico: 1 si true, 0 si false */\n    const estado = estadoLocal ? 1 : 0;\n\n    /* Actualiza la propiedad 'checked' del input para que la interfaz muestre el estadoLocal.\n       Si el evento 'change' ya cambió checked automáticamente, esto asegura coherencia. */\n    if ('checked' in input) {\n      input.checked = estadoLocal;\n    }\n\n    /* Petición HTTP POST al endpoint /set-state sin credenciales ni cookies.\n       Enviamos JSON con la forma { state: 0 } o { state: 1 }. Fire-and-forget: no manejamos la respuesta. */\n    fetch('https://node-red-bh0b.onrender.com/set-state', {\n      method: 'POST',                                   // método POST para comunicar cambio de estado\n      headers: { 'Content-Type': 'application/json' },  // indicamos que el cuerpo es JSON\n      body: JSON.stringify({ state: estado })           // cuerpo: { state: 0 } o { state: 1 }\n    }); // intencional: no await ni then para comportamiento fire-and-forget\n  }\n\n  /* Asocia el handler clickBoton al evento 'change' del input */\n  input.addEventListener('change', clickBoton);\n}\n\n/* ======================================\n   BLOQUE 2 - ON-OF: alterna automaticamente 0/1 y envía\n   ====================================== */\n\n/* Selecciona los elementos del documento que tengan las clases \"micheckbox\" y \"captura\".\n   Esperamos que <input type=\"checkbox\" class=\"micheckbox\"> y <input type=\"text\" class=\"captura\"> existan en el DOM\n   (por ejemplo el script está incluido al final del body). */\n\n   const inputCheckbox = document.querySelector('.micheckbox');\n   const inputNumero = document.querySelector('.captura');\n   var activar = false;\n   var controlObj = null;\n   // 1) Crear el elemento <style> dinámico en memoria\n   const styleEl = document.createElement('style'); // crear un elemento <style> nuevo\n\n   // 2) Marcar el <style> dinámico con un atributo para identificarlo fácilmente (no es obligatorio)\n   styleEl.setAttribute('data-dynamic', 'inline-rules'); // etiqueta para identificar la hoja dinámica\n\n   // 3) Añadir el <style> dinámico al <head> del documento (ahora forma parte del DOM)\n   document.head.appendChild(styleEl); // insertar la hoja en el head para que sea activa\n\n   // 4) Obtener el objeto CSSStyleSheet asociado a ese <style> (donde están las reglas)\n   const sheet = styleEl.sheet; // sheet es la hoja de estilos dinámica en la que trabajaremos\n\n   // 6) Guardar el selector exactamente como pediste (usar comillas externas simples para no romper la cadena)\n   const dynamicSelector1 = '.control_toggle input[type=\"checkbox\"]:checked + label::before'; // selector con pseudo-elemento\n   const dynamicSelector2 = '.control_toggle input[type=\"checkbox\"]:checked + label';\n   \n   function activarControl(e) {\n   /* Prevenir comportamiento por defecto si existiera (por seguridad; normalmente change no tiene un \"default\" visible).*/\n    if (e && typeof e.preventDefault === 'function') {\n      e.preventDefault();\n    }  \n    activar = !activar;\n\n    if (activar === true){\n        var numIngresado = inputNumero.value;\n        if (numIngresado !== \"\"){\n             if (inputCheckbox.checked !== true){\n                 inputCheckbox.checked = true;\n             }\n             for (let i = sheet.cssRules.length - 1; i >= 0; i--) { // recorremos las reglas hacia atrás\n             sheet.deleteRule(i); // eliminamos la regla i-ésima de la hoja dinámica\n             }\n             inputNumero.value = \"\";  \n                // Construir el objeto que quieres enviar\n                controlObj = {\n                enableDisable: 1,\n                target: numIngresado\n                };\n                // Enviar al servidor (Node-RED). Uso explícito de topic + payload\n                uibuilder.send({\n                //topic: 'clientControl', opcional, útil para identificar el mensaje en Node-RED\n                payload: controlObj\n                });\n        } else {\n              alert(\"Ingrese datos....\");\n              // 5) Eliminar todas las reglas actuales de ESTA hoja dinámica (borrar desde el final hacia el inicio)\n              for (let i = sheet.cssRules.length - 1; i >= 0; i--) { // recorremos las reglas hacia atrás\n              sheet.deleteRule(i); // eliminamos la regla i-ésima de la hoja dinámica\n              }\n              // 8) Construir la regla completa combinando selector y cuerpo (aquí usando concatenación como pediste)\n              var ruleText1 = dynamicSelector1 + '{ background-color: #eee; content: \"OF\"; color: #000000; border: none; }';\n              var ruleText2 = dynamicSelector2 + '{ border: 3px solid #CCCCCC; }';\n              sheet.insertRule(ruleText1, sheet.cssRules.length); // insertar la regla nueva\n              sheet.insertRule(ruleText2, sheet.cssRules.length);\n              activar = !activar;\n        }     \n    } else { \n                controlObj = {\n                enableDisable: 0,\n                target: null\n                };\n                // Enviar al servidor (Node-RED). Uso explícito de topic + payload\n                uibuilder.send({\n                payload: controlObj\n                });\n    }    \n  }\n\n/* Asocia el handler activarControl al evento 'change' del input */\n   inputCheckbox.addEventListener('change', activarControl);\n\n/* =================================================\n   BLOQUE 3 - RECEPCIÓN: polling cada 3 segundos \n   ================================================= */\n\n// Código ejecutado en el navegador por la página servida por uibuilder\n\n// Evita conflictos si la librería aún no cargó: uibuilder está disponible por defecto\n(function () {\n  'use strict';\n\n  // callback cuando llega un mensaje desde Node-RED (uibuilder)\n  uibuilder.onChange('msg', (msg) => {\n    // msg.payload es el objeto que enviaste desde el Function en Node-RED\n    const p = (msg && msg.payload) ? msg.payload : {};\n\n    // Protecciones simples y asignaciones a la UI\n    document.querySelector(\".tem\").textContent = (p.temperature !== undefined) ? p.temperature : '—';\n    document.querySelector(\".lum\").textContent = (p.luminosity !== undefined)  ? p.luminosity  : '—';\n    document.querySelector(\".hums\").textContent = (p.soilHumidity !== undefined) ? p.soilHumidity : '—';\n    document.querySelector(\".huma\").textContent = (p.ambientHumidity !== undefined) ? p.ambientHumidity : '—';\n  });\n\n})();\n`;\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1925,7 +1921,7 @@
         "finalize": "",
         "libs": [],
         "x": 290,
-        "y": 1940,
+        "y": 2000,
         "wires": [
             [
                 "a80e8174357a7920"
@@ -1948,7 +1944,7 @@
         "name": "script",
         "topic": "",
         "x": 430,
-        "y": 1940,
+        "y": 2000,
         "wires": []
     },
     {
@@ -1962,7 +1958,7 @@
         "skipBodyParsing": false,
         "swaggerDoc": "",
         "x": 70,
-        "y": 1760,
+        "y": 1820,
         "wires": [
             [
                 "8b0b5c4bec3a82d4"
@@ -1982,7 +1978,7 @@
         "finalize": "",
         "libs": [],
         "x": 230,
-        "y": 1760,
+        "y": 1820,
         "wires": [
             [
                 "89927bb1dcf38e38"
@@ -2003,56 +1999,28 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 400,
-        "y": 1760,
+        "y": 1820,
         "wires": []
-    },
-    {
-        "id": "794f5f92760fd98a",
-        "type": "http in",
-        "z": "30bfffe14836de0f",
-        "name": "monitoreo",
-        "url": "/latest",
-        "method": "get",
-        "upload": false,
-        "swaggerDoc": "",
-        "x": 80,
-        "y": 1640,
-        "wires": [
-            [
-                "3f14a986c1b3e9f5"
-            ]
-        ]
     },
     {
         "id": "3f14a986c1b3e9f5",
         "type": "function",
         "z": "30bfffe14836de0f",
-        "name": "function 22",
-        "func": "// Node-RED Function: preparar msg.payload con los datos que devolveremos en /latest\n\n// 1) Si quieres usar datos dinámicos toma desde flow context, por ejemplo:\n//    const saved = flow.get('ultimoEstado') || {};\n//    En este ejemplo usamos valores de ejemplo (fijos) para demostrar la estructura.\n\n// 2) Preparar el objeto JSON que queremos devolver al cliente\nmsg.payload = {\n  temperature: flow.get(\"temp\"),        // temperatura (número, ejemplo: 23.4 °C)\n  luminosity: flow.get(\"luz\"),        // luminosidad en lux (número, ejemplo: 1200 lux)\n  soilHumidity: flow.get(\"hum_suelo\"),        // humedad del suelo en % (número, ejemplo: 45)\n  ambientHumidity: flow.get(\"hum_ambiente\")     // humedad ambiental en % (número, ejemplo: 60)\n};\n\n// 3) Establecer cabecera Content-Type para que el cliente sea claro sobre el tipo\nmsg.headers = { 'Content-Type': 'application/json' };\n\n// 4) Devolver el mensaje para que el nodo HTTP Response lo envíe\nreturn msg;\n",
+        "name": "envioDatosWeb",
+        "func": "// Function node: preparar msg.payload y enviarlo al uibuilder\n// Lee valores del flow context (si no existen, pone 0 o valores por defecto)\nconst temperature = flow.get(\"temp\") ?? 0;\nconst luminosity  = flow.get(\"luz\") ?? 0;\nconst soilHumidity = flow.get(\"hum_suelo\") ?? 0;\nconst ambientHumidity = flow.get(\"hum_ambiente\") ?? 0;\n\n// Construir el objeto que enviaremos al cliente\nmsg.payload = {\n  temperature: temperature,       // e.g. 23.4\n  luminosity: luminosity,         // e.g. 1200\n  soilHumidity: soilHumidity,     // e.g. 45\n  ambientHumidity: ambientHumidity// e.g. 60\n};\n\n// Opcional: un topic para identificar el mensaje en el cliente\n// msg.topic = \"sensors_latest\";\n\n// (Opcional) cabeceras si usaras HTTP — no hacen falta para uibuilder\n// msg.headers = { 'Content-Type': 'application/json' };\n\n// Devolver el msg para que pase al nodo uibuilder\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 250,
-        "y": 1640,
+        "x": 320,
+        "y": 1700,
         "wires": [
             [
-                "6bfadabfe6154f14"
+                "9ba114eae656b5fa"
             ]
         ]
-    },
-    {
-        "id": "6bfadabfe6154f14",
-        "type": "http response",
-        "z": "30bfffe14836de0f",
-        "name": "envio-dashboard",
-        "statusCode": "",
-        "headers": {},
-        "x": 450,
-        "y": 1640,
-        "wires": []
     },
     {
         "id": "451454b6737b6899",
@@ -2237,59 +2205,53 @@
         ]
     },
     {
-        "id": "ad6ad896ec02c96c",
-        "type": "http in",
-        "z": "30bfffe14836de0f",
-        "name": "control_aut",
-        "url": "/control",
-        "method": "post",
-        "upload": true,
-        "skipBodyParsing": false,
-        "swaggerDoc": "",
-        "x": 80,
-        "y": 1700,
-        "wires": [
-            [
-                "f18c5f5ea5d7ac08"
-            ]
-        ]
-    },
-    {
         "id": "f18c5f5ea5d7ac08",
         "type": "function",
         "z": "30bfffe14836de0f",
-        "name": "function 18",
-        "func": "/* 1) Tomamos el cuerpo/parámetro enviado por el HTTP In. En Node-RED, para POST con JSON*/\n/*    msg.payload ya contiene el objeto parseado (p.ej. { control: 1 })*/\n/*    body: objeto con los datos enviados por el cliente*/\nvar body = msg.payload;\nnode.warn(\"Datos recibidos:\" + JSON.stringify(body));\nmsg.payload = \"\";\nreturn msg;",
+        "name": "actvDescControlAut",
+        "func": "// Node-RED Function (recibe mensajes provenientes de uibuilder)\n// El mensaje enviado desde el cliente tiene la forma { topic: 'clientControl', payload: { enableDisable: ..., target: ... } }\n\nconst incoming = msg.payload || {};     // payload recibido\n\n// Extraer propiedades\nconst enableDisable = incoming.enableDisable;\nconst target = incoming.target;\n\n// Guardar en flow context como objeto\nflow.set('control', { enableDisable, target });\n\nnode.warn(\"Datos recibidos:\" + JSON.stringify(incoming));\nreturn null;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 250,
+        "x": 800,
         "y": 1700,
         "wires": [
-            [
-                "a951eca03184aeb4"
-            ]
+            []
         ]
     },
     {
-        "id": "a951eca03184aeb4",
-        "type": "http response",
+        "id": "472c64e08748eeb4",
+        "type": "inject",
         "z": "30bfffe14836de0f",
-        "name": "acuse_recibo",
-        "statusCode": "",
-        "headers": {},
-        "x": 430,
+        "name": "monitoreo",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "3",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 110,
         "y": 1700,
-        "wires": []
+        "wires": [
+            [
+                "3f14a986c1b3e9f5"
+            ]
+        ]
     },
     {
         "id": "9ba114eae656b5fa",
         "type": "uibuilder",
         "z": "30bfffe14836de0f",
-        "name": "WEB SERVER ",
+        "name": "WEB SERVER",
         "topic": "",
         "url": "ui1",
         "okToGo": true,
@@ -2302,15 +2264,17 @@
         "showfolder": false,
         "reload": false,
         "sourceFolder": "src",
-        "deployedVersion": "7.4.2",
+        "deployedVersion": "7.4.3",
         "showMsgUib": false,
         "title": "",
         "descr": "",
         "editurl": "vscode://vscode-remote/ssh-remote+node-red-bh0b.onrender.com/opt/render/.node-red/uibuilder/ui1/?windowId=_blank",
-        "x": 320,
-        "y": 2000,
+        "x": 540,
+        "y": 1700,
         "wires": [
-            [],
+            [
+                "f18c5f5ea5d7ac08"
+            ],
             []
         ]
     },
