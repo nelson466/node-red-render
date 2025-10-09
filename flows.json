@@ -1913,7 +1913,7 @@
         "type": "function",
         "z": "30bfffe14836de0f",
         "name": "js",
-        "func": "msg.payload = `\"use strict\"; // Activa modo estricto para atrapar errores comunes (mejor práctica).\n\n/* ======================================\n   BLOQUE 1 - ON-OF: alterna y envía 0/1\n   ====================================== */\n\n/* Selecciona el primer elemento del documento que tenga la clase \"on-of\".\n   Esperamos que el <input type=\"checkbox\" class=\"on-of\"> exista en el DOM\n   (por ejemplo el script está incluido al final del body). */\nconst input = document.querySelector('.on-of'); \n\n/* Si no existe el input, detenemos el script en este punto para evitar errores.\n   Esto evita llamadas a propiedades de null/undefined. */\nif (!input) {\n  console.warn('No se encontró ningún elemento con la clase .on-of'); // aviso en consola\n} else {\n  /* Inicializamos estadoLocal en false para que el primer cambio establezca 1 lógico.\n     estadoLocal es la réplica en memoria del estado del switch (no persiste al recargar). */\n  let estadoLocal = false;\n\n  /* Handler que se ejecuta cuando cambia el input (evento 'change').\n     Usamos 'change' porque ocurre cuando el checked ya cambió (o cuando el usuario lo cambia). */\n  function clickBoton(e) {\n    /* Prevenir comportamiento por defecto si existiera (por seguridad; normalmente change no tiene un \"default\" visible). */\n    if (e && typeof e.preventDefault === 'function') {\n      e.preventDefault();\n    }\n\n    /* Alterna el estado local: false -> true, true -> false */\n    estadoLocal = !estadoLocal;\n\n    /* Convierte el booleano estadoLocal en número lógico: 1 si true, 0 si false */\n    const estado = estadoLocal ? 1 : 0;\n\n    /* Actualiza la propiedad 'checked' del input para que la interfaz muestre el estadoLocal.\n       Si el evento 'change' ya cambió checked automáticamente, esto asegura coherencia. */\n    if ('checked' in input) {\n      input.checked = estadoLocal;\n    }\n\n    /* Petición HTTP POST al endpoint /set-state sin credenciales ni cookies.\n       Enviamos JSON con la forma { state: 0 } o { state: 1 }. Fire-and-forget: no manejamos la respuesta. */\n    fetch('https://node-red-bh0b.onrender.com/set-state', {\n      method: 'POST',                                   // método POST para comunicar cambio de estado\n      headers: { 'Content-Type': 'application/json' },  // indicamos que el cuerpo es JSON\n      body: JSON.stringify({ state: estado })           // cuerpo: { state: 0 } o { state: 1 }\n    }); // intencional: no await ni then para comportamiento fire-and-forget\n  }\n\n  /* Asocia el handler clickBoton al evento 'change' del input */\n  input.addEventListener('change', clickBoton);\n}\n\n/* ======================================\n   BLOQUE 2 - ON-OF: alterna automaticamente 0/1 y envía\n   ====================================== */\n\n/* Selecciona los elementos del documento que tengan las clases \"micheckbox\" y \"captura\".\n   Esperamos que <input type=\"checkbox\" class=\"micheckbox\"> y <input type=\"text\" class=\"captura\"> existan en el DOM\n   (por ejemplo el script está incluido al final del body). */\n\n   const inputCheckbox = document.querySelector('.micheckbox');\n   const inputNumero = document.querySelector('.captura');\n   var activar = false;\n   var controlObj = null;\n   // 1) Crear el elemento <style> dinámico en memoria\n   const styleEl = document.createElement('style'); // crear un elemento <style> nuevo\n\n   // 2) Marcar el <style> dinámico con un atributo para identificarlo fácilmente (no es obligatorio)\n   styleEl.setAttribute('data-dynamic', 'inline-rules'); // etiqueta para identificar la hoja dinámica\n\n   // 3) Añadir el <style> dinámico al <head> del documento (ahora forma parte del DOM)\n   document.head.appendChild(styleEl); // insertar la hoja en el head para que sea activa\n\n   // 4) Obtener el objeto CSSStyleSheet asociado a ese <style> (donde están las reglas)\n   const sheet = styleEl.sheet; // sheet es la hoja de estilos dinámica en la que trabajaremos\n\n   // 6) Guardar el selector exactamente como pediste (usar comillas externas simples para no romper la cadena)\n   const dynamicSelector1 = '.control_toggle input[type=\"checkbox\"]:checked + label::before'; // selector con pseudo-elemento\n   const dynamicSelector2 = '.control_toggle input[type=\"checkbox\"]:checked + label';\n   \n   function activarControl(e) {\n   /* Prevenir comportamiento por defecto si existiera (por seguridad; normalmente change no tiene un \"default\" visible).*/\n    if (e && typeof e.preventDefault === 'function') {\n      e.preventDefault();\n    }  \n    activar = !activar;\n\n    if (activar === true){\n        var numIngresado = inputNumero.value;\n        if (numIngresado !== \"\"){\n             if (inputCheckbox.checked !== true){\n                 inputCheckbox.checked = true;\n             }\n             for (let i = sheet.cssRules.length - 1; i >= 0; i--) { // recorremos las reglas hacia atrás\n             sheet.deleteRule(i); // eliminamos la regla i-ésima de la hoja dinámica\n             }\n             inputNumero.value = \"\";  \n                // Construir el objeto que quieres enviar\n                controlObj = {\n                enableDisable: 1,\n                target: numIngresado\n                };\n                // Enviar al servidor (Node-RED). Uso explícito de topic + payload\n                uibuilder.send({\n                //topic: 'clientControl', opcional, útil para identificar el mensaje en Node-RED\n                payload: controlObj\n                });\n        } else {\n              alert(\"Ingrese datos....\");\n              // 5) Eliminar todas las reglas actuales de ESTA hoja dinámica (borrar desde el final hacia el inicio)\n              for (let i = sheet.cssRules.length - 1; i >= 0; i--) { // recorremos las reglas hacia atrás\n              sheet.deleteRule(i); // eliminamos la regla i-ésima de la hoja dinámica\n              }\n              // 8) Construir la regla completa combinando selector y cuerpo (aquí usando concatenación como pediste)\n              var ruleText1 = dynamicSelector1 + '{ background-color: #eee; content: \"OF\"; color: #000000; border: none; }';\n              var ruleText2 = dynamicSelector2 + '{ border: 3px solid #CCCCCC; }';\n              sheet.insertRule(ruleText1, sheet.cssRules.length); // insertar la regla nueva\n              sheet.insertRule(ruleText2, sheet.cssRules.length);\n              activar = !activar;\n        }     \n    } else { \n                controlObj = {\n                enableDisable: 0,\n                target: null\n                };\n                // Enviar al servidor (Node-RED). Uso explícito de topic + payload\n                uibuilder.send({\n                payload: controlObj\n                });\n    }    \n  }\n\n/* Asocia el handler activarControl al evento 'change' del input */\n   inputCheckbox.addEventListener('change', activarControl);\n\n/* =================================================\n   BLOQUE 3 - RECEPCIÓN: polling cada 3 segundos \n   ================================================= */\n\n// Código ejecutado en el navegador por la página servida por uibuilder\n\n// Evita conflictos si la librería aún no cargó: uibuilder está disponible por defecto\n(function () {\n  'use strict';\n\n  // callback cuando llega un mensaje desde Node-RED (uibuilder)\n  uibuilder.onChange('msg', (msg) => {\n    // msg.payload es el objeto que enviaste desde el Function en Node-RED\n    const p = (msg && msg.payload) ? msg.payload : {};\n\n    // Protecciones simples y asignaciones a la UI\n    document.querySelector(\".tem\").textContent = (p.temperature !== undefined) ? p.temperature : '—';\n    document.querySelector(\".lum\").textContent = (p.luminosity !== undefined)  ? p.luminosity  : '—';\n    document.querySelector(\".hums\").textContent = (p.soilHumidity !== undefined) ? p.soilHumidity : '—';\n    document.querySelector(\".huma\").textContent = (p.ambientHumidity !== undefined) ? p.ambientHumidity : '—';\n  });\n\n})();\n`;\nreturn msg;\n",
+        "func": "msg.payload = `\"use strict\"; // Activa modo estricto para atrapar errores comunes (mejor práctica).\n\n/* ======================================\n   BLOQUE 1 - ON-OF: alterna y envía 0/1\n   ====================================== */\n\n/* Selecciona el primer elemento del documento que tenga la clase \"on-of\".\n   Esperamos que el <input type=\"checkbox\" class=\"on-of\"> exista en el DOM\n   (por ejemplo el script está incluido al final del body). */\nconst input = document.querySelector('.on-of'); \n\n/* Si no existe el input, detenemos el script en este punto para evitar errores.\n   Esto evita llamadas a propiedades de null/undefined. */\nif (!input) {\n  console.warn('No se encontró ningún elemento con la clase .on-of'); // aviso en consola\n} else {\n  /* Inicializamos estadoLocal en false para que el primer cambio establezca 1 lógico.\n     estadoLocal es la réplica en memoria del estado del switch (no persiste al recargar). */\n  let estadoLocal = false;\n  var controlObj2 = null;\n\n  /* Handler que se ejecuta cuando cambia el input (evento 'change').\n     Usamos 'change' porque ocurre cuando el checked ya cambió (o cuando el usuario lo cambia). */\n  function clickBoton(e) {\n    /* Prevenir comportamiento por defecto si existiera (por seguridad; normalmente change no tiene un \"default\" visible). */\n    if (e && typeof e.preventDefault === 'function') {\n      e.preventDefault();\n    }\n\n    /* Alterna el estado local: false -> true, true -> false */\n    estadoLocal = !estadoLocal;\n\n    /* Convierte el booleano estadoLocal en número lógico: 1 si true, 0 si false */\n    const estado = estadoLocal ? 1 : 0;\n    // Construir el objeto que quieres enviar\n    controlObj2 = { actvDesactv: estado };\n    // Enviar al servidor (Node-RED). Uso explícito de topic + payload\n    uibuilder.send({payload2: controlObj2});\n  }\n\n  /* Asocia el handler clickBoton al evento 'change' del input */\n  input.addEventListener('change', clickBoton);\n}\n\n/* ======================================\n   BLOQUE 2 - ON-OF: alterna automaticamente 0/1 y envía\n   ====================================== */\n\n/* Selecciona los elementos del documento que tengan las clases \"micheckbox\" y \"captura\".\n   Esperamos que <input type=\"checkbox\" class=\"micheckbox\"> y <input type=\"text\" class=\"captura\"> existan en el DOM\n   (por ejemplo el script está incluido al final del body). */\n\n   const inputCheckbox = document.querySelector('.micheckbox');\n   const inputNumero = document.querySelector('.captura');\n   var activar = false;\n   var controlObj1 = null;\n   // 1) Crear el elemento <style> dinámico en memoria\n   const styleEl = document.createElement('style'); // crear un elemento <style> nuevo\n\n   // 2) Marcar el <style> dinámico con un atributo para identificarlo fácilmente (no es obligatorio)\n   styleEl.setAttribute('data-dynamic', 'inline-rules'); // etiqueta para identificar la hoja dinámica\n\n   // 3) Añadir el <style> dinámico al <head> del documento (ahora forma parte del DOM)\n   document.head.appendChild(styleEl); // insertar la hoja en el head para que sea activa\n\n   // 4) Obtener el objeto CSSStyleSheet asociado a ese <style> (donde están las reglas)\n   const sheet = styleEl.sheet; // sheet es la hoja de estilos dinámica en la que trabajaremos\n\n   // 6) Guardar el selector exactamente como pediste (usar comillas externas simples para no romper la cadena)\n   const dynamicSelector1 = '.control_toggle input[type=\"checkbox\"]:checked + label::before'; // selector con pseudo-elemento\n   const dynamicSelector2 = '.control_toggle input[type=\"checkbox\"]:checked + label';\n   \n   function activarControl(e) {\n   /* Prevenir comportamiento por defecto si existiera (por seguridad; normalmente change no tiene un \"default\" visible).*/\n    if (e && typeof e.preventDefault === 'function') {\n      e.preventDefault();\n    }  \n    activar = !activar;\n\n    if (activar === true){\n        var numIngresado = inputNumero.value;\n        if (numIngresado !== \"\"){\n             if (inputCheckbox.checked !== true){\n                 inputCheckbox.checked = true;\n             }\n             for (let i = sheet.cssRules.length - 1; i >= 0; i--) { // recorremos las reglas hacia atrás\n             sheet.deleteRule(i); // eliminamos la regla i-ésima de la hoja dinámica\n             }\n             inputNumero.value = \"\";  \n                // Construir el objeto que quieres enviar\n                controlObj1 = {\n                enableDisable: 1,\n                target: numIngresado.trim()\n                };\n                // Enviar al servidor (Node-RED). Uso explícito de topic + payload\n                uibuilder.send({\n                //topic: 'clientControl', opcional, útil para identificar el mensaje en Node-RED\n                payload1: controlObj1\n                });\n        } else {\n              alert(\"Ingrese datos....\");\n              // 5) Eliminar todas las reglas actuales de ESTA hoja dinámica (borrar desde el final hacia el inicio)\n              for (let i = sheet.cssRules.length - 1; i >= 0; i--) { // recorremos las reglas hacia atrás\n              sheet.deleteRule(i); // eliminamos la regla i-ésima de la hoja dinámica\n              }\n              // 8) Construir la regla completa combinando selector y cuerpo (aquí usando concatenación como pediste)\n              var ruleText1 = dynamicSelector1 + '{ background-color: #eee; content: \"OF\"; color: #000000; border: none; }';\n              var ruleText2 = dynamicSelector2 + '{ border: 3px solid #CCCCCC; }';\n              sheet.insertRule(ruleText1, sheet.cssRules.length); // insertar la regla nueva\n              sheet.insertRule(ruleText2, sheet.cssRules.length);\n              activar = !activar;\n        }     \n    } else { \n                controlObj1 = {\n                enableDisable: 0,\n                target: null\n                };\n                // Enviar al servidor (Node-RED). Uso explícito de topic + payload\n                uibuilder.send({\n                payload1: controlObj1\n                });\n    }    \n  }\n\n/* Asocia el handler activarControl al evento 'change' del input */\n   inputCheckbox.addEventListener('change', activarControl);\n\n/* =================================================\n   BLOQUE 3 - RECEPCIÓN: polling cada 3 segundos \n   ================================================= */\n\n// Código ejecutado en el navegador por la página servida por uibuilder\n\n// Evita conflictos si la librería aún no cargó: uibuilder está disponible por defecto\n(function () {\n  'use strict';\n\n  // callback cuando llega un mensaje desde Node-RED (uibuilder)\n  uibuilder.onChange('msg', (msg) => {\n    // msg.payload es el objeto que enviaste desde el Function en Node-RED\n    const p = (msg && msg.payload) ? msg.payload : {};\n\n    // Protecciones simples y asignaciones a la UI\n    document.querySelector(\".tem\").textContent = (p.temperature !== undefined) ? p.temperature : '—';\n    document.querySelector(\".lum\").textContent = (p.luminosity !== undefined)  ? p.luminosity  : '—';\n    document.querySelector(\".hums\").textContent = (p.soilHumidity !== undefined) ? p.soilHumidity : '—';\n    document.querySelector(\".huma\").textContent = (p.ambientHumidity !== undefined) ? p.ambientHumidity : '—';\n  });\n\n})();\n`;\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1948,59 +1948,22 @@
         "wires": []
     },
     {
-        "id": "1361b76a4bc195d5",
-        "type": "http in",
-        "z": "30bfffe14836de0f",
-        "name": "on-of",
-        "url": "/set-state",
-        "method": "post",
-        "upload": true,
-        "skipBodyParsing": false,
-        "swaggerDoc": "",
-        "x": 70,
-        "y": 1820,
-        "wires": [
-            [
-                "8b0b5c4bec3a82d4"
-            ]
-        ]
-    },
-    {
         "id": "8b0b5c4bec3a82d4",
         "type": "function",
         "z": "30bfffe14836de0f",
-        "name": "function 21",
-        "func": "/* 1) Tomamos el cuerpo/parámetro enviado por el HTTP In. En Node-RED, para POST con JSON*/\n/*    msg.payload ya contiene el objeto parseado (p.ej. { state: 1 })*/\n/*    body: objeto con los datos enviados por el cliente*/\nvar body = msg.payload;\nreturn msg;",
+        "name": "actvDestContrlMan",
+        "func": "// Node-RED Function (recibe mensajes provenientes de uibuilder)\n// El mensaje enviado desde el cliente tiene la forma { topic: 'clientControl', payload: { enableDisable: ..., target: ... } }\n\nconst incoming = msg.payload2;     // payload recibido\n\n// Extraer propiedades\nconst actvDesactv = incoming.actvDesactv;\n\n// Guardar en flow context como objeto\nflow.set('control2', { actvDesactv });\n\nnode.warn(\"activacion ctrlMan:\" + JSON.stringify(incoming));\nreturn null;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 230,
-        "y": 1820,
+        "x": 790,
+        "y": 1760,
         "wires": [
-            [
-                "89927bb1dcf38e38"
-            ]
+            []
         ]
-    },
-    {
-        "id": "89927bb1dcf38e38",
-        "type": "debug",
-        "z": "30bfffe14836de0f",
-        "name": "debug 1",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 400,
-        "y": 1820,
-        "wires": []
     },
     {
         "id": "3f14a986c1b3e9f5",
@@ -2208,15 +2171,15 @@
         "id": "f18c5f5ea5d7ac08",
         "type": "function",
         "z": "30bfffe14836de0f",
-        "name": "actvDescControlAut",
-        "func": "// Node-RED Function (recibe mensajes provenientes de uibuilder)\n// El mensaje enviado desde el cliente tiene la forma { topic: 'clientControl', payload: { enableDisable: ..., target: ... } }\n\nconst incoming = msg.payload || {};     // payload recibido\n\n// Extraer propiedades\nconst enableDisable = incoming.enableDisable;\nconst target = incoming.target;\n\n// Guardar en flow context como objeto\nflow.set('control', { enableDisable, target });\n\nnode.warn(\"Datos recibidos:\" + JSON.stringify(incoming));\nreturn null;",
+        "name": "actvDestContrlAut",
+        "func": "// Node-RED Function (recibe mensajes provenientes de uibuilder)\n// El mensaje enviado desde el cliente tiene la forma { topic: 'clientControl', payload: { enableDisable: ..., target: ... } }\n\nconst incoming = msg.payload1;     // payload recibido\n\n// Extraer propiedades\nconst enableDisable = incoming.enableDisable;\nconst target = incoming.target;\n\n// Guardar en flow context como objeto\nflow.set('control1', { enableDisable, target });\n\nnode.warn(\"activacion ctrlAut:\" + JSON.stringify(incoming));\nreturn null;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 800,
+        "x": 790,
         "y": 1700,
         "wires": [
             []
@@ -2243,7 +2206,9 @@
         "y": 1700,
         "wires": [
             [
-                "3f14a986c1b3e9f5"
+                "3f14a986c1b3e9f5",
+                "42ebbb9a88b42da2",
+                "477481c1ef032728"
             ]
         ]
     },
@@ -2273,8 +2238,45 @@
         "y": 1700,
         "wires": [
             [
-                "f18c5f5ea5d7ac08"
+                "f18c5f5ea5d7ac08",
+                "8b0b5c4bec3a82d4"
             ],
+            []
+        ]
+    },
+    {
+        "id": "42ebbb9a88b42da2",
+        "type": "function",
+        "z": "30bfffe14836de0f",
+        "name": "contrlAut",
+        "func": "if (flow.get('control1').enableDisable === 1 && flow.get('control1').target !== null){\n    var datoEnviado = flow.get('temp') <= flow.get('control1').target ? 1 : 0;\n    var ultimoDatoEnviado = flow.get('ultimoDatoEnviado');\n    if (ultimoDatoEnviado === undefined){\n        ultimoDatoEnviado = null;\n    }\n    if (datoEnviado !== ultimoDatoEnviado){\n        var datoParaEnviar = datoEnviado; \n        node.warn(\"CtrlAut:\" + JSON.stringify(datoParaEnviar));\n        flow.set('ultimoDatoEnviado', datoEnviado);\n    }\n    flow.set('ultimoDatoDetener', undefined);\n}else{\n    var datoEnviadoDetener = 0;\n    var ultimoDatoDetener = flow.get('ultimoDatoDetener');\n    if (ultimoDatoDetener === undefined) {\n        ultimoDatoDetener = null;\n    }\n    if (datoEnviadoDetener !== ultimoDatoDetener) {\n        datoParaEnviar = datoEnviadoDetener;\n        node.warn(\"CtrlAut:\" + JSON.stringify(datoParaEnviar));\n        flow.set('ultimoDatoDetener', datoEnviadoDetener);\n    }\n    flow.set('ultimoDatoEnviado', undefined);\n}\nreturn null;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 1760,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "477481c1ef032728",
+        "type": "function",
+        "z": "30bfffe14836de0f",
+        "name": "contrlMan",
+        "func": "if (flow.get('control2').actvDesactv === 1 ){\n    //node.warn(\"Control actvDesactv:\" + JSON.stringify(flow.get('control2').actvDesactv));\n    var activar = 1;\n    var antesDeActv = flow.get('antesDeActv');\n    if (antesDeActv === undefined){\n        antesDeActv = null;\n    }\n    if (activar !== antesDeActv){\n        var enviarActvDesac = activar; \n        node.warn(\"CtrlMan:\" + JSON.stringify(enviarActvDesac));\n        flow.set('antesDeActv', activar);\n    }\n    flow.set('antesDeDesactv', undefined);\n}else{\n    var desactivar = 0;\n    var antesDeDesactv = flow.get('antesDeDesactv');\n    if (antesDeDesactv === undefined) {\n        antesDeDesactv = null;\n    }\n    if (desactivar !== antesDeDesactv) {\n        enviarActvDesac = desactivar;\n        node.warn(\"CtrlMan:\" + JSON.stringify(enviarActvDesac));\n        flow.set('antesDeDesactv', desactivar);\n    }\n    flow.set('antesDeActv', undefined);\n}\nreturn null;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 1820,
+        "wires": [
             []
         ]
     },
