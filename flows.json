@@ -927,7 +927,7 @@
         "finalize": "",
         "libs": [],
         "x": 260,
-        "y": 2360,
+        "y": 2320,
         "wires": [
             [
                 "c3f645121877dab0"
@@ -946,7 +946,7 @@
         "flatten": false,
         "name": "GSheet-TRIGGER",
         "x": 450,
-        "y": 2360,
+        "y": 2320,
         "wires": [
             []
         ]
@@ -973,7 +973,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 100,
-        "y": 2360,
+        "y": 2320,
         "wires": [
             [
                 "5c190e65348f47a9"
@@ -1238,7 +1238,7 @@
         "templateScope": "global",
         "className": "",
         "x": 90,
-        "y": 2480,
+        "y": 2440,
         "wires": [
             []
         ]
@@ -1300,7 +1300,7 @@
         "name": "CADA CIERTO TIEMPO ALMACENA DATOS EN EL ARCHIVO \"mediciones.xlsx\"",
         "info": "",
         "x": 300,
-        "y": 2060,
+        "y": 2020,
         "wires": []
     },
     {
@@ -1603,7 +1603,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 100,
-        "y": 2120,
+        "y": 2080,
         "wires": [
             [
                 "131dd4a4861bc86e"
@@ -1623,7 +1623,7 @@
         "finalize": "",
         "libs": [],
         "x": 270,
-        "y": 2120,
+        "y": 2080,
         "wires": [
             [
                 "fae89dcfd90cd41d"
@@ -1644,7 +1644,7 @@
         "signvar": "payload",
         "storetoken": "token",
         "x": 460,
-        "y": 2120,
+        "y": 2080,
         "wires": [
             [
                 "bfa58f8c67cad6f7"
@@ -1664,7 +1664,7 @@
         "finalize": "",
         "libs": [],
         "x": 130,
-        "y": 2180,
+        "y": 2140,
         "wires": [
             [
                 "1a33a2f04ca1cd08"
@@ -1695,7 +1695,7 @@
             }
         ],
         "x": 330,
-        "y": 2180,
+        "y": 2140,
         "wires": [
             [
                 "50ceda244267ba10"
@@ -1715,7 +1715,7 @@
         "finalize": "",
         "libs": [],
         "x": 530,
-        "y": 2180,
+        "y": 2140,
         "wires": [
             [
                 "bcc3a1f786f44836"
@@ -1739,7 +1739,7 @@
         "senderr": false,
         "headers": [],
         "x": 140,
-        "y": 2240,
+        "y": 2200,
         "wires": [
             []
         ]
@@ -1761,7 +1761,7 @@
         "name": "VARIACION DE LA OPCION C PARA ESCRIBIR DATOS AUTOMATICAMENTE EN EL ARCHIVO \"mediciones.xlsx\" USANDO EL NODO \"GSheet\"",
         "info": "",
         "x": 510,
-        "y": 2300,
+        "y": 2260,
         "wires": []
     },
     {
@@ -1771,7 +1771,7 @@
         "name": "OTRAS CONFIGURACIONES",
         "info": "",
         "x": 140,
-        "y": 2420,
+        "y": 2380,
         "wires": []
     },
     {
@@ -1796,7 +1796,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 110,
-        "y": 1940,
+        "y": 1880,
         "wires": [
             [
                 "80f4069f4ef9d82a",
@@ -1810,7 +1810,7 @@
         "type": "function",
         "z": "30bfffe14836de0f",
         "name": "html",
-        "func": "msg.payload = `<!DOCTYPE html> <!-- Declaración del tipo de documento -->\n<html lang=\"es\"> <!-- Etiqueta raíz con idioma español -->\n<head> <!-- Metadatos y enlaces a recursos externos -->\n  <meta charset=\"UTF-8\"> <!-- Codificación de caracteres -->\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"> <!-- Escalado responsivo -->\n  <title>Dashboard IoT</title> <!-- Título de la pestaña -->\n  <!-- Carga de librería FontAwesome para los íconos -->\n  <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css\">\n  <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css\">\n  <!-- Enlace al archivo de estilos CSS -->\n  <link rel=\"stylesheet\" href=\"index.css\">\n  <script src=\"index.js\" defer></script>\n  <script src=\"./uibuilder.iife.min.js\"></script>\n</head>\n<body> <!-- Contenido principal de la página -->\n  <!-- Contenedor principal del dashboard -->\n  <div class=\"dashboard\">\n    <!-- GRID: menú superior -->\n    <div class=\"item menu\">\n         <div class=\"menu-container\"> <!-- Contenedor principal del menú: agrupa botón y lista desplegable. -->\n         <details class=\"menu-details\"> <!-- Elemento <details> que permite abrir/cerrar el bloque sin JS. -->\n           <summary class=\"menu-button\" aria-haspopup=\"true\" aria-label=\"Abrir menú\"> <!-- Resumen que actúa como botón visible. -->\n             <i class=\"bi bi-list\" aria-hidden=\"true\"></i> <!-- Icono de menú (Bootstrap Icons) — decorativo. -->\n           </summary> <!-- Cierre del summary (botón) -->\n           <ul class=\"menu-list\" role=\"menu\"> <!-- Lista de opciones, actúa como menú; role para accesibilidad. -->\n             <li class=\"menu-item\" role=\"none\"> <!-- Item 1 del menú; role none porque el enlace tendrá role. -->\n             <a class=\"menu-link\" role=\"menuitem\" href=\"/download\" target=\"_blank\" rel=\"noopener\">Descargar Reporte</a> <!-- Enlace que abre /download en nueva pestaña. -->\n             </li> <!-- Fin item 1 -->\n             <li class=\"menu-item\" role=\"none\"> <!-- Item 2 del menú. -->\n             <a class=\"menu-link\" role=\"menuitem\" href=\"/logout\">Cerrar Sesión</a> <!-- Enlace que llama a /logout (navegación estándar). -->\n             </li> <!-- Fin item 2 -->\n           </ul> <!-- Cierre de la lista -->\n          </details> <!-- Cierre del details -->\n         </div> <!-- Cierre del contenedor principal -->\n    </div>\n\n    <!-- WIDGET: Temperatura -->\n    <div class=\"item temperature\">\n      <h2>Temperature</h2>\n      <i class=\"fa fa-thermometer-half icon\"></i>\n      <p class=\"value\"><span class=\"tem\"></span> &deg;C</p>\n    </div>\n\n    <!-- WIDGET: Luminosidad -->\n    <div class=\"item luminosity\">\n      <h2>Luminosity</h2>\n      <i class=\"bi bi-brightness-high icon\" aria-hidden=\"true\"></i> \n      <p class=\"value\"><span class=\"lum\"></span> lux</p>\n    </div>\n\n    <!-- WIDGET: Humedad de suelo -->\n    <div class=\"item soil\">\n      <h2>Soil Humidity</h2>\n      <i class=\"fa-solid fa-seedling icon\" aria-hidden=\"true\"></i>\n      <p class=\"value\"><span class=\"hums\"></span> %</p>\n    </div>\n\n    <!-- WIDGET: Humedad ambiente -->\n    <div class=\"item ambient\">\n      <h2>Ambient Humidity</h2>\n      <i class=\"fa-solid fa-droplet icon\"></i>\n      <p class=\"value\"><span class=\"huma\"></span> %</p>\n    </div>\n\n    <!-- WIDGET: Switch_Control_Manual_De_Alguna_Variable -->\n    <div class=\"item button\">\n      <div class=\"switch_toggle\">\n        <input class=\"on-of\" type=\"checkbox\" id=\"btn\"> <!-- Checkbox oculto -->\n        <label for=\"btn\"></label> <!-- Control deslizante visual -->\n      </div> <!-- cierre switch toggle -->  \n    </div> <!-- cierre item button -->\n\n    <!-- WIDGET: Switch_Control_Automatico_Temperatura -->\n    <div class=\"item btn_control\">\n      <h2>Control Temperatura</h2>\n      <div class=\"control_toggle\">\n        <input class=\"micheckbox\" type=\"checkbox\" id=\"actv\"> <!-- Checkbox oculto -->\n        <label for=\"actv\"></label> <!-- Control deslizante visual -->\n        <input class=\"captura\" type=\"text\" placeholder=\"20.25\"> <!-- Numero ingresado -->\n      </div> <!-- cierre control_toggle -->\n    </div> <!-- cierre item btn_control -->\n  </div>\n</body>\n</html>`;\nreturn msg;\n",
+        "func": "msg.payload = `<!DOCTYPE html> <!-- Declaración del tipo de documento -->\n<html lang=\"es\"> <!-- Etiqueta raíz con idioma español -->\n<head> <!-- Metadatos y enlaces a recursos externos -->\n  <meta charset=\"UTF-8\"> <!-- Codificación de caracteres -->\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"> <!-- Escalado responsivo -->\n  <title>Dashboard IoT</title> <!-- Título de la pestaña -->\n  <!-- Carga de librería FontAwesome para los íconos -->\n  <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css\">\n  <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css\">\n  <!-- Enlace al archivo de estilos CSS -->\n  <link rel=\"stylesheet\" href=\"index.css\">\n  <script src=\"index.js\" defer></script>\n  <script src=\"./uibuilder.iife.min.js\"></script>\n</head>\n<body> <!-- Contenido principal de la página -->\n  <!-- Contenedor principal del dashboard -->\n  <div class=\"dashboard\">\n    <!-- GRID: menú superior -->\n    <div class=\"item menu\">\n         <div class=\"menu-container\"> <!-- Contenedor principal del menú: agrupa botón y lista desplegable. -->\n         <details class=\"menu-details\"> <!-- Elemento <details> que permite abrir/cerrar el bloque sin JS. -->\n           <summary class=\"menu-button\" aria-haspopup=\"true\" aria-label=\"Abrir menú\"> <!-- Resumen que actúa como botón visible. -->\n             <i class=\"bi bi-list\" aria-hidden=\"true\"></i> <!-- Icono de menú (Bootstrap Icons) — decorativo. -->\n           </summary> <!-- Cierre del summary (botón) -->\n           <ul class=\"menu-list\" role=\"menu\"> <!-- Lista de opciones, actúa como menú; role para accesibilidad. -->\n             <li class=\"menu-item\" role=\"none\"> <!-- Item 1 del menú; role none porque el enlace tendrá role. -->\n             <a class=\"menu-link\" role=\"menuitem\" href=\"/download\" target=\"_blank\" rel=\"noopener\" onclick=\"(function(d){ if(d) d.open=false; })(this.closest('details'));\">Descargar Reporte</a>\n             </li> <!-- Fin item 1 -->\n             <li class=\"menu-item\" role=\"none\"> <!-- Item 2 del menú. -->\n             <a class=\"menu-link\" role=\"menuitem\" href=\"/logout\" onclick=\"(function(d){ if(d) d.open=false; })(this.closest('details'));\">Cerrar sesión</a>\n             </li> <!-- Fin item 2 -->\n           </ul> <!-- Cierre de la lista -->\n          </details> <!-- Cierre del details -->\n         </div> <!-- Cierre del contenedor principal -->\n    </div>\n\n    <!-- WIDGET: Temperatura -->\n    <div class=\"item temperature\">\n      <h2>Temperature</h2>\n      <i class=\"fa fa-thermometer-half icon\"></i>\n      <p class=\"value\"><span class=\"tem\"></span> &deg;C</p>\n    </div>\n\n    <!-- WIDGET: Luminosidad -->\n    <div class=\"item luminosity\">\n      <h2>Luminosity</h2>\n      <i class=\"bi bi-brightness-high icon\" aria-hidden=\"true\"></i> \n      <p class=\"value\"><span class=\"lum\"></span> lux</p>\n    </div>\n\n    <!-- WIDGET: Humedad de suelo -->\n    <div class=\"item soil\">\n      <h2>Soil Humidity</h2>\n      <i class=\"fa-solid fa-seedling icon\" aria-hidden=\"true\"></i>\n      <p class=\"value\"><span class=\"hums\"></span> %</p>\n    </div>\n\n    <!-- WIDGET: Humedad ambiente -->\n    <div class=\"item ambient\">\n      <h2>Ambient Humidity</h2>\n      <i class=\"fa-solid fa-droplet icon\"></i>\n      <p class=\"value\"><span class=\"huma\"></span> %</p>\n    </div>\n\n    <!-- WIDGET: Switch_Control_Manual_De_Alguna_Variable -->\n    <div class=\"item button\">\n      <div class=\"switch_toggle\">\n        <input class=\"on-of\" type=\"checkbox\" id=\"btn\"> <!-- Checkbox oculto -->\n        <label for=\"btn\"></label> <!-- Control deslizante visual -->\n      </div> <!-- cierre switch toggle -->  \n    </div> <!-- cierre item button -->\n\n    <!-- WIDGET: Switch_Control_Automatico_Temperatura -->\n    <div class=\"item btn_control\">\n      <h2>Control Temperatura</h2>\n      <div class=\"control_toggle\">\n        <input class=\"micheckbox\" type=\"checkbox\" id=\"actv\"> <!-- Checkbox oculto -->\n        <label for=\"actv\"></label> <!-- Control deslizante visual -->\n        <input class=\"captura\" type=\"text\" placeholder=\"20.25\"> <!-- Numero ingresado -->\n      </div> <!-- cierre control_toggle -->\n    </div> <!-- cierre item btn_control -->\n  </div>\n</body>\n</html>`;\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1818,7 +1818,7 @@
         "finalize": "",
         "libs": [],
         "x": 290,
-        "y": 1880,
+        "y": 1820,
         "wires": [
             [
                 "05b13b9c0d0f7069"
@@ -1830,7 +1830,7 @@
         "type": "function",
         "z": "30bfffe14836de0f",
         "name": "css",
-        "func": "msg.payload = `/* Estilos globales y reset básico */\n* { margin: 0; padding: 0; box-sizing: border-box; }\nhtml, body { height: 100%; }\nbody {\n  /* Imagen de fondo cargada desde GitHub */\n  /*background: url('https://raw.githubusercontent.com/nelson466/node-red-render/refs/heads/main/fondo.png') no-repeat center center fixed;*/\n  background-size: cover; /* Ajuste completo */\n  display: flex; /* Centrar dashboard */\n  justify-content: center; /* Horizontal */\n  align-items: center; /* Vertical */\n  font-family: Arial, sans-serif; /* Tipografía base */\n}\n\n/* Contenedor principal con dimensiones en viewport */\n.dashboard {\n  width: 80vw; /* 50% del ancho de la ventana */\n  height: auto;*/ /* 100% de la altura de la ventana */\n  background-color: #F0F0F0; /* Verde oscuro #E0E0E0 */\n  border-radius: 10px; /* Bordes redondeados */\n  display: grid; /* Uso de CSS Grid */\n  /*grid-template-columns: repeat(2, 1fr)*/ /* 2 columnas iguales */\n  grid-template-columns: 50% 50%; /* 2 columnas iguales */\n  grid-template-rows: 12% auto auto auto; /* 4 filas automáticas */\n  gap: 5px; /* Separación entre widgets */\n  padding: 20px; /* Espaciado interno */\n  border: 5px solid #CCCCCC;\n  justify-content: center;\n  align-content: center;  \n  position: absolute;\n  top: 5px;\n  grid-template-areas:\"area1 area1\"\n                      \"area3 area4\"\n                      \"area5 area6\"\n                      \"area7 area8\";\n}\n\n/* Área del menú ocupa dos columnas en la primera fila */\n.item.menu {\n  width: 100%;\n  grid-column: 1 / span 1; /* Desde columna 1 abarcar 2 columnas */\n  background: rgba(10, 77, 77); /* transparente */\n  grid-area: area1;\n  display: flex; /* Habilita */\n  justify-content: center; /*centra el contenido verticalmente*/\n  align-items: flex-start; /*centra el contenido horizontalmente*/\n  border-radius: 5px;\n} \n\n/* Contenedor general del menú (aplica solo dentro de <div class=\"item menu\">) */\n.item.menu > .menu-container {\n  margin: 0; /* margen por defecto */\n}\n\n/* Reset y estilo del element details para que quede limpio (scopeado) */\n.item.menu > .menu-container .menu-details {\n  position: relative; /* relativo para posicionar el desplegable respecto al botón */\n}\n\n/* Estilo del botón (summary) que se comporta como botón (scopeado) */\n.item.menu > .menu-container .menu-button {\n  list-style: none; /* quita el triángulo por defecto en algunos navegadores */\n  display: inline-flex; /* muestra el contenido en línea y permite centrar icono */\n  align-items: center; /* centra verticalmente el icono si hay texto */\n  justify-content: center; /* centra horizontalmente */\n  width: 44px; /* ancho fijo del botón (ajustable) */\n  height: 44px; /* alto fijo del botón (ajustable) */\n  border-radius: 8px; /* bordes redondeados para estética */\n  background: transparent; /* fondo transparente para integrar con tu tema */\n  /*border: 2px solid rgba(255,165,0,0.12); /* borde sutil acorde al color naranja */\n  color: #FFA500; /* color del icono (naranja) para visibilidad */\n  cursor: pointer; /* cursor de mano para indicar clicable */\n  padding: 6px; /* relleno interior */\n  transition: background 150ms ease, transform 120ms ease; /* transición suave en hover/focus */\n  font-size: 2rem; /* Tamaño de icono */\n}\n\n/* Elimina el marcador por defecto del summary en navegadores (seguridad cross-browser) (scopeado) */\n.item.menu > .menu-container .menu-button::-webkit-details-marker {\n  display: none; /* Safari / Chrome marker hide */\n}\n\n/* Hover y foco visibles para accesibilidad (scopeado) */\n.item.menu > .menu-container .menu-button:hover,\n.item.menu > .menu-container .menu-button:focus {\n  background: rgba(255,165,0,0.06); /* leve fondo en hover/focus */\n  transform: translateY(-1px); /* pequeño levantamiento visual */\n  outline: none; /* removemos el outline nativo (se dejó efecto propio) */\n}\n\n/* Lista del menú (inicialmente cerrada): controlamos su altura y visibilidad para animar (scopeado) */\n.item.menu > .menu-container .menu-list {\n  margin: 8px 0 0 0; /* separacion respecto al boton */\n  padding: 8px; /* padding interno del contenedor del menu */\n  list-style: none; /* quitar bullets */\n  background: rgba(255,255,255,0.98); /* fondo claro para contraste con dashboard oscuro */\n  color: #0A4D4D; /* color del texto oscuro para legibilidad */\n  border-radius: 8px; /* esquinas redondeadas */\n  box-shadow: 0 8px 20px rgba(4,20,20,0.35); /* sombra suave para elevar el menú */\n  overflow: hidden; /* oculta contenido cuando aplicamos max-height para animar */\n  max-height: 0; /* altura 0 cuando está cerrado (animable) */\n  opacity: 0; /* transparente cuando está cerrado */\n  transform: translateY(-8px); /* desplazado ligeramente hacia arriba cuando cerrado */\n  transition: max-height 300ms cubic-bezier(.2,.8,.2,1), opacity 220ms ease, transform 220ms ease; /* transiciones para efecto suave */\n  width: 220px; /* ancho fijo mínimo del menu desplegable */\n  position: absolute; /* posición absoluta respecto a details */\n  right: 0; /* alineado a la derecha del contenedor (ajustable) */\n  z-index: 40; /* por encima de otros elementos */\n}\n\n/* Cuando el details está abierto (atributo [open]) simulamos desplegado (scopeado) */\n.item.menu > .menu-container .menu-details[open] .menu-list {\n  max-height: 240px; /* suficiente para mostrar ambos items (ajusta si agregas más) */\n  opacity: 1; /* completamente visible */\n  transform: translateY(0); /* volver a su posición natural */\n}\n\n/* Cada item del menú (scopeado) */\n.item.menu > .menu-container .menu-item {\n  margin: 6px 0; /* margen vertical entre opciones */\n}\n\n/* Estilo del enlace dentro del item (clicable y accesible) (scopeado) */\n.item.menu > .menu-container .menu-link {\n  display: block; /* ocupa todo el ancho para facilitar el clic */\n  width: 100%; /* ancho completo del menú */\n  padding: 8px 10px; /* padding cómodo para dedo/clic */\n  border-radius: 6px; /* esquinas suavizadas en cada opción */\n  text-decoration: none; /* quita subrayado del enlace */\n  color: inherit; /* hereda el color definido en el contenedor */\n  font-weight: 600; /* texto más visible */\n}\n\n/* Efecto hover/focus en cada enlace para feedback visual (scopeado) */\n.item.menu > .menu-container .menu-link:hover,\n.item.menu > .menu-container .menu-link:focus {\n  background: rgba(10,77,77,0.06); /* fondo sutil acorde al color principal */\n  outline: none; /* se usa el efecto visual propio */\n}\n\n.item.temperature {\n   grid-area: area3;\n   box-shadow: -1px -1px 8px rgba(255,255,255,0.7),\n   3px 3px 3px rgba(0,0,0,0.2),\n   inset 1px 1px 3px rgba(255,255,255,0.7),\n   inset 3px 3px 3px rgba(0,0,0,0.2);\n } \n \n .item.luminosity {\n   grid-area: area4;\n   box-shadow: -1px -1px 8px rgba(255,255,255,0.7),\n   3px 3px 3px rgba(0,0,0,0.2),\n   inset 1px 1px 3px rgba(255,255,255,0.7),\n   inset 3px 3px 3px rgba(0,0,0,0.2);\n } \n\n .item.soil {\n   grid-area: area5;\n   box-shadow: -1px -1px 8px rgba(255,255,255,0.7),\n   3px 3px 3px rgba(0,0,0,0.2),\n   inset 1px 1px 3px rgba(255,255,255,0.7),\n   inset 3px 3px 3px rgba(0,0,0,0.2);\n } \n\n .item.ambient {\n   grid-area: area6;\n   box-shadow: -1px -1px 8px rgba(255,255,255,0.7),\n   3px 3px 3px rgba(0,0,0,0.2),\n   inset 1px 1px 3px rgba(255,255,255,0.7),\n   inset 3px 3px 3px rgba(0,0,0,0.2);\n }  \n\n/* color del icono de termometro*/\n.item.temperature .icon {\n  color: #FF4500 !important;\n}\n\n/* color del icono de luminosity*/\n.item.luminosity .icon {\n  color: #FFD700 !important;\n}\n\n/* color del icono de soil humidity*/\n.item.soil .icon {\n  color: #4CAF50 !important;\n}\n/* color del icono de ambient humidity*/\n.item.ambient .icon {\n  color: #00BFFF !important;\n}\n\n/* Estilos comunes a todos los widgets */\n.item {\n  background: rgba(255,255,255); /* Fondo oscuro semitransparente */\n  color: #0A4D4D; /* Texto naranja */\n  border-radius: 10px; /* Bordes redondeados */\n  display: flex; /* Usar flexbox interno */\n  flex-direction: column; /* ***Elementos en columna */\n  justify-content: center; /* Centrar vertical */\n  align-items: center; /* Centrar horizontal */\n  padding: 10px;\n  font-family: Arial; /*tipo de fuente*/\n  font-weight: 400; /*normal (regular)*/\n  /*transform: scaleX(0.80);*/ /* estrecha el texto horizontalmente*/\n  border: 2px solid #CCCCCC;\n}\n.item h2 {\n  margin-bottom: 10px; /* Espacio inferior */\n  font-size: 1.3rem; /* Tamaño de título */\n}\n.item .icon {\n  font-size: 3rem; /* Tamaño de icono */\n  margin-bottom: 10px; /* Separación */\n}\n.item .value {\n  font-size: 2rem; /* Tamaño de valor */\n}\n\n/*estilos para el boton on-of*/\n.item.button {\n   grid-area: area8;\n   background: rgba(0, 0, 0, 0); /* transparente */\n   display: flex;\n   flex-direction: row;\n   padding-left: 0px;\n   padding-top: 0px; \n   justify-content: flex-start;\n   align-items: flex-start;\n   border: none;\n } \n\n/*estilos parte del boton on-of*/\n .switch_toggle {\n  width: 34%;\n  height: 60px;\n  display:flex;\n  flex-direction:row;\n  justify-content: center;\n  align-items: center;\n  border: 2px solid #CCCCCC;\n  border-radius: 10px;\n  box-shadow: -1px -1px 8px rgba(255,255,255,0.7),\n   3px 3px 3px rgba(0,0,0,0.2),\n   inset 1px 1px 3px rgba(255,255,255,0.7),\n   inset 3px 3px 3px rgba(0,0,0,0.2);\n }\n \n /*estilos parte del boton on-of*/\n .switch_toggle input[type=\"checkbox\"]{\n  position: absolute;\n  opacity: 0;\n  z-index: -2;\n }\n\n  .switch_toggle input[type=\"checkbox\"] + label{\n    position: relative;\n    display: inline-block;\n    width: 85%;\n    height: 47px;\n    border-radius: 23px;\n    margin: 0;\n    cursor: pointer;\n    /*box-shadow: inset -8px -8px 15px rgba(255,255,255,0.6),\n    inset 10px 10px 10px rgba(0,0,0,0.25);*/\n    border: 3px solid #CCCCCC;\n }\n\n .switch_toggle input[type=\"checkbox\"] + label::before{\n  position: absolute;\n  content: \"OF\";\n  font-size: 18px;\n  text-align: center; /*centra el texto horizontalmente*/\n  line-height: 40px; /*centra el texto verticalmente*/\n  /*top: 3.5px;*/\n  /*left: 8px;*/\n  width: 45%;\n  height: 40px;\n  border-radius: 20px;\n  background-color: #eee;\n  /*box-shadow: -3px -3px 5px rgba(255,255,255,0.5),\n  3px 3px 5px rgba(0,0,0,0.25);*/\n  border: 2px solid #CCCCCC;\n  transition: 0.3s ease-in-out;\n }\n\n.switch_toggle input[type=\"checkbox\"]:checked + label::before{\n  left: 51%; /* Espacio interno */\n  content: \"ON\";\n  background: #eee;\n  color: #000000; /*texto de color negro puro*/\n  /*box-shadow: -3px -3px 5px rgba(255,255,255,0.5),\n  3px 3px 5px #242422;*/\n  border: 2px solid #CCCCCC;\n}\n\n.switch_toggle input[type=\"checkbox\"]:checked + label{\n  background: #0A4D4D;\n}\n\n/*ESTILOS PARA EL BOTON CONTROL AUTOMATICO DE TEMPERATURA*/\n.item.btn_control {\n   grid-area: area7;\n   background: rgba(0, 0, 0, 0); /* transparente */\n   display: flex;\n   flex-direction: column;\n   /*padding-left: 0px;*/\n   /*padding-top: 0px;*/\n   justify-content: center;\n   align-items: flex-start;\n   /*border: none;*/\n   box-shadow: -1px -1px 8px rgba(255,255,255,0.7),\n   3px 3px 3px rgba(0,0,0,0.2),\n   inset 1px 1px 3px rgba(255,255,255,0.7),\n   inset 3px 3px 3px rgba(0,0,0,0.2);\n}\n\n/*estilos parte del boton control automatico*/\n .control_toggle {\n  width: 40%;\n  height: 60px;\n  display:flex;\n  flex-direction:row;\n  justify-content: center;\n  align-items: center;\n  gap: 5px;\n  border: 2px solid #CCCCCC;\n  border-radius: 10px;\n  box-shadow: -1px -1px 8px rgba(255,255,255,0.7),\n   3px 3px 3px rgba(0,0,0,0.2),\n   inset 1px 1px 3px rgba(255,255,255,0.7),\n   inset 3px 3px 3px rgba(0,0,0,0.2);\n }\n\n /*estilos parte del boton control automatico*/\n .control_toggle input[type=\"checkbox\"]{\n  position: absolute;\n  opacity: 0;\n  z-index: -2;\n }\n\n .control_toggle input[type=\"checkbox\"] + label{\n    position: relative;\n    display: inline-block;\n    width: 40%;\n    height: 50px;\n    border-radius: 30px;\n    margin: 0;\n    cursor: pointer;\n    /*box-shadow: inset -8px -8px 15px rgba(255,255,255,0.6),\n    inset 10px 10px 10px rgba(0,0,0,0.25);*/\n    border: 3px solid #CCCCCC;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n }\n\n .control_toggle input[type=\"checkbox\"] + label::before{\n  position: absolute;\n  content: \"OF\";\n  font-size: 18px;\n  text-align: center;\n  line-height: 45px;\n  /*top: 3.5px;*/\n  /*left: 5px;*/\n  width: 100%;\n  height: 45px;\n  border-radius: 30px;\n  background-color: #eee;\n  /*box-shadow: -3px -3px 5px rgba(255,255,255,0.5),\n  3px 3px 5px rgba(0,0,0,0.25);*/\n  /*transition: 0.2s ease-in-out;*/\n }\n\n.control_toggle input[type=\"checkbox\"]:checked + label::before{\n  /*transform: translateX(1px);*/\n  content: \"ON\";\n  background: #0A4D4D;\n  color: #ffffff; /*texto de color blanco puro*/\n  /*box-shadow: -3px -3px 5px rgba(255,255,255,0.5),\n  3px 3px 5px #242422;*/\n  border: 3px solid #0A4D4D;\n}\n\n.control_toggle input[type=\"checkbox\"]:checked + label{\nborder: none;\n}\n.control_toggle .captura{\n  width: 45%;\n  height: 45px;\n  border-radius: 10px;\n  margin: 0;\n  text-align: center;\n  font-size: 18px;\n  outline: none; /* al posicionar el cursor dentro la caja antes de ingresar el dato, esta propiedad evita que se añada un borde a la caja*/\n  border: 2px solid #CCCCCC;\n}\n/* Estilos aqui solo se aplican si el ancho de la pantalla es 480px o menos */\n@media (max-width: 480px) {\n    .dashboard {\n        width: 100vw; /* Ancho adaptable */\n    }\n    .control_toggle{\n        width: 100%;\n    }\n    .switch_toggle{\n        width: 62%;\n    }\n}\n`;\nreturn msg;\n",
+        "func": "msg.payload = `/* Estilos globales y reset básico */\n* { margin: 0; padding: 0; box-sizing: border-box; }\nhtml, body { height: 100%; }\nbody {\n  /* Imagen de fondo cargada desde GitHub */\n  /*background: url('https://raw.githubusercontent.com/nelson466/node-red-render/refs/heads/main/fondo.png') no-repeat center center fixed;*/\n  background-size: cover; /* Ajuste completo */\n  display: flex; /* Centrar dashboard */\n  justify-content: center; /* Horizontal */\n  align-items: center; /* Vertical */\n  font-family: Arial, sans-serif; /* Tipografía base */\n}\n\n/* Contenedor principal con dimensiones en viewport */\n.dashboard {\n  width: 80vw; /* 50% del ancho de la ventana */\n  height: auto;*/ /* 100% de la altura de la ventana */\n  background-color: #F0F0F0; /* Verde oscuro #E0E0E0 */\n  border-radius: 10px; /* Bordes redondeados */\n  display: grid; /* Uso de CSS Grid */\n  /*grid-template-columns: repeat(2, 1fr)*/ /* 2 columnas iguales */\n  grid-template-columns: 50% 50%; /* 2 columnas iguales */\n  grid-template-rows: 12% auto auto auto; /* 4 filas automáticas */\n  gap: 5px; /* Separación entre widgets */\n  padding: 20px; /* Espaciado interno */\n  border: 5px solid #CCCCCC;\n  justify-content: center;\n  align-content: center;  \n  position: absolute;\n  top: 5px;\n  grid-template-areas:\"area1 area1\"\n                      \"area3 area4\"\n                      \"area5 area6\"\n                      \"area7 area8\";\n}\n\n/* Área del menú ocupa dos columnas en la primera fila */\n.item.menu {\n  width: 100%;\n  background: rgba(10, 77, 77); /* transparente */\n  grid-area: area1;\n  display: flex; /* Habilita */\n  justify-content: center; /*centra el contenido verticalmente*/\n  align-items: flex-start; /*centra el contenido horizontalmente*/\n  border-radius: 5px;\n} \n\n/* Contenedor general del menú (aplica solo dentro de <div class=\"item menu\">) */\n.item.menu > .menu-container {\n  margin: 0; /* margen por defecto */\n}\n\n/* Reset y estilo del element details para que quede limpio (scopeado) */\n.item.menu > .menu-container .menu-details {\n  position: relative; /* relativo para posicionar el desplegable respecto al botón */\n}\n\n/* Estilo del botón (summary) que se comporta como botón (scopeado) */\n.item.menu > .menu-container .menu-button {\n  list-style: none; /* quita el triángulo por defecto en algunos navegadores */\n  display: inline-flex; /* muestra el contenido en línea y permite centrar icono */\n  align-items: center; /* centra verticalmente el icono si hay texto */\n  justify-content: center; /* centra horizontalmente */\n  width: 44px; /* ancho fijo del botón (ajustable) */\n  height: 44px; /* alto fijo del botón (ajustable) */\n  border-radius: 8px; /* bordes redondeados para estética */\n  background: transparent; /* fondo transparente para integrar con tu tema */\n  /*border: 2px solid rgba(255,165,0,0.12); /* borde sutil acorde al color naranja */\n  color: #FFA500; /* color del icono (naranja) para visibilidad */\n  cursor: pointer; /* cursor de mano para indicar clicable */\n  padding: 6px; /* relleno interior */\n  transition: background 150ms ease, transform 120ms ease; /* transición suave en hover/focus */\n  font-size: 2rem; /* Tamaño de icono */\n}\n\n/* Elimina el marcador por defecto del summary en navegadores (seguridad cross-browser) (scopeado) */\n.item.menu > .menu-container .menu-button::-webkit-details-marker {\n  display: none; /* Safari / Chrome marker hide */\n}\n\n/* Hover y foco visibles para accesibilidad (scopeado) */\n.item.menu > .menu-container .menu-button:hover,\n.item.menu > .menu-container .menu-button:focus {\n  background: rgba(255,165,0,0.06); /* leve fondo en hover/focus */\n  transform: translateY(-1px); /* pequeño levantamiento visual */\n  outline: none; /* removemos el outline nativo (se dejó efecto propio) */\n}\n\n/* Lista del menú (inicialmente cerrada): controlamos su altura y visibilidad para animar (scopeado) */\n.item.menu > .menu-container .menu-list {\n  margin: 8px 0 0 0; /* separacion respecto al boton */\n  padding: 8px; /* padding interno del contenedor del menu */\n  list-style: none; /* quitar bullets */\n  background: rgba(255,255,255,0.98); /* fondo claro para contraste con dashboard oscuro */\n  color: #0A4D4D; /* color del texto oscuro para legibilidad */\n  border-radius: 8px; /* esquinas redondeadas */\n  box-shadow: 0 8px 20px rgba(4,20,20,0.35); /* sombra suave para elevar el menú */\n  overflow: hidden; /* oculta contenido cuando aplicamos max-height para animar */\n  max-height: 0; /* altura 0 cuando está cerrado (animable) */\n  opacity: 0; /* transparente cuando está cerrado */\n  transform: translateY(-8px); /* desplazado ligeramente hacia arriba cuando cerrado */\n  transition: max-height 300ms cubic-bezier(.2,.8,.2,1), opacity 220ms ease, transform 220ms ease; /* transiciones para efecto suave */\n  width: 220px; /* ancho fijo mínimo del menu desplegable */\n  position: absolute; /* posición absoluta respecto a details */\n  top: calc(100% + 6px); /* justo debajo del botón */\n  left: 0; /* empuja el menu desplegable de izquierda a derecha */\n  z-index: 40; /* por encima de otros elementos */\n}\n\n/* Cuando el details está abierto (atributo [open]) simulamos desplegado (scopeado) */\n.item.menu > .menu-container .menu-details[open] .menu-list {\n  max-height: 240px; /* suficiente para mostrar ambos items (ajusta si agregas más) */\n  opacity: 1; /* completamente visible */\n  transform: translateY(0); /* volver a su posición natural */\n}\n\n/* Cada item del menú (scopeado) */\n.item.menu > .menu-container .menu-item {\n  margin: 6px 0; /* margen vertical entre opciones */\n}\n\n/* Estilo del enlace dentro del item (clicable y accesible) (scopeado) */\n.item.menu > .menu-container .menu-link {\n  display: block; /* ocupa todo el ancho para facilitar el clic */\n  width: 100%; /* ancho completo del menú */\n  padding: 8px 10px; /* padding cómodo para dedo/clic */\n  border-radius: 6px; /* esquinas suavizadas en cada opción */\n  text-decoration: none; /* quita subrayado del enlace */\n  color: inherit; /* hereda el color definido en el contenedor */\n  font-weight: 600; /* texto más visible */\n}\n\n/* Efecto hover/focus en cada enlace para feedback visual (scopeado) */\n.item.menu > .menu-container .menu-link:hover,\n.item.menu > .menu-container .menu-link:focus {\n  background: rgba(10,77,77,0.06); /* fondo sutil acorde al color principal */\n  outline: none; /* se usa el efecto visual propio */\n}\n\n.item.temperature {\n   grid-area: area3;\n   box-shadow: -1px -1px 8px rgba(255,255,255,0.7),\n   3px 3px 3px rgba(0,0,0,0.2),\n   inset 1px 1px 3px rgba(255,255,255,0.7),\n   inset 3px 3px 3px rgba(0,0,0,0.2);\n } \n \n .item.luminosity {\n   grid-area: area4;\n   box-shadow: -1px -1px 8px rgba(255,255,255,0.7),\n   3px 3px 3px rgba(0,0,0,0.2),\n   inset 1px 1px 3px rgba(255,255,255,0.7),\n   inset 3px 3px 3px rgba(0,0,0,0.2);\n } \n\n .item.soil {\n   grid-area: area5;\n   box-shadow: -1px -1px 8px rgba(255,255,255,0.7),\n   3px 3px 3px rgba(0,0,0,0.2),\n   inset 1px 1px 3px rgba(255,255,255,0.7),\n   inset 3px 3px 3px rgba(0,0,0,0.2);\n } \n\n .item.ambient {\n   grid-area: area6;\n   box-shadow: -1px -1px 8px rgba(255,255,255,0.7),\n   3px 3px 3px rgba(0,0,0,0.2),\n   inset 1px 1px 3px rgba(255,255,255,0.7),\n   inset 3px 3px 3px rgba(0,0,0,0.2);\n }  \n\n/* color del icono de termometro*/\n.item.temperature .icon {\n  color: #FF4500 !important;\n}\n\n/* color del icono de luminosity*/\n.item.luminosity .icon {\n  color: #FFD700 !important;\n}\n\n/* color del icono de soil humidity*/\n.item.soil .icon {\n  color: #4CAF50 !important;\n}\n/* color del icono de ambient humidity*/\n.item.ambient .icon {\n  color: #00BFFF !important;\n}\n\n/* Estilos comunes a todos los widgets */\n.item {\n  background: rgba(255,255,255); /* Fondo oscuro semitransparente */\n  color: #0A4D4D; /* Texto naranja */\n  border-radius: 10px; /* Bordes redondeados */\n  display: flex; /* Usar flexbox interno */\n  flex-direction: column; /* ***Elementos en columna */\n  justify-content: center; /* Centrar vertical */\n  align-items: center; /* Centrar horizontal */\n  padding: 10px;\n  font-family: Arial; /*tipo de fuente*/\n  font-weight: 400; /*normal (regular)*/\n  /*transform: scaleX(0.80);*/ /* estrecha el texto horizontalmente*/\n  border: 2px solid #CCCCCC;\n}\n.item h2 {\n  margin-bottom: 10px; /* Espacio inferior */\n  font-size: 1.3rem; /* Tamaño de título */\n}\n.item .icon {\n  font-size: 3rem; /* Tamaño de icono */\n  margin-bottom: 10px; /* Separación */\n}\n.item .value {\n  font-size: 2rem; /* Tamaño de valor */\n}\n\n/*estilos para el boton on-of*/\n.item.button {\n   grid-area: area8;\n   background: rgba(0, 0, 0, 0); /* transparente */\n   display: flex;\n   flex-direction: row;\n   padding-left: 0px;\n   padding-top: 0px; \n   justify-content: flex-start;\n   align-items: flex-start;\n   border: none;\n } \n\n/*estilos parte del boton on-of*/\n .switch_toggle {\n  width: 34%;\n  height: 60px;\n  display:flex;\n  flex-direction:row;\n  justify-content: center;\n  align-items: center;\n  border: 2px solid #CCCCCC;\n  border-radius: 10px;\n  box-shadow: -1px -1px 8px rgba(255,255,255,0.7),\n   3px 3px 3px rgba(0,0,0,0.2),\n   inset 1px 1px 3px rgba(255,255,255,0.7),\n   inset 3px 3px 3px rgba(0,0,0,0.2);\n }\n \n /*estilos parte del boton on-of*/\n .switch_toggle input[type=\"checkbox\"]{\n  position: absolute;\n  opacity: 0;\n  z-index: -2;\n }\n\n  .switch_toggle input[type=\"checkbox\"] + label{\n    position: relative;\n    display: inline-block;\n    width: 85%;\n    height: 47px;\n    border-radius: 23px;\n    margin: 0;\n    cursor: pointer;\n    /*box-shadow: inset -8px -8px 15px rgba(255,255,255,0.6),\n    inset 10px 10px 10px rgba(0,0,0,0.25);*/\n    border: 3px solid #CCCCCC;\n }\n\n .switch_toggle input[type=\"checkbox\"] + label::before{\n  position: absolute;\n  content: \"OF\";\n  font-size: 18px;\n  text-align: center; /*centra el texto horizontalmente*/\n  line-height: 40px; /*centra el texto verticalmente*/\n  /*top: 3.5px;*/\n  /*left: 8px;*/\n  width: 45%;\n  height: 40px;\n  border-radius: 20px;\n  background-color: #eee;\n  /*box-shadow: -3px -3px 5px rgba(255,255,255,0.5),\n  3px 3px 5px rgba(0,0,0,0.25);*/\n  border: 2px solid #CCCCCC;\n  transition: 0.3s ease-in-out;\n }\n\n.switch_toggle input[type=\"checkbox\"]:checked + label::before{\n  left: 51%; /* Espacio interno */\n  content: \"ON\";\n  background: #eee;\n  color: #000000; /*texto de color negro puro*/\n  /*box-shadow: -3px -3px 5px rgba(255,255,255,0.5),\n  3px 3px 5px #242422;*/\n  border: 2px solid #CCCCCC;\n}\n\n.switch_toggle input[type=\"checkbox\"]:checked + label{\n  background: #0A4D4D;\n}\n\n/*ESTILOS PARA EL BOTON CONTROL AUTOMATICO DE TEMPERATURA*/\n.item.btn_control {\n   grid-area: area7;\n   background: rgba(0, 0, 0, 0); /* transparente */\n   display: flex;\n   flex-direction: column;\n   /*padding-left: 0px;*/\n   /*padding-top: 0px;*/\n   justify-content: center;\n   align-items: flex-start;\n   /*border: none;*/\n   box-shadow: -1px -1px 8px rgba(255,255,255,0.7),\n   3px 3px 3px rgba(0,0,0,0.2),\n   inset 1px 1px 3px rgba(255,255,255,0.7),\n   inset 3px 3px 3px rgba(0,0,0,0.2);\n}\n\n/*estilos parte del boton control automatico*/\n .control_toggle {\n  width: 40%;\n  height: 60px;\n  display:flex;\n  flex-direction:row;\n  justify-content: center;\n  align-items: center;\n  gap: 5px;\n  border: 2px solid #CCCCCC;\n  border-radius: 10px;\n  box-shadow: -1px -1px 8px rgba(255,255,255,0.7),\n   3px 3px 3px rgba(0,0,0,0.2),\n   inset 1px 1px 3px rgba(255,255,255,0.7),\n   inset 3px 3px 3px rgba(0,0,0,0.2);\n }\n\n /*estilos parte del boton control automatico*/\n .control_toggle input[type=\"checkbox\"]{\n  position: absolute;\n  opacity: 0;\n  z-index: -2;\n }\n\n .control_toggle input[type=\"checkbox\"] + label{\n    position: relative;\n    display: inline-block;\n    width: 40%;\n    height: 50px;\n    border-radius: 30px;\n    margin: 0;\n    cursor: pointer;\n    /*box-shadow: inset -8px -8px 15px rgba(255,255,255,0.6),\n    inset 10px 10px 10px rgba(0,0,0,0.25);*/\n    border: 3px solid #CCCCCC;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n }\n\n .control_toggle input[type=\"checkbox\"] + label::before{\n  position: absolute;\n  content: \"OF\";\n  font-size: 18px;\n  text-align: center;\n  line-height: 45px;\n  /*top: 3.5px;*/\n  /*left: 5px;*/\n  width: 100%;\n  height: 45px;\n  border-radius: 30px;\n  background-color: #eee;\n  /*box-shadow: -3px -3px 5px rgba(255,255,255,0.5),\n  3px 3px 5px rgba(0,0,0,0.25);*/\n  /*transition: 0.2s ease-in-out;*/\n }\n\n.control_toggle input[type=\"checkbox\"]:checked + label::before{\n  /*transform: translateX(1px);*/\n  content: \"ON\";\n  background: #0A4D4D;\n  color: #ffffff; /*texto de color blanco puro*/\n  /*box-shadow: -3px -3px 5px rgba(255,255,255,0.5),\n  3px 3px 5px #242422;*/\n  border: 3px solid #0A4D4D;\n}\n\n.control_toggle input[type=\"checkbox\"]:checked + label{\nborder: none;\n}\n.control_toggle .captura{\n  width: 45%;\n  height: 45px;\n  border-radius: 10px;\n  margin: 0;\n  text-align: center;\n  font-size: 18px;\n  outline: none; /* al posicionar el cursor dentro la caja antes de ingresar el dato, esta propiedad evita que se añada un borde a la caja*/\n  border: 2px solid #CCCCCC;\n}\n/* Estilos aqui solo se aplican si el ancho de la pantalla es 480px o menos */\n@media (max-width: 480px) {\n    .dashboard {\n        width: 100vw; /* Ancho adaptable */\n    }\n    .control_toggle{\n        width: 100%;\n    }\n    .switch_toggle{\n        width: 62%;\n    }\n}\n`;\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1838,7 +1838,7 @@
         "finalize": "",
         "libs": [],
         "x": 290,
-        "y": 1940,
+        "y": 1880,
         "wires": [
             [
                 "f9c9096259ac117e"
@@ -1861,7 +1861,7 @@
         "name": "index",
         "topic": "",
         "x": 430,
-        "y": 1880,
+        "y": 1820,
         "wires": []
     },
     {
@@ -1880,7 +1880,7 @@
         "name": "style",
         "topic": "",
         "x": 430,
-        "y": 1940,
+        "y": 1880,
         "wires": []
     },
     {
@@ -1896,7 +1896,7 @@
         "finalize": "",
         "libs": [],
         "x": 290,
-        "y": 2000,
+        "y": 1940,
         "wires": [
             [
                 "a80e8174357a7920"
@@ -1919,7 +1919,7 @@
         "name": "script",
         "topic": "",
         "x": 430,
-        "y": 2000,
+        "y": 1940,
         "wires": []
     },
     {
